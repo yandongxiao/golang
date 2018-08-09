@@ -11,8 +11,6 @@ func main() {
 	chMsg <- "hello"
 	chMsg <- "world"
 
-	// The close built-in function closes a channel, which must be either bidirectional or send-only. 说明接收端是没有权利close一个chan的
-	// any receive from c will succeed without blocking, returning the zero value for the channel element
 	close(chMsg)
 
 	fmt.Println(<-chMsg)

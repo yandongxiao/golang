@@ -56,4 +56,5 @@ func test2() {
 }
 
 func main() {
+	test1()
 }

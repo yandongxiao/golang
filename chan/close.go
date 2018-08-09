@@ -11,8 +11,7 @@ func main() {
 		for {
 			// NOTE: 注意接收message的同时，需要判断该channel是否已经关闭
 			// It will also set more to false for a closed channel
-			msg, more := <-chMsg
-			if more {
+			if msg, more := <-chMsg; more {
 				println("receive message", msg)
 			} else {
 				println("have received all messages")
