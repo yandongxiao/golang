@@ -9,7 +9,6 @@ import (
 func main() {
 	buffer := new(bytes.Buffer)
 
-	// 必须声明err, 否则报错：f declared and not used
 	var f *os.File
 	var err error
 	if f, err = os.Open("/tmp/data"); err != nil {
