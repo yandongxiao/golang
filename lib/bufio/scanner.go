@@ -46,8 +46,8 @@ func test2() {
 	reader := strings.NewReader("hello world")
 	bufReader := bufio.NewScanner(reader)
 	// 设置太短：bufio.Scanner: token too long
-	data := make([]byte, 20)
-	bufReader.Buffer(data, 20)
+	data := make([]byte, 2)
+	bufReader.Buffer(data, 2)
 	bufReader.Split(bufio.ScanWords)
 	fmt.Println(bufReader.Scan())
 	fmt.Println(bufReader.Err())
@@ -56,5 +56,5 @@ func test2() {
 }
 
 func main() {
-	test1()
+	test2()
 }
