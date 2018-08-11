@@ -13,7 +13,7 @@ func main() {
 	r := strings.NewReader("some io.Reader stream to be read\n")
 	lr := io.LimitReader(r, 4) // 只会读取前四个字节，并返回
 
-	if _, err := io.Copy(os.Stdout, lr); err != nil { // err == nil, 即LimitReader的这种特殊性不会影响到其它函数
+	if _, err := io.Copy(os.Stdout, lr); err != nil {
 		log.Fatal(err)
 	}
 }

@@ -17,6 +17,8 @@ func main() {
 	}
 	fmt.Printf("%s\n", buf)
 
+	// 以下与ReadAtLeast类似
+
 	// If an EOF happens after reading some but not all the bytes, ReadFull returns ErrUnexpectedEOF
 	longBuf := make([]byte, 64)
 	if _, err := io.ReadFull(r, longBuf); err != nil {
@@ -24,7 +26,6 @@ func main() {
 	}
 
 	// EOF The error is EOF only if no bytes were read.
-	// 与ReadAtLeast类似
 	if _, err := io.ReadFull(r, longBuf); err != nil {
 		fmt.Println("error:", err)
 	}

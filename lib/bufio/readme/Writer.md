@@ -38,7 +38,10 @@ type Writer struct {
 	If an error occurs writing to a Writer, no more data will be accepted
 	and all subsequent writes will return the error.
 	```
-	Read操作返回错误以后，相关方法会将bufio.Reader.err重置为nil；而且Write操作并没有将bufio.Writer.err置为nil的接口！！
+	Read操作返回错误以后，相关方法会将bufio.Reader.err重置为nil；而且Write操作并没有将bufio.Writer.err置为nil的接口！！ 
+
+>
+> 注意，只是bufio.Writer.Write的个体行为, io.Writer.Write没有这个要求
 
 - 如何处理flush
 
