@@ -13,5 +13,5 @@ func main() {
 	// 与ReadAll相比，入参有区别
 	entries, err := ioutil.ReadFile("/tmp/data")
 	errcheck(err)
-	fmt.Println(string(entries))
+	fmt.Printf("%s\n", entries)
 }

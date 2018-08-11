@@ -10,5 +10,5 @@ func main() {
 	b := []byte("world")
 	data := [][]byte{a, b}
 	sep := []byte{','}
-	fmt.Println(string(bytes.Join(data, sep)))
+	fmt.Printf("%q\n", bytes.Join(data, sep))
 }

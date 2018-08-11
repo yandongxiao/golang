@@ -7,7 +7,7 @@ import (
 
 type Server struct {
 	Name string /* Why the field Name must be accessed */
-	Ip   string
+	IP   string
 }
 
 type ServerSlice struct {
@@ -15,8 +15,8 @@ type ServerSlice struct {
 }
 
 func main() {
-	slice := ServerSlice{ []Server{{"shanghai", "127.0.0.1"}, {"beijing", "127.0.0.2"}}}
+	slice := ServerSlice{[]Server{{"shanghai", "127.0.0.1"}, {"beijing", "127.0.0.2"}}}
 
 	data, _ := json.Marshal(slice)
-	fmt.Println(string(data))
+	fmt.Printf("%s\n", data)
 }

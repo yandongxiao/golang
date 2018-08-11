@@ -36,7 +36,7 @@ func test1() {
 		// The underlying array may point to data that will be overwritten by a subsequent call to Scan.
 		// It does no allocation.
 		// NOTE: 返回值为[]byte，表明了数据是有可能被修改的
-		fmt.Println(string(scanner.Bytes()))
+		fmt.Printf("%q\n", scanner.Bytes())
 	}
 }
 
@@ -52,9 +52,10 @@ func test2() {
 	fmt.Println(bufReader.Scan())
 	fmt.Println(bufReader.Err())
 	fmt.Println(bufReader.Text())
-	fmt.Println(string(data)) // Buffer中缓存的数据可不止一个Token，所以直接使用data时没有意义的
+	fmt.Printf("%q\n", data) // Buffer中缓存的数据可不止一个Token，所以直接使用data时没有意义的
 }
 
 func main() {
+	test1()
 	test2()
 }

@@ -8,7 +8,7 @@ import (
 /* This is not OK */
 type Server struct {
 	Name string /* Why the field Name must be accessed */
-	Ip   string
+	IP   string
 	Next *Server
 	Prev *Server
 }
@@ -32,7 +32,7 @@ func main() {
 	data2.Prev = data1
 
 	encode, _ := json.Marshal(data1)
-	fmt.Println(string(encode))
+	fmt.Printf("%s\n", encode)
 
 	decodeServer := new(Server)
 	json.Unmarshal(encode, decodeServer)

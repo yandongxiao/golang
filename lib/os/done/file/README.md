@@ -1,8 +1,4 @@
-# os
-
-1. gives us a platform-independent interface to operating-system functionality;
-2. its design is Unix-like;
-3. it hides the differences between various operating systems to give a consistent view of files and other OS-objects.
+# File
 
 File类型是一个与操作系统紧密关联的数据结构，我们无法弄清楚它的struct类型。与它紧密关联的两个类型FileMode和FileInfo。
 

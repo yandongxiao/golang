@@ -19,5 +19,5 @@ func main() {
 	// A successful call returns err == nil, not err == EOF.
 	data, err := ioutil.ReadAll(reader)
 	errcheck(err)
-	fmt.Println(string(data))
+	fmt.Printf("%s\n", data)
 }

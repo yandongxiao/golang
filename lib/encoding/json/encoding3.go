@@ -8,7 +8,7 @@ import (
 
 type Server struct {
 	Name string /* Why the field Name must be accessed */
-	Ip   string
+	IP   string
 	Age  int
 	D1   *int /* nil */
 	D2   *int
@@ -34,7 +34,7 @@ func main() {
 			{"beijing", "127.0.0.2", 20, nil, &val}}}
 
 	data, _ := json.Marshal(slice)
-	fmt.Println(string(data))
+	fmt.Printf("%s\n", data)
 
 	/* D2 point to the different value */
 	/* this is OK, because go do not allowed to compare pointers */

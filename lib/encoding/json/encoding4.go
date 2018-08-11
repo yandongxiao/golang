@@ -27,7 +27,7 @@ func main() {
 	data1 := &Server{"shanghai", "127.0.0.1", nil}
 	data1.Next = &Server{"beijing", "127.0.0.2", nil}
 	encode, _ := json.Marshal(data1)
-	fmt.Println(string(encode))
+	fmt.Printf("%s\n", encode)
 
 	decodeServer := new(Server)
 	json.Unmarshal(encode, decodeServer)

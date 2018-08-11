@@ -6,8 +6,8 @@ import "unicode/utf8"
 func test1() {
 	var str = "国"
 	vals := []byte(str)
-	vals[2] += 1
-	fmt.Println(string(vals))
+	vals[2]++
+	fmt.Printf("%s\n", vals)
 }
 
 func main() {
