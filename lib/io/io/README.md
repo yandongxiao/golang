@@ -127,3 +127,24 @@ func ReadAtLeast(r Reader, buf []byte, min int) (n int, err error)
 func ReadFull(r Reader, buf []byte) (n int, err error)
 func WriteString(w Writer, s string) (n int, err error)
 ```
+
+### functions from ioutil
+
+ioutil的IO操作大多是与文件系统有关，即用户无需自己打开，读，关闭等操作，一键搞定
+
+```
+创建文件：
+func TempDir(dir, prefix string) (name string, err error)
+    Multiple programs calling TempDir simultaneously will not choose the same directory.
+func TempFile(dir, prefix string) (f *os.File, err error)
+
+读写文件:
+func ReadDir(dirname string) ([]os.FileInfo, error)
+func ReadFile(filename string) ([]byte, error)
+func WriteFile(filename string, data []byte, perm os.FileMode) error
+var Discard io.Writer = devNull(0)
+
+func NopCloser(r io.Reader) io.ReadCloser
+func ReadAll(r io.Reader) ([]byte, error)
+    注意与func ReadFull(r Reader, buf []byte) (n int, err error)的区别
+```

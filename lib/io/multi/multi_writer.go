@@ -8,7 +8,6 @@ import (
 	"strings"
 )
 
-// MultiWriter creates a writer that duplicates its writes to all the provided writers, similar to the Unix tee(1) command
 func main() {
 	r := strings.NewReader("some io.Reader stream to be read\n")
 
