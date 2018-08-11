@@ -46,10 +46,23 @@ not indicate EOF.
 Implementations must not retain p.
 ```
 
-
-
 >
 > 具体怎么实现Read接口，io.Reader并不关心，但是你的实现，必须满足Read操作规范！
+
+- 定义的标准列表
+
+	1. ```Read(p []byte) (n int, err error)```
+	2. 	```Write(p []byte) (n int, err error)```
+	3. ```Close() error```
+	4. ```	ReadAt(p []byte, off int64) (n int, err error)```
+	5. ```	ReadFrom(r Reader) (n int64, err error)```
+	6. ```WriteString(s string) (n int, err error)```
+	7. ```	WriteAt(p []byte, off int64) (n int, err error)```
+	8. ```	WriteTo(w Writer) (n int64, err error)```
+	9. ```	Seek(offset int64, whence int) (int64, error)```
+
+>
+> 以上所有方法都有对应的接口，如Read操作的封装接口就是Reader.
 
 ## error
 
@@ -66,49 +79,51 @@ ErrNegativeCount     = errors.New("bufio: negative count")
 >
 > 注意，错误并非是常量，因为常量只能应用于primitive type(数字、布尔、字符串)
 
+## 二次封装
 
-## functions
+基于IO原语，golang也提供了二次封装的应用类型。包括：
 
+### interface
 
-## pipe
-
-# 读
-type Reader interface {
-    func Read(p []byte) (n int, err error)
+```
+type LimitedReader struct {
+	R Reader // underlying reader
+	N int64  // max bytes remaining
 }
-Reader is the interface that wraps the basic Read method
+```
 
-Read reads up to len(p) bytes into p
-It returns the number of bytes read (0<=n<=len(p)) and any error encounterd.
-
-# 不能假设[n, len(p))之间的数据没有被更改
-Even if Read returns n < len(p), it may use all of p as scratch space(临时空间) during the call.
-
-# 即使正确返回的情况下，并不一定返回len(p)个字节. 但是这说明不了Read是阻塞还是非阻塞式
-If some data is available but not len(p) bytes, Read conventionally returns what is available instead of waiting for more.
-
-# 遇到错误的情况下，错误也有可能是在下一次调用后返回
-When Read encounters an error or end-of-file condition after successfully reading n > 0 bytes, it returns the number of bytes read.
-It may return the non-nil error from the same call or return the error (and n==0) from a subsequent call.
-An instance of this general case is that a Reader returning a non-zero number of bytes at the end of the input stream may return 
-err == EOR or err == nil. The next Read should return 0, EOF.
-
-# 失败的情况下也要检查n的值，n>0就表示正确读取了这些数据
-Caller should always process the n > 0 bytes returned brfore considering the error err.
-
-Implementations of Read are discouraged from returning n=0 and err=nil except when len(p)=0
-Caller should treat a return of 0 and nil as indicating that nothing happened. NOTE: It does not indicate EOF
-
-
-# 写
-type Writer interface {
-    func Write(p []byte) (n int, err error)
+```
+type SectionReader struct {
+	r     ReaderAt
+	base  int64
+	off   int64
+	limit int64
 }
 
-Writer is the interface that wrpas the basic Write method
+// NewSectionReader returns a SectionReader that reads from r
+// starting at offset off and stops with EOF after n bytes.
+func NewSectionReader(r ReaderAt, off int64, n int64) *SectionReader {
+	return &SectionReader{r, off, off, off + n}
+}
 
-Write writes len(p) bytes from p to the underlying data stream. It returns the number of bytes written from p (0<=n<=len(p)) and any error encountered
-that cased the write to stop early.
-Write must return a non-nil error if it returns n < len(p)
-Write must not modify the slice data
+// TeeReader returns a Reader that writes to w what it reads from r.
+// All reads from r performed through it are matched with
+// corresponding writes to w. There is no internal buffering -
+// the write must complete before the read completes.
+// Any error encountered while writing is reported as a read error.
+type teeReader struct {
+	r Reader
+	w Writer
+}
+```
 
+### functions
+
+```
+func Copy(dst Writer, src Reader) (written int64, err error)
+func CopyBuffer(dst Writer, src Reader, buf []byte) (written int64, err error)
+func CopyN(dst Writer, src Reader, n int64) (written int64, err error)
+func ReadAtLeast(r Reader, buf []byte, min int) (n int, err error)
+func ReadFull(r Reader, buf []byte) (n int, err error)
+func WriteString(w Writer, s string) (n int, err error)
+```
