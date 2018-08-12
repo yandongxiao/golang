@@ -1,19 +1,24 @@
-# File
+# os
 
-File类型是一个与操作系统紧密关联的数据结构，我们无法弄清楚它的struct类型。与它紧密关联的两个类型FileMode和FileInfo。
+1. gives us a platform-independent interface to operating-system functionality;
+2. its design is Unix-like
+3. Failing calls return values of type error rather than error numbers
+4. it hides the differences between various operating systems to give a consistent view of files and other OS-objects
+5. The os interface is intended to be uniform across all operating systems.
+6. Features not generally available appear in the system-specific package syscall. 所以package os只是封装了操作系统最通用的部分，借助package syscall来调用特殊系统的API
 
-> 注意，```func Pipe() (r *File, w *File, err error)``` 创建管道。
+package os 提供的接口可以分为两类：文件类和进程类。针对文件类，package os提供了类似bash命令的接口，方便易用。
+针对进程处理，package os提供的是操作系统原始接口的简单封装。例如需要指定标准输入、输出和出错；
+等待进程退出的wait函数在操作系统原语中也存在；父进程回收子进程的状态，否则子进程将成为僵尸进程。
 
-## FileMode
-
-1. A FileMode represents a file's mode and permission bits. FileMode对应了Linux文件系统的文件类型和文件权限
-2. The bits have the same definition on all systems, so that information about files can be moved from one system to another portably. 突出了os package的跨平台性
-3. Not all bits apply to all systems.
+>
+> package os/exec 可能更适合进程处理
 
 ## 设置常量的技巧
 
-1. 不但是要定义常量；
-2. 同时指定常量的类型，该类型有别于内置类型
+1. 不但要定义常量；
+2. 同时指定常量的类型，该类型有别于内置类型，如int
+3. 避免直接操作FileMode，因为调用该类型的方法会更方便。
 
 ```
 type FileMode uint32
@@ -38,20 +43,58 @@ const (
 )
 ```
 
-> 不要直接操作FileMode，因为调用该类型的方法会更方便。
+## 错误处理
 
-## FileInfo
+1. 错误的比较只与文件是否存在有关系，与是哪个文件，如何操作文件无关，解耦。
+2. 使得Is类函数更加通用，所有package os的错误类型，如```PathError```, ```LinkError```, ```SyscallError```都可以作为Is类函数的参数。
+3. 由于package os 定义了多中类型的错误，如PathError, LinkError等，每个函数的Documentation中都明确说明了返回的错误类型。
 
 ```
-type FileInfo interface {
-    Name() string       // base name of the file
-    Size() int64        // length in bytes for regular files; system-dependent for others
-    Mode() FileMode     // file mode bits
-    ModTime() time.Time // modification time
-    IsDir() bool        // abbreviation for Mode().IsDir()
-    Sys() interface{}   // underlying data source (can return nil)
+type PathError struct {
+    Op   string
+    Path string
+    Err  e
 }
+
+package os 自定义的错误类型，注意，它只是自定义了PathError.Err部分。
+var (
+    ErrInvalid    = errors.New("invalid argument") // methods on File will return this error when the receiver is nil
+    ErrPermission = errors.New("permission denied")
+    ErrExist      = errors.New("file already exists")
+    ErrNotExist   = errors.New("file does not exist")
+)
+
+func IsExist(err error) bool
+func IsNotExist(err error) bool
+func IsPathSeparator(c uint8) bool
+func IsPermission(err error) bool
 ```
+
+## File
+
+File类型是一个与操作系统紧密关联的数据结构，我们无法弄清楚它的struct类型。
+与它紧密关联的两个类型有FileMode和FileInfo。
+
+> 注意，```func Pipe() (r *File, w *File, err error)``` 创建管道。
+
+- FileMode
+
+    1. A FileMode represents a file's mode and permission bits. FileMode对应了Linux文件系统的文件类型和文件权限
+    2. The bits have the same definition on all systems, so that information about files can be moved from one system to another portably.
+    3. Not all bits apply to all systems.
+
+- FileInfo
+
+    ```
+    type FileInfo interface {
+        Name() string       // base name of the file
+        Size() int64        // length in bytes for regular files; system-dependent for others
+        Mode() FileMode     // file mode bits
+        ModTime() time.Time // modification time
+        IsDir() bool        // abbreviation for Mode().IsDir()
+        Sys() interface{}   // underlying data source (can return nil)
+    }
+    ```
 
 ## 打开文件操作
 
@@ -128,5 +171,4 @@ func (f *File) Sync() error
     Sync commits the current contents of the file to stable storage.
     Typically, this means flushing the file system's in-memory copy of
     recently written data to disk.
-
 ```
