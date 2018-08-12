@@ -1,4 +1,4 @@
-// Sometimes our Go programs need to spawn other, non-Go processes.
+// NOTICE: the examples in this package assume a Unix system. They may not run on Windows
 
 package main
 
@@ -62,5 +62,5 @@ func main() {
 		panic(err)
 	}
 	fmt.Println("> ls -a -l -h")
-	fmt.Println(string(lsOut))
+	fmt.Printf("%s\n", lsOut)
 }
