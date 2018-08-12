@@ -1,3 +1,4 @@
+// 通过该例子，我们就明白了，为什么package之间最好不要使用同一类型作为key
 package main
 
 import (
@@ -12,7 +13,7 @@ func main() {
 	ctx := context.WithValue(context.Background(), INT(1), 100)
 	fmt.Println(ctx.Value(INT(1))) // 100
 
-	// 继承了ctx, 但是每一个context都拥有自己独立的map
+	// ctx2继承了ctx, 但是每一个context都拥有自己独立的map
 	ctx2 := context.WithValue(ctx, INT(1), 200)
 	fmt.Println(ctx.Value(INT(1)))  // 100
 	fmt.Println(ctx2.Value(INT(1))) // 200
