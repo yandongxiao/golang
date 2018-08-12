@@ -2,6 +2,8 @@
 
 File类型是一个与操作系统紧密关联的数据结构，我们无法弄清楚它的struct类型。与它紧密关联的两个类型FileMode和FileInfo。
 
+> 注意，```func Pipe() (r *File, w *File, err error)``` 创建管道。
+
 ## FileMode
 
 1. A FileMode represents a file's mode and permission bits. FileMode对应了Linux文件系统的文件类型和文件权限
@@ -36,6 +38,8 @@ const (
 )
 ```
 
+> 不要直接操作FileMode，因为调用该类型的方法会更方便。
+
 ## FileInfo
 
 ```
@@ -49,13 +53,49 @@ type FileInfo interface {
 }
 ```
 
+## 打开文件操作
+
 ```
+func Mkdir(name string, perm FileMode) error
+func MkdirAll(path string, perm FileMode) error
+
+
 func Create(name string) (*File, error)
 func Open(name string) (*File, error)
-func OpenFile(name string, flag int, perm FileMode) (*File, error)
-func Pipe() (r *File, w *File, err error)
 
-# 元数据
+const (
+    O_RDONLY int = syscall.O_RDONLY // open the file read-only.
+    O_WRONLY int = syscall.O_WRONLY // open the file write-only.
+    O_RDWR   int = syscall.O_RDWR   // open the file read-write.
+    O_APPEND int = syscall.O_APPEND // append data to the file when writing.
+    O_CREATE int = syscall.O_CREAT  // create a new file if none exists.
+    O_EXCL   int = syscall.O_EXCL   // used with O_CREATE, file must not exist
+    O_SYNC   int = syscall.O_SYNC   // open for synchronous I/O.
+    O_TRUNC  int = syscall.O_TRUNC  // if possible, truncate file when opened.
+)   // Flags to OpenFile
+func OpenFile(name string, flag int, perm FileMode) (*File, error)
+
+func Pipe() (r *File, w *File, err error)
+```
+
+### 为什么需要OpenFile函数
+
+创建文件时，一般需要指定FileMode和permission。
+
+打开文件时一般需要指定打开方式，包括：读、写或读写方式。
+
+```
+Create creates the named file with mode 0666 (before umask), truncating
+it if it already exists. If successful, the associated file descriptor has mode O_RDWR.
+
+Open opens the named file for reading. If successful, the associated file descriptor has mode O_RDONLY. 
+```
+
+可见，虽然Create和Open是最常用的两种打开方式，但是缺乏灵活性。FileMode，permission 和读写方式是固定写死的，而OpenFile的最大优势就在于它可以让调用者自己选择合适的组和方式。 注意，这也是FileMode的每一个标志占据一位的原因（方便组和）。
+
+## 元数据操作
+
+```
 func (f *File) Chdir() error
 func (f *File) Chmod(mode FileMode) error
 func (f *File) Chown(uid, gid int) error
@@ -63,18 +103,30 @@ func (f *File) Close() error
 func (f *File) Fd() uintptr
 func (f *File) Name() string
 func (f *File) Stat() (FileInfo, error)
+```
 
-# 读
+## 读文件操作
+
+```
 func (f *File) Read(b []byte) (n int, err error)
 func (f *File) ReadAt(b []byte, off int64) (n int, err error)
 func (f *File) Readdir(n int) ([]FileInfo, error)
 func (f *File) Readdirnames(n int) (names []string, err error)
 func (f *File) Seek(offset int64, whence int) (ret int64, err error)
 func (f *File) Sync() error
+```
 
-# 写
+## 写文件操作
+
+```
 func (f *File) Truncate(size int64) error
 func (f *File) Write(b []byte) (n int, err error)
 func (f *File) WriteAt(b []byte, off int64) (n int, err error)
 func (f *File) WriteString(s string) (n int, err error)
+
+func (f *File) Sync() error
+    Sync commits the current contents of the file to stable storage.
+    Typically, this means flushing the file system's in-memory copy of
+    recently written data to disk.
+
 ```
