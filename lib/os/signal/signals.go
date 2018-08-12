@@ -1,44 +1,51 @@
-// Sometimes we'd like our Go programs to intelligently
-// handle [Unix signals](http://en.wikipedia.org/wiki/Unix_signal).
-// For example, we might want a server to gracefully
-// shutdown when it receives a `SIGTERM`, or a command-line
-// tool to stop processing input if it receives a `SIGINT`.
-// Here's how to handle signals in Go with channels.
-
 package main
 
-import "fmt"
-import "os"
-import "os/signal"
-import "syscall"
+import (
+	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+)
 
 func main() {
 
-	// Go signal notification(信号通知机制) works by sending `os.Signal`
-	// values on a channel. We'll create a channel to
-	// receive these notifications (we'll also make one to
-	// notify us when the program can exit).
-	sigs := make(chan os.Signal, 1)
-	done := make(chan bool, 1)
+	// Package signal will not block sending to c: the caller must ensure that
+	// c has sufficient buffer space to keep up with the expected signal rate.
+	// For a channel used for notification of just one signal value, a buffer of size 1 is sufficient.
+	// 如果chan处理时间太长，chan buffer塞满了信号，新来的信号会丢失哟
+	ch1 := make(chan os.Signal)
+	ch2 := make(chan os.Signal)
+	signal.Notify(ch1, syscall.SIGINT) // ctl-c
+	signal.Notify(ch1, syscall.SIGTSTP)
+	signal.Notify(ch2, syscall.SIGINT)
+	signal.Notify(ch2, syscall.SIGTSTP) // ctl-z
 
-	// `signal.Notify` registers(注册) the given channel to
-	// receive notifications of the specified signals.
-	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	go func(ch <-chan os.Signal) {
+		for sig := range ch {
+			switch sig {
+			case syscall.SIGINT:
+				time.Sleep(time.Second)
+				fmt.Println("syscall.SIGINT")
+				os.Exit(1)
+			case syscall.SIGTSTP:
+				fmt.Println("syscall.SIGTSTP")
+				time.Sleep(time.Second)
+				fmt.Println("restart")
+			}
+		}
+	}(ch1)
 
-	// This goroutine executes a blocking receive for
-	// signals. When it gets one it'll print it out
-	// and then notify the program that it can finish.
-	go func() {
-		sig := <-sigs
-		fmt.Println()
-		fmt.Println(sig)
-		done <- true
-	}()
+	go func(ch <-chan os.Signal) {
+		for sig := range ch {
+			switch sig {
+			case syscall.SIGINT:
+				fmt.Println("..")
+			case syscall.SIGTSTP:
+				fmt.Println("..")
+			}
+		}
+	}(ch2)
 
-	// The program will wait here until it gets the
-	// expected signal (as indicated by the goroutine
-	// above sending a value on `done`) and then exit.
-	fmt.Println("awaiting signal")
-	<-done
-	fmt.Println("exiting")
+	time.Sleep(time.Second * 5)
 }

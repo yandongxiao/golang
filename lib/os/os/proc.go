@@ -13,7 +13,7 @@ func checkError(err error) {
 
 func main() {
 
-	// 1. 设置子进程的属性
+	// 1. 设置子进程的属性, 几乎是所有属性
 	procAttr := &os.ProcAttr{
 		Dir: "/tmp",
 		Env: os.Environ(),
