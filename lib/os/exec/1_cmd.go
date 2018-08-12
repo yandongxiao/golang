@@ -1,5 +1,3 @@
-// Package exec runs external commands. It wraps os.StartProcess to make it easier
-// to remap stdin and stdout, connect I/O with pipes, and do other adjustments.
 // NOTICE: the examples in this package assume a Unix system. They may not run on Windows
 
 package main
@@ -10,7 +8,8 @@ import (
 )
 
 func main() {
-	cmd := exec.Command("ls")
+	// 根据Linux系统的
+	cmd := exec.Command("ls", "/tmp")
 
 	// Path is the path of the command to run.
 	// This is the only field that must be set to a non-zero value
