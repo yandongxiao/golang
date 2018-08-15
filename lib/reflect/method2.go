@@ -15,7 +15,7 @@ type Bbb struct {
 
 type Handler struct{}
 
-func (h Handler) GET(a Aaa, b Bbb, ptr *Aaa) string {
+func (h Handler) GET(a *Aaa, ptr *Aaa) string {
 	return "OK" + a.a + " ptr:" + ptr.a
 }
 
@@ -24,13 +24,13 @@ func main() {
 	s := reflect.ValueOf(handler)
 	method := s.MethodByName("GET")
 
-	x := Aaa{"x"}
+	// reflect.Type可以作为map的key
+	// 由于y将x覆盖掉了，说以说明reflect.TypeOf返回的对象其实是一个对象。或者说是两个相等的对象
+	x := &Aaa{"x"}
 	y := &Aaa{"y"}
-	z := Bbb{2}
 	m := make(map[reflect.Type]interface{})
 	m[reflect.TypeOf(x)] = x
 	m[reflect.TypeOf(y)] = y
-	m[reflect.TypeOf(z)] = z
 
 	input := make([]reflect.Value, 0)
 	for i := 0; i < method.Type().NumIn(); i++ {

@@ -5,9 +5,6 @@ import (
 	"reflect"
 )
 
-/**
- * Functions.
- */
 func inspect(d interface{}) {
 	fmt.Println("--------------------------------")
 
@@ -17,14 +14,11 @@ func inspect(d interface{}) {
 	)
 
 	dv = reflect.ValueOf(d)
-	fmt.Printf("Value: ")
-	fmt.Println(dv.Interface())
-	fmt.Println()
+	fmt.Printf("Value: %v\n", dv.Interface())
 
 	dt = reflect.TypeOf(d)
 	fmt.Printf("Type: %s\n", dt)
 	fmt.Printf("Name: %s\n", dt.Name())
-
 	fmt.Printf("Kind: %s\n", dt.Kind())
 	fmt.Println()
 
@@ -40,9 +34,7 @@ func inspect(d interface{}) {
 				fmt.Printf("Name: %s\n", ft.Name)
 			}
 
-			fmt.Printf("Value: ")
-			fmt.Println(fv.Interface())
-			fmt.Println()
+			fmt.Printf("Value: %v\n\n", fv.Interface())
 		}
 
 		for i := 0; i < dv.NumMethod(); i++ {

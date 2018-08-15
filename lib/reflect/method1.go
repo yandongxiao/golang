@@ -29,7 +29,7 @@ func (h Add) Add(a, b, c int) int {
 // 调用对象object的方法
 func call(object interface{}, methodName string, arguments ...interface{}) []reflect.Value {
 	s := reflect.ValueOf(object)
-	method := s.MethodByName(methodName) // NOTE: methodName的第一个字符必须是最大值
+	method := s.MethodByName(methodName) // NOTE: methodName的第一个字符必须是大写
 
 	input := make([]reflect.Value, 0, len(arguments))
 	for _, arg := range arguments {
