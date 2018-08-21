@@ -1,1 +1,0 @@
-The net package returns errors of type error, following the usual convention, but some of the error implementations have additional methods defined by the net.Error interface:
