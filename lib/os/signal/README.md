@@ -18,9 +18,9 @@ Linux信号是进程间通信的一种方式，基本流程如下：
 - **Synchronous signals**
 
 	Synchronous signals are signals triggered by errors in program execution: SIGBUS, SIGFPE, and SIGSEGV.
-	
+
 	These are only considered synchronous when caused by program execution, not when sent using os.Process.Kill or the kill program or some similar mechanism.
-	
+
 	In general, except as discussed below, **Go programs will convert a synchronous signal into a run-time panic**.
 
 - **asynchronous signals**
@@ -33,7 +33,7 @@ Linux信号是进程间通信的一种方式，基本流程如下：
 
 By default, a synchronous signal is converted into a run-time panic.
 
-A SIGHUP, SIGINT, or SIGTERM signal causes the program to exit. A SIGQUIT,
+A SIGHUP, SIGINT(CTRL+C), or SIGTERM signal causes the program to exit. A SIGQUIT,
 SIGILL, SIGTRAP, SIGABRT, SIGSTKFLT, SIGEMT, or SIGSYS signal causes the
 program to exit with a stack dump.
 

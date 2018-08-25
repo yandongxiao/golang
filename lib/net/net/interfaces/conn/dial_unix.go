@@ -1,4 +1,5 @@
-package unix
+// NOTE: nc是一个非常简单的可以模拟TCP/UDP的客户端或者服务端的命令
+package main
 
 import (
 	"fmt"
@@ -6,36 +7,18 @@ import (
 )
 
 func main() {
-
-	// client
-	/*
-		go func() {
-			// network: tcp, tcp4, tcp6, udp, udp4, udp6, ip, ip4, ip6, unix, unixgram, unixpacket
-			conn, _ := net.Dial("tcp", "localhost:8888")
-			data := make([]byte, 1)
-			for {
-				n, err := conn.Read(data)
-				if n > 0 {
-					fmt.Printf("%v", string(data))
-				} else {
-					fmt.Println()
-				}
-
-				if err == io.EOF {
-					break
-				} else if err != nil {
-					panic(err)
-				}
-			}
-
-			end <- true
-		}()
-	*/
 	// server
-	// 借助linux命令nc，可以模拟客户端.nc -p 31337 -w 5 host.example.com 42
-	Listener, _ := net.Listen("unix", "/tmp/aaabc.socket")
-	defer Listener.Close() ///tmp/aaabc.socket
-	conn, _ := Listener.Accept()
+	// 借助nc模拟客户端. nc -U /tmp/aaabc.socket
+	listener, err := net.Listen("unix", "/tmp/aaabc.socket") // 如果文件已存在则返回失败
+	if err != nil {
+		fmt.Println(err)
+	}
+	// 退出时删除该文件tmp/aaabc.socket, 否则
+	// listen unix /tmp/aaabc.socket: bind: address already in use
+	// A SIGHUP, SIGINT(CTRL+C), or SIGTERM signal causes the program to exit. 所以直接CTRL+C时，该文件不会被删除
+	defer listener.Close()
+
+	conn, _ := listener.Accept()
 	for {
 		data := make([]byte, 100)
 		conn.Write([]byte("helloworld\n"))
@@ -43,7 +26,7 @@ func main() {
 		if err != nil {
 			break
 		}
-		fmt.Printf("%s\n", data)
+		fmt.Printf("%s", data)
 	}
 	conn.Close()
 }
