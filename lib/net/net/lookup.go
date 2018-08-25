@@ -21,6 +21,7 @@ func main() {
 	// To bypass the host resolver, use a custom Resolver.
 	conn, _ := net.Dial("tcp", "baidu.com:80")
 	fmt.Printf("net.Dial: %+v\n", conn.RemoteAddr())
+	// NOTE：还存在逆向的函数: func JoinHostPort(host, port string) string)
 	fmt.Println(net.SplitHostPort(conn.RemoteAddr().String()))
 
 	// 直接域名解析

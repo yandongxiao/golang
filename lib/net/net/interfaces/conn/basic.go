@@ -1,3 +1,6 @@
+// package net中最重要的接口之一
+// Conn is a generic stream-oriented network connection.
+// Multiple goroutines may invoke methods on a Conn simultaneously.
 package main
 
 import (
