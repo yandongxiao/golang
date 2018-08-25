@@ -5,8 +5,8 @@
  *    String() string  // string form of address (for example, "192.0.2.1:25", "[2001:db8::1]:80")
  * }
  * The two methods Network and String conventionally return strings that can be passed as the arguments to Dial
- *
- * 函数 net.Dial and net.Listen 的参数是用于构造*net.TCPAddr
+ * the exact form and meaning of the strings is up to the implementation
+ * 实现net.Addr接口的类型包括：*net.IPAddr, *net.TCPAddr, *net.UDPAddr, *net.UnixAddr
  */
 package main
 

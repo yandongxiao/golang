@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	// 既是network interface的名称和索引的映射关键，也是系统网络设备的信息
+	// 既是network interface的名称和索引的映射关键，也是网络设备的信息
 	// Interface represents a mapping between network interface name and index.
 	// It also represents network interface facility information.
 	interfaces, err := net.Interfaces()
