@@ -12,7 +12,17 @@ func main() {
 	interfaces, err := net.Interfaces()
 	checkError(err)
 	for idx := range interfaces {
-		fmt.Printf("%+v\n", interfaces[idx])
+		/*
+			每个接口的flag值是下面这些值的或
+			const (
+			    FlagUp           Flags = 1 << iota // interface is up
+			    FlagBroadcast                      // interface supports broadcast access capability
+			    FlagLoopback                       // interface is a loopback interface
+			    FlagPointToPoint                   // interface belongs to a point-to-point link
+			    FlagMulticast                      // interface supports multicast access capability
+			)
+		*/
+		fmt.Printf("%+v, %#v\n", interfaces[idx], interfaces[idx].Flags)
 	}
 
 	// 通过network interface name or index来获取网络接口信息
