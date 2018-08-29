@@ -53,6 +53,7 @@ func main() {
 
 	// server
 	Listener, _ := net.Listen("tcp", "localhost:8888")
+	defer Listener.Close() // Already Accepted connections are not closed.
 	conn, _ := Listener.Accept()
 	conn.Write([]byte("helloworld"))
 	conn.Close()

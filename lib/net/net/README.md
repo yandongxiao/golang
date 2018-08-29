@@ -213,3 +213,14 @@ func (e *DNSError) Timeout() bool
 1. DNSConfigError包含的信息更少，唯一的field：Err error又显得多余了
 2. DNSError拥有更丰富的错误上下文，可描述为：lookup Name on Server时，出现了Err.
 
+
+cname, cidr, IPNet, ParseXXX, Mask, Accept, Resolve， Multicast, golang.org/x/net/ipv4,
+DNS SRV record,simultaneously, Loopback
+
+```
+type IPNet struct {
+    IP   IP     // network number
+    Mask IPMask // network mask
+}
+```
+
