@@ -17,6 +17,8 @@ func main() {
 			// NOTE: It is an error to set this field in an HTTP client request.
 			fmt.Println(req.RequestURI)
 
+			fmt.Println(req.FormValue("name"))
+
 			// ParseForm populates r.Form and r.PostForm.
 			// For all requests, ParseForm parses the **raw query** from the URL and updates r.Form.
 			// For POST, PUT, and PATCH requests, it also parses the request body as
