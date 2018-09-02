@@ -48,7 +48,7 @@ func main() {
 	// If Body is present, Content-Length is <= 0 and TransferEncoding hasn't
 	// been set to "identity", Write adds "Transfer-Encoding: chunked" to the
 	// header. Body is closed after it is sent.
-	req.ContentLength = int64(len("helloworld"))
+	// req.ContentLength = int64(len("helloworld"))
 
 	// 只需要client端设置
 	// setting this field prevents re-use of TCP connections between requests to the same hosts
@@ -67,6 +67,9 @@ func main() {
 
 func server() {
 	http.HandleFunc("/", func(resp http.ResponseWriter, req *http.Request) {
+		// 如果client端的请求, req.ContentLength没有被设置
+		// server端获取到的req.TransferEncoding=[chunked]
+		fmt.Println(req.TransferEncoding)
 		resp.Write([]byte("server: helloworld"))
 	})
 	http.ListenAndServe("localhost:8080", nil)

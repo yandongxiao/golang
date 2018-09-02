@@ -26,6 +26,7 @@ func main() {
 	// 虽然Trailer的值虽然还不清楚，但是必须一开始就指定好key
 	req.Trailer = http.Header{
 		"XXX": []string{"xx", "yy"},
+		"AA":  []string{"xx", "yy"},
 	}
 
 	// The ContentLength must be 0 or -1, to send a chunked request.
