@@ -1,5 +1,6 @@
-// A Client is higher-level than a RoundTripper (such as Transport) and
-// additionally handles HTTP details such as cookies and redirects.
+// A Client is higher-level than a RoundTripper (such as Transport)
+//	and additionally handles HTTP details such as cookies and redirects.
+// NOTICE：关于HTTP client request的修改，应该参考http.Request结构
 package main
 
 import (

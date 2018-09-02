@@ -1,5 +1,5 @@
 // The default HTTP client's Transport does not attempt to reuse HTTP/1.0 or HTTP/1.1 TCP connections
-// unless the Body is read to completion and is closed
+// unless the Response Body is read to completion and is closed
 // 所以，如果client希望重用该连接，1.读取完毕数据，2.调用Close方法. 我们每个函数都准从了这两条
 package main
 
@@ -55,6 +55,7 @@ func doPost() {
 }
 
 func doPostForm() {
+	// The Content-Type header is set to application/x-www-form-urlencoded.
 	resp, err := http.PostForm("http://localhost:8888",
 		url.Values{"name": {"jack"}, "age": {"19", "20"}})
 	if err != nil {
