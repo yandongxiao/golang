@@ -7,8 +7,10 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"net/http"
+	"os"
 )
 
 func listenAndServe() {
@@ -60,6 +62,10 @@ func main() {
 	// new --> active --> close
 	// new --> active --> idle
 	server.ConnState = cb
+
+	file, _ := os.Create("/tmp/mylog")
+	logger := log.New(file, "logger", log.LstdFlags)
+	server.ErrorLog = logger
 
 	// ListenAndServe always returns a non-nil error. 因为平时不返回
 	err := server.ListenAndServe()
