@@ -1,3 +1,4 @@
+// ./basic --name='alice'
 package main
 
 import (
