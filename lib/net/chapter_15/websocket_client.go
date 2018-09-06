@@ -4,7 +4,8 @@ package main
 import (
 	"fmt"
 	"time"
-	"code.google.com/p/go.net/websocket"
+
+	"github.com/gorilla/websocket"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 	}
 	go readFromServer(ws)
 	time.Sleep(5e9)
-    ws.Close()
+	ws.Close()
 }
 
 func readFromServer(ws *websocket.Conn) {

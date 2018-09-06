@@ -4,7 +4,8 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"code.google.com/p/go.net/websocket"
+
+	"github.com/gorilla/websocket"
 )
 
 func server(ws *websocket.Conn) {
