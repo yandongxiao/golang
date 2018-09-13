@@ -15,13 +15,16 @@
 // 1. always recover from panic in your package: no explicit panic() should be allowed to cross a package boundary
 // 2. return errors as error values to the callers of your package.
 //
-// NOTICE:  发生panic意味着that something **impossible** has happened
+// NOTICE:  发生panic意味着that something **impossible** has happened. 在init中，初始化package失败时，可抛出异常
 package main
 
 import "fmt"
 
 func main() {
 	defer func() {
+		// NOTICE: 即使是在recover调用之前
+		fmt.Println("helloworld")
+
 		// 捕获panic的一般做法：
 		// The recover built-in function allows a program to manage behavior of a panicking goroutine.
 		// Executing a call to recover inside a **deferred** function
@@ -31,7 +34,10 @@ func main() {
 		// If recover is called outside the deferred function it will not stop a panicking sequence.
 		// In this case, or when the goroutine is not panicking, or if the argument supplied to panic was nil, recover returns nil
 		// Thus the return value from recover reports whether the goroutine is panicking.
-		if r := recover(); r != nil { // r is an empty interface
+		//
+		// A call to recover stops the unwinding and returns the argument passed to panic.
+		//  run unaffected by the panicking state. 如果fmt.Println发生panic，则它会被fmt.Println的defer语句捕获, 执行recover, 消灭fmt内部的panic
+		if r := recover(); r != nil { // r is an empty interface.
 			fmt.Println(r)
 		}
 	}()

@@ -1,19 +1,24 @@
-// test_defer.go
 package main
 
-import (
-	"fmt"
-)
+// 测试函数参数i的值
+// If the defer has arguments they are evaluated at the line of the defer-statement.
+func foo() {
+	var i = 10
+	defer func(v int) {
+		println(v) // 10
+	}(i)
+	i = 20
+}
 
-func f() (ret int) {
+func bar() {
+	var i = 10
 	defer func() {
-		ret++
+		println(i) // 20
 	}()
-	return 1 /* ret = 1*/
+	i = 20
 }
 
 func main() {
-	fmt.Println(f())
+	foo()
+	bar()
 }
-
-// Output: 2
