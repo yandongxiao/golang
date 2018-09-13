@@ -1,4 +1,17 @@
-chan:
-    1. 协程安全的数据结构
-    2. 默认不带缓存，要求发送端和接收端必须分属于两个协程，且同时读写。否则，阻塞
-    3. 通过提供带缓存的channel，可以提供系统的性能
+# 关于golang知识点的总结
+
+1. [variable](./variable)
+2. [const](./const)
+3. [control](./control)
+4. [func](./func)
+5. [import](./import)
+6. [interface](./interface)
+7. [error](./error)
+8. [chan](./chan)
+9. [map](./map)
+10. [slice](./slice)
+11. [struct](./struct)
+12. [type](./type)
+13. [routine](./routine)
+14. [other](./other)
+15. [标准库](./lib)

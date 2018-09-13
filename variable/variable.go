@@ -26,4 +26,13 @@ func main() {
 	// 如果声明变量时没有指定初始化值，变量被赋值为zero-value
 	var e int
 	fmt.Println(e)
+
+	// 定义一组变量
+	var (
+		name2   string // 不允许再使用name变量，否则golang会报告重定义错误
+		age2    int    // 注意:没有逗号
+		salary2 float64
+		sex2    bool
+	) // 处于单独的一行
+	fmt.Println(name2, age2, salary2, sex2)
 }

@@ -1,28 +1,43 @@
-// What are the rules when there are two fields with the same name
-// An outer name hides an inner name. This provides a way to override a field or method.
-// If the same name appears twice at the same level, it is an error if the name is used by the program. (If it’s not used, it doesn’t matter.) There are no rules to resolve the ambiguity; it must be fixed.
-
+// Grouped globals
+// NOTICE: 如果你需要使用map[T1]T2来聚合数据，考虑使用匿名类来代替
 package main
 
-import "fmt"
+import (
+	"flag"
+	"fmt"
+)
 
 type Person struct {
-	age int
+	Name string
 }
 
-type Dog struct {
-	age int
+// 在最外层定义了匿名类. 外部访问方式：package.Ps.Man
+// 与数组方式相比，它不需要下标，语义更清晰
+// 与MAP方式相比，它不需要额外定义key的取值范围，更安全
+// 与在外部声明单独声明Man, Woman相比，Ps将同一类型的数据聚合在了一起
+var Ps struct {
+	Man, Woman Person
 }
 
-type House struct {
-	Person
-	Dog
+func init() {
+	Ps.Man.Name = "jack"
+	Ps.Woman.Name = "lili"
 }
 
 func main() {
-	h := House{Person{10}, Dog{1}}
-	fmt.Println(h)
+	// 假设这是在另一个package中使用上面的全局变量
+	flag.Parse()
+	fmt.Println(Ps.Man)
+	fmt.Println(Ps.Woman)
 
-	// ambiguous selector h.age
-	// h.age = 10
+	// Template data
+	// 假设这个struct是临时的，或者无需对外暴露的.
+	product := struct {
+		id   int
+		name string
+	}{
+		id:   10,
+		name: "jack",
+	}
+	fmt.Println(product.id, product.name)
 }

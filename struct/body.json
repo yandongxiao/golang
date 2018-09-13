@@ -1,0 +1,18 @@
+{
+    "code":200,
+    "data": {
+        "name": "jack",
+        "age": 10,
+        "children": [
+            {
+                "name": "alice",
+                "sex": "m"
+            },
+            {
+                "name": "bob",
+                "sex": "f"
+            }
+        ]
+    }
+
+}
