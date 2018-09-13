@@ -18,11 +18,11 @@ func main() {
 	// 两个常量之间的运算，可以不考虑类型问题. 例如虽然n值很大，但是还是能计算出d的值
 	fmt.Println(d)
 
-	// 常量是没有类型的, Sin方法需要的是float64类型
+	// **常量是没有类型的**, Sin方法需要的是float64类型
 	fmt.Println(math.Sin(d))
 
 	// 整数变量和浮点数常量进行计算
-	var num1 = 10 // 如果没有指定类型信息，则num1的数据类型为10
+	var num1 = 10 // 如果没有指定类型信息，则num1的数据类型为int
 	// println(num1 + 10.2) // constant 10.2 truncated to integer. 还是会报错
 	println(num1 + 10.0) // ok
 

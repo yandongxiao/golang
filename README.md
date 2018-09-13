@@ -1,7 +1,8 @@
-# 关于golang知识点的总结
+# golang-learning
 
-1. [variable](./variable)
-2. [const](./const)
+不断更新自己对golang的认知
+
+1. [variable](./variable): 介绍多重赋值、类型转换、**比较**、变量名与类型同名、作用域、零值和常量.
 3. [control](./control)
 4. [func](./func)
 5. [import](./import)
