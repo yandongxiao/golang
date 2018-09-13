@@ -14,4 +14,11 @@ func main() {
 	// 左右两边的值的个数必须相等
 	//a = 1, 2
 	//fmt.Println(a)
+
+	// 利用var定义多个变量
+	var (
+		b1 = 1 // 没有逗号
+		b2 = 1
+	)
+	fmt.Println(b1, b2)
 }

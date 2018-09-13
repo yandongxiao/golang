@@ -2,10 +2,6 @@ package main
 
 import "fmt"
 
-func zeroval(v int) {
-	v = 0
-}
-
 func zeroptr(v *int) {
 	*v = 0
 }
@@ -19,15 +15,11 @@ func zeroArray(arr *[3]int) {
 }
 
 func main() {
-	v := 10
-	zeroval(v)
-	println(v)
-
 	// cannot use v (type int) as type *int in argument to zeroptr
 	// 不会自动进行类型转换
 	// zeroptr(v)
 	// println(v)
-
+	var v int
 	zeroptr(&v)
 	println(v)
 

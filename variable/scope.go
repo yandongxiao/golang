@@ -5,19 +5,26 @@
 //  下层可以隐藏上层变量
 package main
 
-var a = "G" // global (package) scope
+import "fmt"
+
+func test1() {
+	m := 10
+	// 在同一级block内，下面的操作只会定义变量n
+	m, n := 20, 30
+	fmt.Println(m, n)
+}
+
+func test2() {
+	m := 10
+	// 在下面的block内，重新定义了m和n，所以上面的m变量被隐藏了
+	// structure level
+	if m, n := 20, 30; n == 30 {
+		fmt.Println(m, n)
+	}
+	fmt.Println(m) // m=10
+}
 
 func main() {
-	n()
-	m()
-	n()
+	test1()
+	test2()
 }
-func n() {
-	print(a)
-}
-func m() {
-	a := "O" // new local variable a is declared
-	print(a)
-}
-
-// GOG
