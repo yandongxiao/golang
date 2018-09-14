@@ -16,8 +16,30 @@ type Person struct {
 }
 
 func main() {
+	initialize()
 	getSize()
 	getAccess()
+}
+
+func initialize() {
+	// 四者等价
+	p1 := &Person{
+		name: "jack",
+	}
+
+	// struct 是 value type，所以使用new来创建新的对象
+	p2 := new(Person)
+	p2.name = "jack"
+
+	p3 := &Person{}
+	p3.name = "jack"
+
+	p4 := &Person{name: "jack"} // 推荐
+
+	fmt.Printf("%T %v\n", p1, p1)
+	fmt.Printf("%T %v\n", p2, p2)
+	fmt.Printf("%T %v\n", p3, p3)
+	fmt.Printf("%T %v\n", p4, p4)
 }
 
 // Even when a struct contains other structs, structs form a continuous block in memory
@@ -54,6 +76,11 @@ func getAccess() {
 func (p Person) getAge() int {
 	return p.age
 }
+
+// 如果再在pointer上重定义getAge，会导致method redeclared: Person.getAge错误
+//func (p *Person) getAge() int {
+//	return p.age
+//}
 
 func (p *Person) setAge(age int) {
 	p.age = age
