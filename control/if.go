@@ -9,7 +9,8 @@ func main() {
 		println("if语句的基本用法, 条件两边的括号可以省，大括号不能省")
 	}
 
-	// A statement can precede conditionals; any variables declared in this statement are available in all branches
+	// A statement can precede conditionals;
+	// any variables declared in this statement are available in all branches
 	num := -10
 	if num := 1; num < 0 { // 在更小的structure level定义了一个新的变量，并隐藏了同名的上级变量
 		fmt.Printf("%d is negtive\n", num)

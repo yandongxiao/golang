@@ -24,4 +24,17 @@ func main() {
 	for i, v := range []int{1, 2, 3} {
 		println(i, v)
 	}
+
+	// 自动解引用
+	array := [3]float64{7.0, 8.5, 9.1}
+	x := Sum(&array)
+	fmt.Printf("The sum of the array is: %f", x)
+}
+
+// can also with dereferencing *a to get back to the array
+func Sum(a *[3]float64) (sum float64) {
+	for _, v := range a {
+		sum += v
+	}
+	return
 }
