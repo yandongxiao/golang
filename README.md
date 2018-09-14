@@ -16,3 +16,18 @@
 13. [routine](./routine)
 14. [other](./other)
 15. [标准库](./lib)
+
+- Misusing pointers with value types
+
+Passing a value as a parameter in a function or as receiver to a method may seem
+a misuse of memory, because a value is always copied. 值传递看似浪费内存.
+
+But on the other hand values are allocated on the stack, which is quick and relatively cheap. 值传递借助栈, 代价没那么大.
+
+If you would pass a pointer to the value instead the Go compiler in most cases will see this as the making of an object,
+and will move this object to the heap, so also causing an additional memory allocation. golang的内存管理原则
+
+therefore nothing was gained in using a pointer instead of the value!
+
+总结：分辨变量的生命周期是重要的，我们从一开始就应该决定是否应该将对象放在堆上。
+对于临时变量或占用空间小的变量，可以采用值传递.
