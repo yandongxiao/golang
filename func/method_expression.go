@@ -2,7 +2,6 @@ package main
 
 type Person struct{}
 
-// NOTICE: 必须去掉p
 func (p *Person) Add(a, b int) int {
 	return a + b
 }
