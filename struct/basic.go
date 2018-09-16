@@ -1,3 +1,11 @@
+// a go method is a function that acts on variable of a certain type, called the receiver.
+// type分为两类，一种是value type(如type INT int), 另一种是pointer Type(如 type PINT *int).
+// it cannot be a pointer type, but it can be a pointer to any of the allowed types. 所以，PINT类型是不允许被作为recevier的
+// variable: 一个recevier可以是(a INT) 或 (p *INT) 两种变形，其中，(a INT)定义的函数也可以被pointer recevier使用.
+//
+// a method is a special kind of function. 注意，方法的本质是函数.
+// The receiver type can be (almost) anything, not only a struct type: any type can have methods,
+// even a function type or alias types for int, bool, string or array.
 package main
 
 import (
