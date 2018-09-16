@@ -10,8 +10,6 @@
 5. [import](./import)
 6. [interface](./interface)
 8. [chan](./chan)
-9. [map](./map)
-10. [slice](./slice)
 12. [type](./type)
 13. [routine](./routine)
 14. [other](./other)
