@@ -1,6 +1,6 @@
-// inheritance_car.go
+// 继承是通过匿名内部类的方式实现的
 // When an anonymous type is embedded in a struct, the visible methods of that type are embedded as well.
-// embedded类型可以是struct，interface，alias type
+// embedded类型可以是struct，interface，alias type等
 package main
 
 import (
@@ -21,11 +21,6 @@ type Car struct {
 	Engine
 }
 
-// define a behavior for Car
-func (car Car) numberOfWheels() int {
-	return car.wheelCount
-}
-
 type Mercedes struct {
 	Car //anonymous field Car
 }
@@ -35,6 +30,10 @@ func (m *Mercedes) sayHiToMerkel() {
 	fmt.Println("Hi Angela!")
 }
 
+// define a behavior for Car
+func (car Car) numberOfWheels() int {
+	return car.wheelCount
+}
 func (car *Car) Start() {
 	fmt.Println("Car is started")
 }

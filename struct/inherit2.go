@@ -2,16 +2,8 @@ package main
 
 import "fmt"
 
-type Getter interface {
-	get() int
-}
-
 type Base struct {
 	age int
-}
-
-func (b Base) get() int {
-	return b.age
 }
 
 type Child struct {
@@ -19,6 +11,35 @@ type Child struct {
 }
 
 func main() {
-	g := Getter(new(Child)) // 可以传递一个Child, 虽然Child并没有实现get方法
-	fmt.Println(g.get())
+	child := Child{
+		Base{
+			age: 20,
+		},
+	}
+
+	// 解释为什么输出Base的值20？
+	// 1. 直接调用foo(c)会出错，因为存在类型转换的问题
+	// 2. golang中的继承的本质是composite
+	// 所以child.Base是将它内部的Base变量赋值给foo的参数，所以肯定只会调用Base的方法
+	fmt.Println(foo(child.Base))
+
+	// 解释为什么输出20
+	// child.getMore调用的本质是方法名寻找, 调用对应field的方法的过程(而调用方法的本质是调用函数)
+	child.getMore()
+}
+
+func foo(b Base) int {
+	return b.get()
+}
+
+func (b Base) get() int {
+	return b.age
+}
+
+func (c Child) get() int {
+	return 200
+}
+
+func (b Base) getMore() {
+	fmt.Println(b.get())
 }

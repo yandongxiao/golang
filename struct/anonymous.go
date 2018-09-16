@@ -29,15 +29,4 @@ func main() {
 	flag.Parse()
 	fmt.Println(Ps.Man)
 	fmt.Println(Ps.Woman)
-
-	// Template data
-	// 假设这个struct是临时的，或者无需对外暴露的.
-	product := struct {
-		id   int
-		name string
-	}{
-		id:   10,
-		name: "jack",
-	}
-	fmt.Println(product.id, product.name)
 }

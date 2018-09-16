@@ -11,7 +11,7 @@ func main() {
 
 	// Decoding deeply nested JSON data
 	// NOTICE: 你再也不用为了每个HTTP的响应创建新的struct了
-	f, _ := os.Open("json.body")
+	f, _ := os.Open("anonymous-json.body")
 	data, _ := ioutil.ReadAll(f)
 	person := struct {
 		Code int
