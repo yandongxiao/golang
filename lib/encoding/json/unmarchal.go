@@ -1,5 +1,0 @@
-package main
-
-package main() {
-
-}
