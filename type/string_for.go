@@ -24,6 +24,9 @@ func main() {
 	//         在内存当中的表示形式(UTF-8编码)，61 e4 bd a0 e5 a5 bd
 	//		   61 e4 bd a0 e5 a5 bd. 其中a占用一个字节，内容为61，等于ASCII字符的值；你好分别占用了三个字节.
 	// s := "a你好"
+	// s := "\xe4\xb8\x96\xe7\x95\x8c" // UTF-8编码, 世界
+	// s := "\u4e16\u754c" // UNICODE字符, 世界
+	// s := "\U00004e16\U0000754c" // UNICODE字符, 世界, \U后面跟的是4字节的形式
 	s := "\u0061\u4f60\u597d" // 直接给定UNICODE字符或者二进制形式
 	for i := 0; i < len(s); i++ {
 		fmt.Printf("%x %T\n", s[i], s[i])

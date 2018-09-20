@@ -1,4 +1,5 @@
-// The constant data can only be of type boolean, number or string
+// the underlying type of every constant is a basic type: boolean, string, or number.
+// 所以可以定义time.Duration类型的常量
 package main
 
 import "math"
