@@ -1,71 +1,46 @@
-// 1. Pointer methods can be called with pointers.
-// 2. Value methods can be called with values.
-// 3. Value-receiver methods can be called with pointer values because they can be dereferenced first.
-// 4. Pointer-receiver methods cannot be called with values, however, because the value stored inside an interface(receiver类型是Person对象，pointer方法调用作用在该对象上是没有意义的) has no address.
-//
 package main
 
 import "fmt"
 
-func foo(num int) {
-	num++
-}
-
-func test1() {
-	v := new(int)
-	*v = 20
-	// cannot use v (type *int) as type int in argument to foo
-	// NOTE：不能直接传递v
-	foo(*v)
-	fmt.Println(*v)
-}
-
 type Person struct {
-	age int
+	name string
 }
 
-func (p Person) get() int {
-	return p.age
+func (p Person) get() string {
+	return p.name
 }
 
-func (p *Person) set(n int) {
-	p.age = n
-}
-
-func test2() {
-	p := new(Person)
-	// NOTE: 以下两行是自动解引用
-	p.age = 20
-	fmt.Println(p.get())
-
-}
-
-type Getter interface {
-	get() int
-}
-
-func test3() {
-	p := new(Person)
-	p.age = 20
-	getter := Getter(p) // NOTE: 自动解引用
-	println(getter.get())
-}
-
-type Gser interface {
-	Getter
-	set(int)
-}
-
-func test4() {
-	p := new(Person)
-	// 虽然Person get的recevier类型是value, set的recevier类型是pointer
-	// 但是get方法会被认为value和receiver类型都实现了.
-	sger := Gser(p)
-	sger.set(20)
-	println(sger.get())
-	println(p.get())
+func (p *Person) set(name string) {
+	p.name = name
 }
 
 func main() {
-	test4()
+	p := Person{"jack"}
+	p.get()
+	p.set("lua")
+	(&p).get()
+	(&p).set("lua")
+	fmt.Println(p)
+
+	getter := func(getter interface {
+		get() string
+	}) {
+		fmt.Println(getter.get())
+	}
+	getter(p)
+	getter(&p)
+
+	setter := func(setter interface {
+		set(name string)
+	}, name string) {
+		setter.set(name)
+	}
+	setter(&p, "set")
+	fmt.Println(p)
+
+	// interface type的值有两个：具体类型和具体对象.
+	// setter = p ：具体类型为Person, 具体对象是p的一个副本.
+	// set操作将会作用域p的这个副本，1. 很可能与开发的愿意不符，编译出错，可以提前做出警示
+	// 2. 修改这个副本对象是没有什么意义的
+	setter(p, "set")
 }
