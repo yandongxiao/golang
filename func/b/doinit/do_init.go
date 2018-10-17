@@ -1,5 +1,9 @@
-package doinit
+package mock
 
 func init() {
-	println("do init")
+	println("mock init")
+}
+
+func Foo() {
+	println("mock")
 }

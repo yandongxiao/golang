@@ -51,4 +51,14 @@ func main() {
 	default:
 		println("not equal")
 	}
+
+	// NOTE: case true: 后面没有接任何case语句，表明do nothing. 与b=2毫无关系
+	// NOTE: case 后面可以跟随多个表达式，它们之间是或的关系
+	b := 0
+	switch {
+	case true:
+	case 1 == 2, 2 == 2:
+		b = 2
+	}
+	fmt.Println(b)
 }
