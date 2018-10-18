@@ -25,21 +25,21 @@ func main() {
 		println(i, v)
 	}
 
-	// 自动解引用
-	array := [3]float64{7.0, 8.5, 9.1}
-	x := Sum(&array)
-	fmt.Printf("The sum of the array is: %f", x)
+	// for range 简化形式
+	for range []int{1, 2, 3} {
+		println("--")
+	}
 
-	// NOTE: range 的参数值可以是nil!
+	// NOTE: range 的参数值可以是nil! 但不支持 for range nil
 	var strs []string
 	for i := range strs {
 		println(strs[i])
 	}
 
-	// 简化形式
-	for range []int{1, 2, 3} {
-		println("--")
-	}
+	// 自动解引用
+	array := [3]float64{7.0, 8.5, 9.1}
+	x := Sum(&array)
+	fmt.Printf("The sum of the array is: %f", x)
 }
 
 // can also with dereferencing *a to get back to the array
