@@ -1,3 +1,4 @@
+// Go语言的大多数AIP都假设字符串是byte类型构造的
 package main
 
 import "fmt"
@@ -5,7 +6,7 @@ import "fmt"
 // Unicode VS UTF-8
 // Unicode 只是一个符号集，它只规定了符号的二进制代码. 例如, 汉字严的Unicode字符是十六进制数4E25.
 // 字符的二进制代码有大有小，有些可以以一个字节进行存储（比如英文字符），有些可能需要三四个字节进行存储（比如汉字）
-// NOTICE: Unicode只是一个字符集（与ASCII字符集类似）， 但是Unicode并没有规定如何存储（ASCII比较好存储，就用一个字节进行存储）
+// NOTICE: Unicode只是一个字符集（与ASCII字符集类似），但是Unicode并没有规定如何存储（ASCII比较好存储，就用一个字节进行存储）
 // 假如每个Unicode字符都以4个字节存储（有些Unicode）, 那么传输文本中如果含有大量的英文字符时，需要传递0x00000061, 浪费网络带宽.
 //
 // UTF-8, UTF-16编码就是为了解决Unicode字符集的存储和传输问题。
@@ -15,8 +16,8 @@ import "fmt"
 // len(s) 返回的是字节数, s[i]返回了一个字节，本质上是一个byte类型(uint8).
 // for range 形式返回的是一个**Unicode字符**，类型为rune(int32)，表示Unicode字符的二进制编码.
 // NOTICE: rune中存储的是Unicode编码字符，并非是UTF-8编码.
-// In the same way the conversion c:=[]int(s) is allowed, then each int contains a Unicode code point.
-// NOTICE: []byte(s) 和 c:=[]int32(s), c:=[]int(s) 存储字符的集合
+// In the same way the conversion c:=[]int32(s) is allowed, then each int32 contains a Unicode code point.
+// NOTICE: []byte(s) 和 c:=[]int32(s) 存储Unicode字符的集合
 
 func main() {
 

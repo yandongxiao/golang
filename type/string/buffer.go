@@ -6,7 +6,7 @@ import (
 )
 
 /* Due to compiler-optimizations and depending on the size of the strings using a
-Buffer only starts to become more efficient when the number of iterations is > 15.
+Buffer only starts to become more efficient when the number of iterations > 15.
 */
 func main() {
 	var buff bytes.Buffer
