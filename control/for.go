@@ -29,6 +29,17 @@ func main() {
 	array := [3]float64{7.0, 8.5, 9.1}
 	x := Sum(&array)
 	fmt.Printf("The sum of the array is: %f", x)
+
+	// NOTE: range 的参数值可以是nil!
+	var strs []string
+	for i := range strs {
+		println(strs[i])
+	}
+
+	// 简化形式
+	for range []int{1, 2, 3} {
+		println("--")
+	}
 }
 
 // can also with dereferencing *a to get back to the array
