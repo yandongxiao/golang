@@ -1,5 +1,4 @@
-// In Go, an _array_ is a numbered sequence of elements of a
-// specific length.
+// In Go, an array is a numbered sequence of elements of a specific length.
 
 package main
 
@@ -26,12 +25,15 @@ func main() {
 
 	// Use this syntax to declare and initialize an array
 	// in one line.
-	b := [5]int{1, 2, 3, 4, 5}
-	fmt.Println("dcl:", b)
+	var arrAge = [5]int{18, 20, 15, 22, 16}            // literal-1
+	var arrLazy = [...]int{5, 6, 7, 8, 22}             // literal-2
+	var arrKeyValue = [10]string{3: "Chris", 4: "Ron"} // literal-3
+	var arr4 = [...]string{3: "Chris", 4: "Ron"}       // literal-4
+	// var arrLazy = []int{5, 6, 7, 8, 22}			// 只要[]内什么都没有，返回的类型就是slice
+	fmt.Printf("%T, %T, %T, %T\n", arrAge, arrLazy, arrKeyValue, arr4)
 
 	// Array types are one-dimensional, but you can
-	// compose types to build multi-dimensional data
-	// structures.
+	// compose types to build multi-dimensional data structures.
 	var twoD [2][3]int
 	for i := 0; i < 2; i++ {
 		for j := 0; j < 3; j++ {

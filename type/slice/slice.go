@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-// Slices are a key data type in Go, giving a more powerful interface to sequences than arrays.
 func main() {
 	test1()
 	test2()
@@ -27,19 +26,16 @@ func test1() {
 	whatIAM(s2)
 
 	// NOTE: 如果data是数组类型，那么就是值传递
-	asFuncParam1 := func(data [3]int) {
-		data[0] = 10
-	}
 	var input [3]int
-	asFuncParam1(input)
+	func(data [3]int) {
+		data[0] = 10
+	}(input)
 	fmt.Println(input)
 
 	// 如果data是切片类型，那么就是引用传递
-	asFuncParam2 := func(data []int) {
+	func(data []int) {
 		data[0] = 10
-	}
-	// NOTE: cannot use input (type [3]int) as type []int in argument to asFuncParam)
-	asFuncParam2(input[:])
+	}(input[:])
 	fmt.Println(input)
 }
 
@@ -56,7 +52,7 @@ func test2() {
 	s := []string{"a", "b", "c"}
 	s = append(s, "d")
 	fmt.Println(s)
-	// Slices can also be copy’d
+	// Slices can also be copyed
 	c := make([]string, len(s))
 	copy(c, s)
 	fmt.Println(c)

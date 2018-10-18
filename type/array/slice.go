@@ -30,4 +30,9 @@ func main() {
 
 	// grow the slice beyond capacity:
 	// slice1 = slice1[0:7 ] // panic: runtime error: slice bounds out of range
+
+	slice1 = append(slice1, 1) // 执行append之后，arr1和slice1再无关系
+	slice1[0] = 100
+	fmt.Println(arr1)
+	fmt.Println(slice1)
 }
