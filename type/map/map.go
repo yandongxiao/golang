@@ -32,5 +32,6 @@ func main() {
 
 	// delete
 	delete(persons, "k1")
+	delete(persons, "k111")
 	fmt.Println(persons)
 }

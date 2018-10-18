@@ -36,9 +36,32 @@ func main() {
 	// interface的比较规则如下：
 	//	1. 首先比较的两个对象必须是同一种类型，即实现了相同的接口
 	//	2. 如果底层类型不相同，则返回false
-	//	3. 如果底层类型相同，但是类型不支持比较，如map, slice, 则**报错**
+	//	3. 如果底层类型相同，但是类型不支持比较，如map, slice, 则**panic**
 	//	4. 如果支持比较，则按照底层类型的比较规则进行比较.
 	var d interface{} = [3]int{1, 2, 3}
 	var e interface{} = [3]int{1, 2, 3}
-	println(d == e)
+	println(d == e) // true
+
+	type IntArray [3]int
+	x := IntArray{1, 2, 3}
+	y := [3]int{1, 2, 3}
+	var f interface{} = x
+	var g interface{} = y
+	println(x == y) //true
+	println(f == g) //false, 满足了第二条规则
+
+	// NOTE: 不能将rune等价为type rune int32
+	println("------")
+	m := int32(1)
+	n := rune(1)
+	println(m == n) //true
+	f = m
+	g = n
+	println(f == g) //true
+
+	type INT32 int32
+	q := INT32(1)
+	//println(m == q) //panic
+	g = q
+	println(f == g) // false
 }
