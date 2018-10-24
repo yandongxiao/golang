@@ -1,6 +1,7 @@
 # golang-learning
 
-不断更新自己对golang的认知
+Features added between releases, available in the source repository but not part of the numbered binary releases,
+are under active development. No promise of compatibility is made for software using such features until they have been released.
 
 1. [variable](./variable): 介绍多重赋值、类型转换、**比较**、变量名与类型同名、作用域、零值和常量.
 2. [control](./control): 介绍for、 if、 switch 和 type switch.
