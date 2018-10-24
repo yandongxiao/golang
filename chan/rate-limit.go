@@ -1,9 +1,3 @@
-// <em>[Rate limiting](http://en.wikipedia.org/wiki/Rate_limiting)</em>
-// is an important mechanism for controlling resource
-// utilization and maintaining quality of service. Go
-// elegantly supports rate limiting with goroutines,
-// channels, and [tickers](tickers).
-
 package main
 
 import "time"
