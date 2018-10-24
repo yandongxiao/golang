@@ -11,7 +11,7 @@ func main() {
 	// 数字(字符) --> 字符串
 	fmt.Println(string(0x4f60))
 	c := '你'
-	fmt.Println(string(c))
+	fmt.Printf("%T %v\n", c, string(c)) // NOTE: 即使c:='a', c的类型也是rune
 
 	// 字符串 --> 数字
 	s := "你"

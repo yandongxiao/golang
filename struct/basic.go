@@ -28,6 +28,7 @@ func main() {
 }
 
 // 2. structs are value types
+// NOTE: 对于exported filed，推荐使用指明key的形式
 func initialize() {
 	// 四者等价
 	p1 := &Person{

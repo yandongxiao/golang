@@ -3,7 +3,7 @@ package main
 import (
 	fm "fmt" // alias import
 
-	. "os" // 不推荐
+	. "os" // NOTE: 不推荐, 存在兼容性问题
 
 	_ "fmt" // 运行package fmt的init方法
 
