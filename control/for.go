@@ -21,6 +21,7 @@ func main() {
 		i++
 	}
 
+	// the order is unpredictable even if the same loop is run multiple times with the same map
 	for i, v := range []int{1, 2, 3} {
 		println(i, v)
 	}
