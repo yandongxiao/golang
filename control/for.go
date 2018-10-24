@@ -50,3 +50,9 @@ func Sum(a *[3]float64) (sum float64) {
 	}
 	return
 }
+
+// 能自动判断a terminating statement, 例如for
+func foo() int {
+	for {
+	}
+}
