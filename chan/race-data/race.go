@@ -50,7 +50,7 @@ func jack() {
 }
 
 func main() {
-	//alice()
+	alice()
 	// bob()
-	jack()
+	// jack()
 }
