@@ -3,12 +3,16 @@ package main
 
 import "fmt"
 
-func main() {
+func slice() {
 
-	data := []byte{1, 2, 3}
+	var data []byte
 
-	// 1
+	// 0
 	data = append(data, []byte{4, 5, 6}...)
+	fmt.Println(data)
+
+	// 0.1
+	data = append(data, []byte(nil)...)
 	fmt.Println(data)
 
 	// 2
@@ -18,4 +22,13 @@ func main() {
 	// 3
 	data = append(data, "xyz"...)
 	fmt.Println(data)
+}
+
+func main() {
+	slice()
+
+	// for map
+	// NOTE: panic: assignment to entry in nil map
+	var m map[int]int
+	m[1] = 1
 }

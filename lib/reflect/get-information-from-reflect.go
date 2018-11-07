@@ -107,6 +107,7 @@ func main() {
 
 	// create a struct
 	dv := reflect.New(reflect.TypeOf(Person{}))
+	fmt.Printf("%T", dv.Interface())
 	dve := dv.Elem()
 	dve.FieldByName("Name").SetString("alex")
 	dve.FieldByName("Age").SetInt(22)
