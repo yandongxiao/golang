@@ -19,6 +19,7 @@ func main() {
 			chData <- counter
 
 			// check whether to end
+			// NOTE: 一般是由生产者检查ctx.Done的
 			select {
 			case <-ctx.Done():
 				return
