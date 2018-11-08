@@ -1,22 +1,35 @@
 [应用案例](https://blog.golang.org/context)
 
 Incoming requests to a server should create a Context.
-    Request和Context实例一一对应, 所以在请求一开始到来时就创建Context实例.
-
 outgoing calls to servers should accept a Context.
+    Request和Context实例一一对应, 所以在请求一开始到来时就创建Context实例.
     Request handlers often start additional goroutines to access backends such as databases and RPC services.
-    一旦第三方service响应时间过长，可取消整个请求.
-
-The chain of function calls between them must propagate the Context, optionally replacing it with a *derived Context* created using *With-*
-    When a Context is canceled, all Contexts derived from it are also canceled.
-    这满足了常见的另外一个需求，A对第三方服务B并非是强依赖，假如A.timeout == 1s, 那么通过WithTimeout可创建一个新的Context，B.timeout = 0.5s.
+    单起一个协程完成请求的好处：一旦第三方service响应时间过长，可取消该请求.
 
 
-// Calling the CancelFunc cancels the child and its children, removes the parent's
-// reference to the child, and stops any associated timers. 否则，存在资源泄露
-func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
-func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
-func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
+取消请求的情况，如下：
+    1. 取消整个请求，返回给用户失败
+    2. 取消部分请求，返回部分信息
+    3. 同一个请求，法向了多个主机，一旦获取第一个响应，即可取消其它请求.
+
+
+The chain of function calls between them must propagate the Context,
+optionally replacing it with a *derived Context* created using:
+
+1. func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
+2. func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
+3. func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
+
+When a Context is canceled, all Contexts derived from it are also canceled.
+显然，Context的这个特性即可满足取消请求的各种情况.
+
+
+type CancelFunc func()
+Calling the CancelFunc cancels the child and its children, removes the parent's
+reference to the child, and stops any associated timers.
+NOTE: Failing to call the CancelFunc leaks the child and its children
+The go vet tool checks that CancelFuncs are used on all control-flow paths.
+
 
 Programs that use Contexts should follow these rules to keep interfaces
 consistent across packages and enable static analysis tools to check context propagation:
@@ -27,4 +40,4 @@ After the first call, subsequent calls to a CancelFunc do nothing. 可多次调�
  	if you are unsure about which Context to use.
 3. Use context Values only for request-scoped data that transits processes and APIs,
  	not for passing optional parameters to functions.
-Contexts are safe for simultaneous use by multiple goroutines
+4. Contexts are safe for simultaneous use by multiple goroutines
