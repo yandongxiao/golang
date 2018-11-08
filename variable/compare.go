@@ -5,6 +5,11 @@
 //		interface: 是可以比较的
 package main
 
+import (
+	"errors"
+	"fmt"
+)
+
 func test1() {}
 func test2() {}
 
@@ -50,4 +55,17 @@ func main() {
 	var g interface{} = y
 	println(x == y) //true
 	println(f == g) //false, 满足了第二条规则
+
+	// Pointer 与 chan类似，是可以比较当，相等条件
+	p1 := &struct {
+		Name string
+	}{
+		Name: "jack",
+	}
+	p2 := p1
+	fmt.Println(p1 == p2)
+
+	v1 := errors.New("helloworld")
+	v2 := v1
+	fmt.Println(v1 == v2)
 }

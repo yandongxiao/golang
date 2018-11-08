@@ -1,0 +1,30 @@
+[应用案例](https://blog.golang.org/context)
+
+Incoming requests to a server should create a Context.
+    Request和Context实例一一对应, 所以在请求一开始到来时就创建Context实例.
+
+outgoing calls to servers should accept a Context.
+    Request handlers often start additional goroutines to access backends such as databases and RPC services.
+    一旦第三方service响应时间过长，可取消整个请求.
+
+The chain of function calls between them must propagate the Context, optionally replacing it with a *derived Context* created using *With-*
+    When a Context is canceled, all Contexts derived from it are also canceled.
+    这满足了常见的另外一个需求，A对第三方服务B并非是强依赖，假如A.timeout == 1s, 那么通过WithTimeout可创建一个新的Context，B.timeout = 0.5s.
+
+
+// Calling the CancelFunc cancels the child and its children, removes the parent's
+// reference to the child, and stops any associated timers. 否则，存在资源泄露
+func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
+func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
+func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
+
+Programs that use Contexts should follow these rules to keep interfaces
+consistent across packages and enable static analysis tools to check context propagation:
+After the first call, subsequent calls to a CancelFunc do nothing. 可多次调用很重要
+1. Do not store Contexts inside a struct type; instead, pass a Context explicitly to
+ 	each function that needs it. The Context should be the first parameter
+2. Do not pass a nil Context, even if a function permits it. Pass context.TODO
+ 	if you are unsure about which Context to use.
+3. Use context Values only for request-scoped data that transits processes and APIs,
+ 	not for passing optional parameters to functions.
+Contexts are safe for simultaneous use by multiple goroutines
