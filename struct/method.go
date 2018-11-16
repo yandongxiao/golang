@@ -5,12 +5,12 @@ import "fmt"
 // method value: have been bound to a specific receiver value. e.g. w.Write
 // func (p []byte) (n int, err error) {
 //	return w.Write(p)
-// }]
+// }
 //
 // method expressions: generate functions from methods of a given type, e.g. (*bufio.Writer).Write
 // func (w *bufio.Writer, p []byte) (n int, err error) {
 //		return w.Write(p)
-// }])
+// }
 
 type Person struct {
 	name string

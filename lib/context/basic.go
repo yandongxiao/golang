@@ -1,4 +1,3 @@
-// NOTE: see block.go for problems
 package main
 
 import (
@@ -8,35 +7,23 @@ import (
 )
 
 func main() {
-	chData := make(chan int)
-
 	ctx, cancel := context.WithCancel(context.Background())
 	go func(ctx context.Context) {
-		counter := 0
 		for {
-			time.Sleep(100 * time.Millisecond)
-			counter++
-			chData <- counter
-
-			// check whether to end
-			// NOTE: 一般是由生产者检查ctx.Done的
 			select {
 			case <-ctx.Done():
+				fmt.Println("监控退出，停止了...")
 				return
 			default:
+				fmt.Println("goroutine监控中...")
+				time.Sleep(2 * time.Second)
 			}
 		}
 	}(ctx)
 
-	// consumer
-	for {
-		counter := <-chData
-		fmt.Println(counter)
-		if counter > 3 {
-			// go tool vet basic.go
-			// basic.go:13: the cancel function returned by context.WithCancel should be called, not discarded, to avoid a context leak
-			cancel()
-			break
-		}
-	}
+	time.Sleep(10 * time.Second)
+	fmt.Println("可以了，通知监控停止")
+	cancel()
+	//为了检测监控过是否停止，如果没有监控输出，就表示停止了
+	time.Sleep(5 * time.Second)
 }
