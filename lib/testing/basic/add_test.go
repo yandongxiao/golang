@@ -3,7 +3,7 @@ package main
 
 import "testing"
 
-func testAdd(t *testing.T) {
+func TestAdd(t *testing.T) {
 	if add(1, 2) == 3 {
 		t.Logf("add test success")
 	}
@@ -14,4 +14,14 @@ func testAdd(t *testing.T) {
 // show this N and the average execution time of the functions in ns (ns/op)
 func BenchmarkReverse(b *testing.B) {
 	b.Log("hellowolrd")
+}
+
+func TestAdd_2(t *testing.T) {
+	failure(t)
+}
+
+// Helper marks the calling function as a test helper function.
+func failure(t *testing.T) {
+	t.Helper() // This call silences this function in error reports.
+	t.Fatal("failure")
 }
