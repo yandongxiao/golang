@@ -16,6 +16,12 @@ func checkError(err error) {
 func main() {
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/helloworld")
 	checkError(err)
+	// guarantees that they’ll be executed on the same connection.
+	// The methods on the Tx map one-for-one to methods you can call on the database itself, such as Query() and so forth.
+	// NOTE: Prepared statements that are created in a transaction are bound exclusively to that transaction.
+	// NOTE: While you are working inside a transaction you should be careful not to make calls to the Db variable.
+	// Make all of your calls to the Tx variable that you created with db.Begin().
+	// NOTE: If you need to work with multiple statements that modify connection state, you need a Tx even if you don’t want a transaction
 	tx, err := db.Begin()
 	checkError(err)
 

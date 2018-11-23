@@ -1,15 +1,19 @@
-# DB
+## 数据库相关资料
 
-1. DB is a database handle representing a pool of zero or more underlying connections. DB是一个句柄，用于管理底层的连接
-2. The sql package creates and frees connections automatically. Mysql连接对上层调用是透明的
-3. It's safe for concurrent use by multiple goroutines. 协程安全
-4. Once DB.Begin is called, the returned Tx is bound to a single connection.
-   Once Commit or Rollback is called on the transaction, that transaction's 
-   connection is returned to DB's idle connection pool.
-5. package database/sql 包里面有数据类型DB, Stmt, Tx 三种类型，他们都支持Exec、Stmt、
-Query、QueryRow操作
+- http://go-database-sql.org/
+- database-sql
+- github.com/go-sql-driver/mysql/
 
-- Open Conn and Idle Conn
+## Working with NULLs
+
+1. Nullable columns are annoying and lead to a lot of ugly code. If you can, avoid them.
+2. reasons to avoid nullable columns
+    - There’s no sql.NullUint64 or sql.NullYourFavoriteType
+    - If you need to define your own types to handle NULLs, you can copy the design of sql.NullString to achieve that.
+    - `SELECT name, COALESCE(other_field, '') as otherField WHERE id = ?`
+    - If `other_field` was NULL, `otherField` is now an empty string. This works with other data types as well
+
+## Open Conn and Idle Conn
 
 The db pool may contain 0 or more idle connections to the database.
 These were connections that were made, used, and rather than closed, were kept around for future use.
@@ -24,13 +28,14 @@ MaxIdleConns <= MaxOpenConns
 
 >
 > Keeping an idle connection alive is not free
-> It is rare to Close a DB, as the DB handle is meant to be long-lived and shared between many goroutines.
-
 
 ## Tx
 
-1. A transaction must end with a call to Commit or Rollback.
-2. The statements prepared for a transaction by calling the transaction's    Prepare or Stmt methods are closed by the call to Commit or Rollback.
+1. Once DB.Begin is called, the returned Tx is bound to a single connection.
+   Once Commit or Rollback is called on the transaction, that transaction's
+   connection is returned to DB's idle connection pool.
+2. A transaction must end with a call to Commit or Rollback.
+3. The statements prepared for a transaction by calling the transaction's    Prepare or Stmt methods are closed by the call to Commit or Rollback.
 
 ## [Locking Reads](https://dev.mysql.com/doc/refman/5.5/en/innodb-locking-reads.html)
 
