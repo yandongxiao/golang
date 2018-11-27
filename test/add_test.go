@@ -13,8 +13,8 @@ func TestAdd(t *testing.T) {
 	a := 10
 	b := 10
 	c := test.Add(a, b)
-	// TODO
-	fmt.Println("helloworld", c)
+	// printed only if the test fails or the -test.v flag is set.
+	t.Log("helloworld", c)
 }
 
 // Benchmarks are run sequentially.
