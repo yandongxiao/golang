@@ -20,6 +20,9 @@ func TestAdd(t *testing.T) {
 // Benchmarks are run sequentially.
 // The benchmark function must run the target code b.N times.
 // go help testflag: go test -bench=.
+// To start tuning the Go program, we have to enable profiling.
+// If the code used the Go testing package's benchmarking support,
+// we could use gotest's standard -cpuprofile and -memprofile flags
 func BenchmarkAdd(b *testing.B) {
 	// If a benchmark needs some expensive setup before running, the timer may be reset
 	b.ResetTimer()
