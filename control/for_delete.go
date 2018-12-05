@@ -22,6 +22,18 @@ func main() {
 	}
 	fmt.Println(n)
 
+	// This is safe
+	// 另外两种情况:
+	// If map entries that have not yet been reached are removed during iteration, the corresponding iteration values will not be produced.
+	// If map entries are created during iteration, that entry may be produced during the iteration or may be skipped.
+	mm := map[string]int{"jack": 10, "bob": 20}
+	for key := range mm {
+		if key == "jack" {
+			delete(mm, key)
+		}
+	}
+	fmt.Println(mm)
+
 	// NOTICE: for range 的遍历次数由m的** 初始值 **决定
 	m = []int{1, 2, 3}
 	for i := range m {
@@ -30,4 +42,5 @@ func main() {
 			m = append(m[:i], m[i+1:]...)
 		}
 	}
+
 }

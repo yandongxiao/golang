@@ -19,4 +19,8 @@ func main() {
 	v3 := nums[:0] // make v3 as an empty slice
 	v3 = append(v3, 100)
 	fmt.Println(v3, len(v3), cap(v3), nums) // NOTE: nums被修改了
+
+	v4 := nums[:0:0] // make v4 as an empty slice
+	v4 = append(v4, 100)
+	fmt.Println(v4, len(v4), cap(v4), nums) // NOTE: nums未修改
 }

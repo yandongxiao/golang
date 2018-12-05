@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-
 	// 数字(字符) --> 字符串
 	fmt.Println(string(0x4f60))
 	c := '你'
