@@ -40,6 +40,14 @@ func test1() {
 }
 
 func test2() {
+	// 这个slice的前五个元素的值都是零，同时，append操作将会添加第六个元素
+	ss1 := make([]int, 5)
+	fmt.Println(len(ss1))
+
+	// array或者slice在进行literal初始化时，可以指定{0：0, 2:20, 30}. 注意30的下标值是前一个下标2+1
+	ss2 := []int{0: 0, 2: 20, 30}
+	fmt.Println(ss2)
+
 	// 初始化的方式
 	a1 := []int{1, 2, 3}
 	// To create an empty slice with non-zero length, use the builtin make.
