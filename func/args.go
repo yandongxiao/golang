@@ -1,3 +1,4 @@
+// NOTE: 在给函数起名字时要考虑到标准库中定义的interface的方法名，可以充分利用标准库。
 package main
 
 import "fmt"

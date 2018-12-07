@@ -33,7 +33,7 @@ type Dog struct {
 //  所以, 上面的歧义通过实现House自己的getAge即可解决.
 //
 type House struct {
-	Empty // 接口也可以匿名
+	Empty // NOTE: struct不但可以包含匿名的struct，而且也可以包含匿名的interface
 	Person
 }
 

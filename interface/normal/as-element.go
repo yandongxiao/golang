@@ -10,6 +10,9 @@ func method1() {
 	ds = append(ds, "jack")
 	ds = append(ds, 1.0)
 
+	// switch type ：case的值不止可以是struct，还可以是interface。
+	// 如果有多个case满足要求，排在最前面的case将会被执行。后面的case被忽略。
+	// 注意：fallthough是不允许被使用的
 	for _, elmt := range ds {
 		switch t := elmt.(type) {
 		case int:

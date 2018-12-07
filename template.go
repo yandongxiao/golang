@@ -2,6 +2,12 @@
 //
 // Experience has show that a small number of procedures
 // can prove helpful when attempting to save the world.
+//
+// NOTE:
+// Line comments are the norm
+// block comments appear mostly as package comments, but are useful
+// within an expression or to disable large swaths of code.
+// Comments do not need extra formatting
 package main
 
 import (

@@ -1,7 +1,11 @@
 // A type assertion provides access to an interface value's underlying concrete value.
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+	"os"
+)
 
 func main() {
 	// concrete value --> interface
@@ -21,7 +25,13 @@ func main() {
 	}
 
 	// interface --> concrete value
-
 	fmt.Println(i)
 	fmt.Println(v)
+
+	// 如果接口类型之间存在包含与被包含的关系，可以不借助type assertion，直接进行赋值
+	// type assertion: interfaceA 和 Interface B之间是否可以转换，只与底层的类型变量是否同时实现了他们的接口有关
+	f, _ := os.Open("/tmp/dd")
+	var empty io.Writer = f
+	s, ok := empty.(io.Reader)
+	fmt.Printf("%T, %v, %v\n", s, s, ok)
 }

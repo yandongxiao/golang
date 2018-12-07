@@ -8,6 +8,7 @@ type Interface2 interface {
 	func2()
 }
 
+// NOTE
 type Interface3 interface {
 	Interface1
 	Interface2

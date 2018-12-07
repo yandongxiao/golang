@@ -1,5 +1,6 @@
-// 不同类型的变量之间是不能进行计算，即便是int32和rune之间, 必须进行强制类型转换
 // 常量可以是无类型的, 变量一定是有类型的
+// 对于value type类型来说，type INT int 和int是两种不同的类型，所以需要强制类型转换；
+// NOTE: 但是对于reference type，例如slice、map，只要它们底层的数据结构是一致的，无需进行强制类型转换。
 package main
 
 import "fmt"
