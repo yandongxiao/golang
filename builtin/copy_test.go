@@ -3,14 +3,13 @@ package main
 
 import "fmt"
 
-func main() {
+func ExampleCopy() {
 	x := []byte("hello")
-
-	// 1
 	copy(x, []byte("world"))
 	fmt.Printf("%s\n", x)
-
-	// 2
 	copy(x, "WORLD")
 	fmt.Printf("%s\n", x)
+	// Output:
+	// world
+	// WORLD
 }
