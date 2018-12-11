@@ -1,4 +1,6 @@
-package bank
+package main
+
+import "fmt"
 
 var deposits = make(chan int)
 var balances = make(chan int)
@@ -17,6 +19,8 @@ func broker() {
 	}
 }
 
-func init() {
+func main() {
 	go broker()
+	Deposit(100)
+	fmt.Println(Balance())
 }

@@ -1,6 +1,9 @@
-package bank
+package main
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
 var (
 	mutex   sync.Mutex
@@ -17,4 +20,9 @@ func Balance() int {
 	mutex.Lock()
 	defer mutex.Unlock()
 	return balance
+}
+
+func main() {
+	Deposit(100)
+	fmt.Println(Balance())
 }
