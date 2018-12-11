@@ -1,6 +1,5 @@
-// all types can be used in a channel. A channel is in fact a typed message queue
-// so channels are first class objects: they can be stored in variables, passed
-// as arguments to functions, returned from functions and sent themselves over channels.
+// NOTE: all types can be used in a channel.
+// A channel is in fact a typed message queue so channels are first class objects
 package main
 
 import "fmt"

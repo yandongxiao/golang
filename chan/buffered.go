@@ -1,7 +1,5 @@
 // But design your algorithm in the first place with unbuffered channels,
-// and only introduce buffering when the former is problematic.
-// NOTE: since the number of items in the container is generally known,
-// it makes sense to use a channel with enough capacity to hold all the items.
+// and only introduce buffering when performance is problematic.
 package main
 
 import "fmt"

@@ -8,9 +8,9 @@ import (
 
 var ngoroutine = flag.Int("n", 100000, "how many goroutines")
 
-// 一遍创建channel的同时，一遍计算结果
+// 申请一个巨大的buffered channel
 func method1() {
-	chs := make([]chan int, *ngoroutine+1)
+	chs := make([]chan int, *ngoroutine)
 	for i := 0; i < *ngoroutine; i++ {
 		chs[i] = make(chan int)
 		go func(i int) {
@@ -60,13 +60,11 @@ func main() {
 	flag.Parse()
 
 	wrapper := func(f func()) {
-
 		begin := time.Now()
 		defer func() {
 			end := time.Now()
 			fmt.Println(end.Sub(begin))
 		}()
-
 		f()
 	}
 

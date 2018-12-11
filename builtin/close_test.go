@@ -14,3 +14,13 @@ func ExampleCloseClosedChan() {
 	//Output:
 	//close of closed channel
 }
+
+func ExampleCloseNilChan() {
+	defer func() {
+		fmt.Println(recover())
+	}()
+	var ch chan int
+	close(ch)
+	//Output:
+	//close of nil channel
+}
