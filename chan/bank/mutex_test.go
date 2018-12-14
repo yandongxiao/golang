@@ -1,4 +1,4 @@
-package main
+package bank
 
 import (
 	"fmt"
@@ -22,7 +22,9 @@ func Balance() int {
 	return balance
 }
 
-func main() {
+func ExampleMutex() {
 	Deposit(100)
 	fmt.Println(Balance())
+	//Output:
+	//100
 }

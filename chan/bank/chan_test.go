@@ -1,4 +1,4 @@
-package main
+package bank
 
 import "fmt"
 
@@ -19,8 +19,11 @@ func broker() {
 	}
 }
 
-func main() {
+func ExampleChan() {
 	go broker()
 	Deposit(100)
+	Deposit(100)
 	fmt.Println(Balance())
+	//Output:
+	//200
 }

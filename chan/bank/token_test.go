@@ -1,4 +1,4 @@
-package main
+package bank
 
 import "fmt"
 
@@ -20,7 +20,9 @@ func Balance() int {
 	return val
 }
 
-func main() {
+func ExampleToken() {
 	Deposit(100)
 	fmt.Println(Balance())
+	//Output:
+	//100
 }
