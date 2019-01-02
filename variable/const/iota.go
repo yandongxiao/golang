@@ -16,10 +16,20 @@ func main() {
 	fmt.Println(c0, c1, c2, c3)
 
 	const (
-		c00 = iota
+		_ = iota // NOTE
+		c00
 		c01
 		c02
 		c03
 	)
 	fmt.Println(c00, c01, c02, c03)
+
+	// 在常量组中，如不提供类型和初始化值，那么视作与上⼀一常量相同。
+	const (
+		c10 = "name"
+		c11
+		c12
+		c13
+	)
+	fmt.Println(c10, c11, c12, c13)
 }

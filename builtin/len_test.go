@@ -16,8 +16,9 @@ func ExampleArrayLen() {
 	//3 <nil>
 }
 
-func ExampleSliceAndMapLen() {
+func ExampleNil() {
 	// Slice, or map: the number of elements in v; if v is nil, len(v) is zero
+	// NOTE: 直接传递nil是不可以的
 	var s []int
 	var m map[int]int
 	fmt.Println(len(s), len(m))
@@ -34,12 +35,4 @@ func ExampleChan() {
 	//Output:
 	//1
 	//1
-}
-
-func ExampleNil() {
-	// if v is nil, len(v) is zero.
-	// NOTE: 直接传递nil是不可以的
-	fmt.Println(len([]int(nil)))
-	//Output:
-	//0
 }

@@ -1,4 +1,4 @@
-// Package superman implements methods for saving the world.
+// Package main implements methods for saving the world.
 //
 // Experience has show that a small number of procedures
 // can prove helpful when attempting to save the world.
