@@ -4,7 +4,7 @@ import "fmt"
 
 var counter = 10
 
-func ExampleRace() {
+func main() {
 	go func() {
 		counter++
 	}()

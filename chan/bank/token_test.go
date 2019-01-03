@@ -1,4 +1,4 @@
-package bank
+package main
 
 import "fmt"
 
@@ -7,13 +7,13 @@ var (
 	account int
 )
 
-func Deposit(money int) {
+func TDeposit(money int) {
 	token <- struct{}{}
 	account += money
 	<-token
 }
 
-func Balance() int {
+func TBalance() int {
 	token <- struct{}{}
 	val := account
 	<-token
@@ -21,8 +21,8 @@ func Balance() int {
 }
 
 func ExampleToken() {
-	Deposit(100)
-	fmt.Println(Balance())
+	TDeposit(100)
+	fmt.Println(TBalance())
 	//Output:
 	//100
 }

@@ -4,7 +4,7 @@ package main
 
 import "fmt"
 
-func main() {
+func ExampleChan() {
 	ch1 := make(chan int)
 	ch2 := make(chan chan int)
 	go func() {
@@ -17,4 +17,7 @@ func main() {
 	for v := range ch1 {
 		fmt.Println(v)
 	}
+
+	// Output:
+	// 1
 }

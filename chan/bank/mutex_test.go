@@ -1,4 +1,4 @@
-package bank
+package main
 
 import (
 	"fmt"
@@ -10,21 +10,21 @@ var (
 	balance int
 )
 
-func Deposit(account int) {
+func MDeposit(account int) {
 	mutex.Lock()
 	defer mutex.Unlock()
 	balance += account
 }
 
-func Balance() int {
+func MBalance() int {
 	mutex.Lock()
 	defer mutex.Unlock()
 	return balance
 }
 
 func ExampleMutex() {
-	Deposit(100)
-	fmt.Println(Balance())
+	MDeposit(100)
+	fmt.Println(MBalance())
 	//Output:
 	//100
 }

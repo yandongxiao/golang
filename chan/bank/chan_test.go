@@ -1,12 +1,12 @@
-package bank
+package main
 
 import "fmt"
 
 var deposits = make(chan int)
 var balances = make(chan int)
 
-func Deposit(money int) { deposits <- money } // 只有一行语句的函数
-func Balance() int      { return <-balances }
+func CDeposit(money int) { deposits <- money } // 只有一行语句的函数
+func CBalance() int      { return <-balances }
 
 func broker() {
 	money := 0 // 原本共享的变量，变成协程独有
@@ -21,9 +21,9 @@ func broker() {
 
 func ExampleChan() {
 	go broker()
-	Deposit(100)
-	Deposit(100)
-	fmt.Println(Balance())
+	CDeposit(100)
+	CDeposit(100)
+	fmt.Println(CBalance())
 	//Output:
 	//200
 }
