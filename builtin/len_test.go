@@ -9,7 +9,6 @@ func ExampleArrayLen() {
 	fmt.Println(len(&[3]int{}))
 	var p *[3]int
 	fmt.Println(len(p), p)
-
 	//Output:
 	//3
 	//3
@@ -21,9 +20,10 @@ func ExampleNil() {
 	// NOTE: 直接传递nil是不可以的
 	var s []int
 	var m map[int]int
-	fmt.Println(len(s), len(m))
+	var p *[3]int
+	fmt.Println(len(s), len(m), len(p), p) // 所以不能以len(p)的形式遍历所有元素
 	// Output:
-	// 0 0
+	// 0 0 3 <nil>
 }
 
 func ExampleChan() {
