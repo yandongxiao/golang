@@ -2,7 +2,10 @@
 // A channel is in fact a typed message queue so channels are first class objects
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func ExampleChan() {
 	ch1 := make(chan int)
@@ -17,7 +20,18 @@ func ExampleChan() {
 	for v := range ch1 {
 		fmt.Println(v)
 	}
-
 	// Output:
 	// 1
+}
+
+func ExampleInterface() {
+	c := make(chan interface{})
+	go func() {
+		val := <-c
+		fmt.Println(val.(int))
+	}()
+	c <- 3
+	time.Sleep(time.Second)
+	// Output:
+	// 3
 }
