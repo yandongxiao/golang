@@ -1,5 +1,6 @@
+// 文件命名原因参见duplicate.go
 // Package memo provides a concurrency-safe memoization a function of
-// a function.  Requests for different keys proceed in parallel.
+// a function. Requests for different keys proceed in parallel.
 // Concurrent requests for the same key block until the first completes.
 // This implementation uses a Mutex.
 package memo
@@ -7,8 +8,9 @@ package memo
 import "sync"
 
 type Memo struct {
-	f     Func
-	mu    sync.Mutex
+	f  Func
+	mu sync.Mutex
+	// 使用指针的特殊值nil来表示key尚未被缓存
 	cache map[string]*entry
 }
 

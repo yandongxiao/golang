@@ -1,3 +1,4 @@
+// 使用channel来实现deduplicate.go同样的效果
 package memo
 
 type Func func(string) (interface{}, error)
@@ -37,7 +38,7 @@ func (memo *Memo) Get(key string) (interface{}, error) {
 func (memo *Memo) Close() { close(memo.requests) }
 
 func (memo *Memo) server(f Func) {
-	cache := make(map[string]*entry)
+	cache := make(map[string]*entry) // NOTE: 将共享变量归属为一个协程的局部变量
 	for req := range memo.requests {
 		e := cache[req.key]
 		if e == nil {
@@ -45,7 +46,7 @@ func (memo *Memo) server(f Func) {
 			cache[req.key] = e
 			go e.call(f, req.key)
 		}
-		go e.delivery(req.resp)
+		go e.delivery(req.resp) // 不能把server给阻塞住
 	}
 }
 
