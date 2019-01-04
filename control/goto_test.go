@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func ExampleBasic() {
+func ExampleGoTo() {
 	gotoCount := 0
 GotoLabel:
 	gotoCount++
