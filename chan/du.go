@@ -1,3 +1,7 @@
+// package main does work like linux du command
+// tow ways to exit:
+//	1. user input content to standard input
+//	2. all workers have finished theirs jobs
 package main
 
 import (
@@ -8,7 +12,11 @@ import (
 	"time"
 )
 
+// recevie command from standard input to exited earlier
 var end = make(chan struct{})
+
+// limit the number of workers
+var sema = make(chan struct{}, 20)
 
 func main() {
 	roots := os.Args[1:]
@@ -29,7 +37,7 @@ func main() {
 		go walkDir(root, ch, &n)
 	}
 	go func() {
-		n.Wait()
+		n.Wait() // NOTE: means all workers have exited
 		close(ch)
 	}()
 
@@ -39,12 +47,12 @@ func main() {
 loop:
 	for {
 		select {
-		case <-end:
-			for range ch {
+		case <-end: // user wants to exit earlier
+			for range ch { // make sure all workers have exited
 			}
 			break loop
 		case size, ok := <-ch:
-			if !ok {
+			if !ok { // all workers have finished theirs jobs
 				break loop
 			}
 			nfiles++
@@ -55,12 +63,6 @@ loop:
 	}
 	fmt.Printf("end: %d files  %v bytes\n", nfiles, nbytes)
 }
-
-func printDiskUsage(nfiles, nbytes int64) {
-	fmt.Printf("%d files  %v bytes\n", nfiles, nbytes)
-}
-
-var sema = make(chan struct{}, 20)
 
 func walkDir(root string, ch chan<- int64, n *sync.WaitGroup) {
 	defer n.Done()
