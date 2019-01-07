@@ -1,9 +1,11 @@
 package mock
 
+import "fmt"
+
 func init() {
-	println("mock init")
+	fmt.Println("mock init")
 }
 
 func Foo() {
-	println("mock")
+	fmt.Println("mock Foo")
 }

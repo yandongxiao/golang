@@ -5,17 +5,23 @@ package main
 
 import "fmt"
 
-func main() {
-	foo := Adder()
-	bar := Adder()
-	fmt.Println("foo: ", foo(1))
-	fmt.Println("bar: ", bar(1))
-	fmt.Println("foo: ", foo(20))
-	fmt.Println("bar: ", bar(20))
-	fmt.Println("foo: ", foo(300))
+func ExampleVariable() {
+	foo := adder()
+	bar := adder()
+	fmt.Println(foo(1))
+	fmt.Println(bar(1))
+	fmt.Println(foo(20))
+	fmt.Println(bar(20))
+	fmt.Println(foo(300))
+	// Output:
+	// 1
+	// 1
+	// 21
+	// 21
+	// 321
 }
 
-func Adder() func(int) int {
+func adder() func(int) int {
 	// 闭包变量不会随着高阶函数Adder的返回而消失
 	// 相反，它可以被返回的匿名函数访问
 	num := 0
