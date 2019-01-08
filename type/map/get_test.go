@@ -10,22 +10,24 @@ type Person struct {
 	age  int
 }
 
-func main() {
-	// NOTICE: 类似, golang当中，get永远不会抛出异常，如果该key不存在，返回value的一个zero-value。
+func ExampleGet() {
+	// NOTE: 类似golang当中，get永远不会抛出异常，如果该key不存在，
+	// 返回value的一个zero-value。
 	// Person 是一个值类型，它的zero-value是{"", 0}
 	persons := make(map[string]Person)
-	if persons["jack"].name == "" {
-		println("因为struct是值类型，persons返回了一个zero-value")
-	}
+	fmt.Println(persons["jack"])
 
 	// golang中区分zero-value和key的值不存在的方法
-	if _, ok := persons["jack"]; !ok {
-		println("map中不存在该条记录")
-	}
+	v, ok := persons["jack"]
+	fmt.Println(v, ok)
 
-	// range 接收nil值
+	// range接收nil值
 	var kvs map[string]Person
 	for k, v := range kvs {
 		fmt.Println(k, v)
 	}
+
+	// Output:
+	// { 0}
+	// { 0} false
 }
