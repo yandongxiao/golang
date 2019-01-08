@@ -2,16 +2,16 @@ package main
 
 import "fmt"
 
-type Person struct {
+type MPerson struct {
 	name string
 }
 
-func (p *Person) Foo() string {
+func (p *MPerson) Foo() string {
 	return "Foo"
 }
 
-func ExampleNil() {
-	var p *Person
+func ExampleNilPointer() {
+	var p *MPerson
 	fmt.Println(p.Foo())
 	// Output:
 	// Foo

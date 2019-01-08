@@ -6,43 +6,43 @@ type Empty interface {
 	getAge() int
 }
 
-type Person struct {
+type APerson struct {
 	age int
 }
 
-type Dog struct {
+type ADog struct {
 	age int
 }
 
 // NOTE: struct不但可以包含匿名的struct，而且也可以包含匿名的interface
 type House struct {
 	Empty
-	Person
+	APerson
 }
 
 func ExampleAmbiguous() {
 	h := House{
-		Person: Person{10},
+		APerson: APerson{10},
 	}
 	fmt.Println(h)
-	h.Empty = Dog{20} // 如果House.getAge实现了，该赋值是无效的
+	h.Empty = ADog{20} // 如果House.getAge实现了，该赋值是无效的
 	fmt.Println(h)
 
-	// foo(h)
+	// afoo(h)
 
 	// Output:
 	// {<nil> {10}}
 	// {{20} {10}}
 }
 
-func foo(empty Empty) {
+func afoo(empty Empty) {
 	println(empty.getAge())
 }
 
-func (p Person) getAge() int {
+func (p APerson) getAge() int {
 	return p.age
 }
 
-func (d Dog) getAge() int {
+func (d ADog) getAge() int {
 	return d.age
 }

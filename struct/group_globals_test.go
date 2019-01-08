@@ -1,13 +1,11 @@
-// Grouped globals
 // NOTICE: 如果你需要使用map[T1]T2来聚合数据，考虑使用匿名类来代替
 package main
 
 import (
-	"flag"
 	"fmt"
 )
 
-type Person struct {
+type GPerson struct {
 	Name string
 }
 
@@ -16,7 +14,7 @@ type Person struct {
 // 与MAP方式相比，它不需要额外定义key的取值范围，更安全
 // 与在外部声明单独声明Man, Woman相比，Ps将同一类型的数据聚合在了一起
 var Ps struct {
-	Man, Woman Person
+	Man, Woman GPerson
 }
 
 func init() {
@@ -24,9 +22,11 @@ func init() {
 	Ps.Woman.Name = "lili"
 }
 
-func main() {
+func ExampleGourpedGlobals() {
 	// 假设这是在另一个package中使用上面的全局变量
-	flag.Parse()
 	fmt.Println(Ps.Man)
 	fmt.Println(Ps.Woman)
+	// Output:
+	// {jack}
+	// {lili}
 }
