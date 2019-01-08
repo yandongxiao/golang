@@ -19,7 +19,7 @@ import "fmt"
 // In the same way the conversion c:=[]int32(s) is allowed, then each int32 contains a Unicode code point.
 // NOTICE: []byte(s) 和 c:=[]int32(s) 存储Unicode字符的集合
 
-func main() {
+func ExampleEmcoding() {
 
 	// NOTICE: Golang的字符串实际上是UTF-8编码的字符串
 	//         在内存当中的表示形式(UTF-8编码)，61 e4 bd a0 e5 a5 bd
@@ -40,6 +40,23 @@ func main() {
 	// If erroneous UTF-8 is encountered, the character is set to U+FFFD and the index advances by one byte.
 	s = string([]uint8{21, 21, 255, 254, 253})
 	for i, c := range s {
-		fmt.Printf("%d %x %c %T\n", i, c, c, c)
+		fmt.Printf("%d %x %T\n", i, c, c)
 	}
+
+	// Output:
+	// 61 uint8
+	// e4 uint8
+	// bd uint8
+	// a0 uint8
+	// e5 uint8
+	// a5 uint8
+	// bd uint8
+	// 0 61 a int32
+	// 1 4f60 你 int32
+	// 4 597d 好 int32
+	// 0 15 int32
+	// 1 15 int32
+	// 2 fffd int32
+	// 3 fffd int32
+	// 4 fffd int32
 }

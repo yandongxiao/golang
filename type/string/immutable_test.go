@@ -3,7 +3,7 @@ package main
 
 import "fmt"
 
-func main() {
+func ExampleImmutable() {
 	// 1. string的底层指针是没有办法获取的
 	// 2. data 和 修改后的bd 肯定没有指向同一块内存。
 	// 3. 以下也是修改string的方式.
@@ -14,4 +14,8 @@ func main() {
 	// 直接打印一个byte slice
 	fmt.Printf("%q\n", bd)
 	fmt.Println(data)
+
+	// Output:
+	// "Hello world"
+	// hello world
 }
