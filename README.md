@@ -1,6 +1,10 @@
 # golang-learning
 
-the summay of Go
+把Go语言大致总结了一遍，大致包括：
+    1. Go语言本身的特性
+    2. 标准库
+    3. Go的周边工具
+    4. Go的Release Note信息
 
 ## How do I know whether a variable is allocated on the heap or the stack?
 
