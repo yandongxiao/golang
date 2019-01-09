@@ -2,8 +2,6 @@
 
 the summay of Go
 
-
-
 ## How do I know whether a variable is allocated on the heap or the stack?
 
 From a correctness standpoint, you don't need to know.

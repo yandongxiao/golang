@@ -14,16 +14,20 @@ func zeroArray(arr *[3]int) {
 	}
 }
 
-func main() {
+func ExamplePointer() {
 	// cannot use v (type int) as type *int in argument to zeroptr
 	// 不会自动进行类型转换
 	// zeroptr(v)
 	// println(v)
 	var v int
 	zeroptr(&v)
-	println(v)
+	fmt.Println(v)
 
 	arr := [3]int{1, 2, 3}
 	zeroArray(&arr)
 	fmt.Println(arr)
+
+	// Output:
+	// 0
+	// [0 0 0]
 }

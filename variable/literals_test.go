@@ -1,15 +1,14 @@
-// a composite literal of array, slice, or map type can elide the type specification for the elements' initializers
+// a composite literal of array, slice, or map type can
+// elide the type specification for the elements' initializers
 // if they are not pointer type.
 package main
-
-import "fmt"
 
 type Date struct {
 	month string
 	day   int
 }
 
-func main() {
+func ExampleLiteral() {
 	// Struct values, fully qualified; always legal.
 	holiday1 := []Date{
 		Date{"Feb", 14},
@@ -37,5 +36,7 @@ func main() {
 		{"Dec", 25},
 	}
 
-	fmt.Println(holiday1, holiday2, holiday3, holiday4)
+	println(holiday1, holiday2, holiday3, holiday4)
+	// Output:
+	//
 }
