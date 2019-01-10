@@ -3,6 +3,19 @@ package main
 
 import "fmt"
 
+func ExampleCopyUnderlying() {
+	// the types of the two slices are not required to be identical,
+	// but their element types must be identical. In other words,
+	// the two argument slices must share the same underlying type.
+	type bytes []byte
+	x := make(bytes, 10)
+	copy(x, []byte("hello"))
+	copy(x, "world")
+	fmt.Println(string(x[:5])) // :5是必须的
+	// Output:
+	// world
+}
+
 func ExampleCopyBytes() {
 	x := []byte("hello")
 	copy(x, []byte("world"))

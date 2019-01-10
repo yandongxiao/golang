@@ -13,6 +13,58 @@ func ExampleZero() {
 	// []
 }
 
+func ExampleArrayModification1() {
+	// The ranged container is a copy of aContainer.
+	// Please note, only the direct part of aContainer is copied.
+	// The copied container direct part is anonymous, so there are no ways to modify it.
+	a := [1]struct {
+		name string
+	}{{"jack"}}
+	// All key-element pairs will be assigned to the same iteration variable pair.
+	for _, s := range a {
+		s.name = "bob"
+	}
+	fmt.Println(a[0].name)
+	// Output:
+	// jack
+}
+
+func ExampleArrayModification2() {
+	a := [1][]int{
+		{1, 2, 3},
+	}
+	for _, s := range a {
+		s = append(s, 4, 5, 6)
+	}
+	fmt.Println(a[0])
+	// Output:
+	// [1 2 3]
+}
+
+func ExamplePointerIter() {
+	var p *[2]int         // nil
+	for i, _ := range p { // okay, NOTE: 遍历数组的好方法
+		fmt.Println(i)
+	}
+
+	for i := range p { // okay
+		fmt.Println(i)
+	}
+
+	defer func() {
+		fmt.Println(recover())
+	}()
+	for i, n := range p { // panic, NOTE, 非指针类型的情况下，不会发生panic
+		fmt.Println(i, n)
+	}
+	// Output:
+	// 0
+	// 1
+	// 0
+	// 1
+	// runtime error: invalid memory address or nil pointer dereference
+}
+
 func ExampleInitilize() {
 	// Use this syntax to declare and initialize an array
 	// in one line.

@@ -1,3 +1,4 @@
+// for _, buf := range buffers. 如果buffers中元素很多，则**不建议**使用这种方法
 package main
 
 import "fmt"
@@ -30,6 +31,9 @@ func ExampleSliceAddressability() {
 }
 
 func ExampleSlice() {
+	// 对切片的要求，可见low不一定要比len(baseContainer)小
+	// 0 <= low <= high <= cap(baseContainer)        // two-index form
+	// 0 <= low <= high <= max <= cap(baseContainer) // three-index form
 	var arr1 [6]int
 	var slice1 = arr1[2:5] // 2, 5-2, 6-2
 	var i int32            // 作为下标，不一定非得是int类型
