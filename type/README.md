@@ -13,6 +13,10 @@ Up to now (Go 1.11), Go has 26 kinds of types. (包括unsafe types)
 
 ## Composite Types
 
+In Go, the form T{...}, where T must be a type literal or a type name,
+is called as a composite literal and is used as the value literals of
+some kinds of types, including struct types and the container types introduced later.
+
 - pointer types - C pointer alike.
 - struct types - C struct alike.
 - function types - functions are first-class types in Go.

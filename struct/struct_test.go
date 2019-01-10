@@ -49,6 +49,10 @@ func ExampleInitialize() {
 // 3. Even when a struct contains other structs,
 // structs form a continuous block in memory
 // this gives a huge performance benefit.
+// NOTE: The size of a struct type is the sum of the sizes of all its field types
+// plus the number of some padding bytes. The padding bytes are used to align
+// the memory addresses of some fields. We can learn padding and memory
+// address alignments in a later article.
 func ExampleContinuousBlock() {
 	age := 10 // size of int == 8
 	fmt.Println(unsafe.Sizeof(age))
@@ -57,11 +61,14 @@ func ExampleContinuousBlock() {
 	fmt.Println(unsafe.Sizeof(name))
 	// NOTE: struct的大小=每个field的大小的和.
 	fmt.Println(unsafe.Sizeof(SPerson{}))
+	// The size of a zero-field struct type is zero.
+	fmt.Println(unsafe.Sizeof(struct{}{}))
 
 	// Output:
 	// 8
 	// 16
 	// 48
+	// 0
 }
 
 // 3. The rule about pointers vs. values for receivers is that

@@ -37,3 +37,29 @@ func ExampleAnonymousUnmarshalJson() {
 	// Output:
 	// {200 {jack 10 [{alice m} {bob f}]}}
 }
+
+func ExampleAnonymous() {
+	// Annoymous struct types are allowed used as the types of the fields of another struct type.
+	// Annoymous struct type literals are also allowed to be used in composite literals.
+	var aBook = struct {
+		author struct { // the type of this field is an anonymous struct type
+			firstName, lastName string
+			gender              bool
+		}
+		title string
+		pages int
+	}{
+		author: struct {
+			firstName, lastName string
+			gender              bool
+		}{
+			firstName: "Mark",
+			lastName:  "Twain",
+		}, // the type in the composite literal is an anonymous struct type
+		title: "The Million Pound Note",
+		pages: 96,
+	}
+	_ = aBook
+	// OUtput:
+	//
+}
