@@ -134,3 +134,81 @@ type Ages AgeSlice
 2. Each interface value can box a non-interface value in it.
 3. The type of the dynamic value is called the dynamic type of the interface value.
 4. The value boxed in an interface value is called the dynamic value of the interface value.
+
+## Value Part
+
+Direct Value Part and Underlying Value Part
+
+The types in the second category are not very fundamental types for a language,
+we can implement them from scratch by using the types in the first category.
+
+Underlying Value Parts Are Not Copied In Value Assignments
+Since an indirect underlying part may not belong to any value exclusively, it doesn't contribute to the size returned by the unsafe.Sizeof function.
+
+### Direct Value Part
+
+Each C alike value only consists of one direct transparent value part.
+
+1. boolean types
+2. numeric types
+3. struct types
+4. pointer types
+5. array types
+6. unsafe pointer types.
+
+### Underlying Value Part
+
+Values of types in the category **may** contain underlying parts, and their direct parts are not transparent.
+
+1. slice types
+2. map types
+3. string types
+4. channel types
+5. function types
+6. interface types
+
+Different Go compilers may adopt different internal implementations for these types, but the external behaviors
+of values of these types must satisfy the requirements specified in Go specification.
+
+```
+types of the three kinds are just pointer types. Direct Value part是一个指针
+// map types
+type _map *hashtableImpl // currently, for the standard Go compiler,
+                         // Go maps are hashtables actually.
+// channel types
+type _channel *channelImpl
+// function types
+type _function *functionImpl
+
+type _slice struct {
+	elements unsafe.Pointer // referencing underlying elements
+	len      int            // number of elements
+	cap      int            // capacity
+}
+
+type _string struct {
+	elements *byte // referencing underlying bytes
+	len      int   // number of bytes
+}
+
+type _interface struct {
+	dynamicType  *_type         // the dynamic type
+	dynamicValue unsafe.Pointer // the dynamic value
+}
+
+// non-blank interface types
+type _interface struct {
+	dynamicTypeInfo *struct {
+		dynamicType *_type       // the dynamic type
+		methods     []*_function // implemented methods
+	}
+	dynamicValue unsafe.Pointer // the dynamic value
+}
+```
+
+## About The "Reference Type" And "Reference Value" Terminologies
+
+The word reference in Go world is a big mess.
+
+1. use reference as qualifiers of types and values
+2. treat reference as the opposite of value.
