@@ -3,6 +3,14 @@ package main
 
 import "fmt"
 
+func ExampleCopyFase() {
+	a := []int{1, 2, 3}
+	b := append(a[:0:0], a...)
+	fmt.Println(b)
+	// Output
+	// [1 2 3]
+}
+
 func ExampleCopyUnderlying() {
 	// the types of the two slices are not required to be identical,
 	// but their element types must be identical. In other words,

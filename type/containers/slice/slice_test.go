@@ -4,6 +4,13 @@ package main
 import "fmt"
 import "unsafe"
 
+func ExampleNil() {
+	var a []int
+	fmt.Println(a[:0]) // NOTE: 竟然没有抛出异常
+	// Output:
+	// []
+}
+
 func ExampleSliceNil() {
 	var a []int
 	b := []int(nil)
