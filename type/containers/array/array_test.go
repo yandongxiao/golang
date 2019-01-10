@@ -1,9 +1,17 @@
-// In Go, an array is a numbered sequence of elements of
-// a specific length.
+// In Go, an array is a numbered sequence of elements of a specific length.
+// Array elements can neither be appended nor deleted, though elements of
+// addressable arrays can be modified.
 
 package main
 
 import "fmt"
+
+func ExampleZero() {
+	a := [0]int{}
+	fmt.Println(a)
+	// Output:
+	// []
+}
 
 func ExampleInitilize() {
 	// Use this syntax to declare and initialize an array

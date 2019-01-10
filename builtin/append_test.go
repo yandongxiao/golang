@@ -6,7 +6,10 @@ import (
 )
 
 func ExampleSlice() {
-	var data []byte
+	var data []byte // NOTE: data can be nil
+	// the append function doesn't require the variadic argument
+	// must be a slice with the same type as the first slice argument
+	// two argument slices must share the same underlying type.
 	data = append(data, []byte{4, 5, 6}...)
 	data = append(data, []byte(nil)...)
 	data = append(data, 7, 8, 9)

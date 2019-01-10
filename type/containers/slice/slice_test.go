@@ -1,12 +1,40 @@
 package main
 
 import "fmt"
+import "unsafe"
+
+func ExampleSliceNil() {
+	var a []int
+	b := []int(nil)
+	c := []int{}
+
+	fmt.Println(a == nil && b == nil && unsafe.Sizeof(c) == 24)
+	//Output:
+	// true
+}
+
+func ExampleSliceAddressability() {
+	// Elements of any slice value are always addressable, whether
+	// or not that slice value is addressable.
+	ps0 := &[]string{"Go", "C"}[0]
+	fmt.Println(*ps0) // Go
+
+	// Elements of addressable array values are also addressable.
+	// Elements of unaddressable array values are also unaddressable.
+	// The reason is each array value only consists of one direct part.
+	// _ = &[3]int{2, 3, 5}[0]
+
+	// Output:
+	// Go
+
+}
 
 func ExampleSlice() {
 	var arr1 [6]int
 	var slice1 = arr1[2:5] // 2, 5-2, 6-2
-	for i := 0; i < len(arr1); i++ {
-		arr1[i] = i
+	var i int32            // 作为下标，不一定非得是int类型
+	for i = 0; i < 6; i++ {
+		arr1[i] = int(i)
 	}
 	fmt.Println("array state")
 	fmt.Println(len(arr1))
