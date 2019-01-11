@@ -1,4 +1,28 @@
 // A []rune conversion applied to a UTF-8-encoded string
+//
+// When a string is converted to a rune slice, the bytes stored in
+// the string will be viewed as successive UTF-8 encoding byte sequence
+// representations of many Unicode code points.
+//
+// When a string is converted to a byte slice, the resultant byte slice is
+// just a deep copy of the underlying byte sequence of the string.
+//
+// case: a string is converted to a byte slice
+// NOTE: A memory allocation is needed to store the deep copy in each of such
+// conversions. The reason why a deep copy is essential is slice elements
+// are mutable but the bytes stored in strings are immutable, so a byte
+// slice and a string can't share byte elements.
+//
+// byte slices and rune slices are not supported directly in Go
+// unicode/utf8 或 use the Runes function in the bytes standard package
+// 使用string作为中间结果的方法，需要两次深度拷贝，不见得是好方法
+//
+// 编译器优化，防止深度拷贝的几种情况：
+// 	1. for i, b := range []byte(str)
+//	2. m[string(key)] = "value"
+//	3. if string(x) != string(y) {
+//	4. s = (" " + string(x) + string(y))[1:]
+//	   at least one of concatenated string values is a non-blank string constant.
 package main
 
 import (

@@ -18,7 +18,7 @@ func ExampleCopyUnderlying() {
 	type bytes []byte
 	x := make(bytes, 10)
 	copy(x, []byte("hello"))
-	copy(x, "world")
+	copy(x, "world")           // Sugar
 	fmt.Println(string(x[:5])) // :5是必须的
 	// Output:
 	// world
