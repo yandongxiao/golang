@@ -6,7 +6,7 @@ package main
 
 import "fmt"
 
-func ExampleZero() {
+func ExampleZeroArray() {
 	a := [0]int{}
 	fmt.Println(a)
 	// Output:

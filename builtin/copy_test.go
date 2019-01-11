@@ -3,7 +3,7 @@ package main
 
 import "fmt"
 
-func ExampleCopyFase() {
+func ExampleCopyFast() {
 	a := []int{1, 2, 3}
 	b := append(a[:0:0], a...)
 	fmt.Println(b)

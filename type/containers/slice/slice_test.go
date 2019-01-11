@@ -4,14 +4,7 @@ package main
 import "fmt"
 import "unsafe"
 
-func ExampleNil() {
-	var a []int
-	fmt.Println(a[:0]) // NOTE: 竟然没有抛出异常
-	// Output:
-	// []
-}
-
-func ExampleSliceNil() {
+func ExampleNilSlice() {
 	var a []int
 	b := []int(nil)
 	c := []int{}
@@ -19,6 +12,13 @@ func ExampleSliceNil() {
 	fmt.Println(a == nil && b == nil && unsafe.Sizeof(c) == 24)
 	//Output:
 	// true
+}
+
+func ExampleNilSliceIndex() {
+	var a []int
+	fmt.Println(a[:0]) // NOTE: 竟然没有抛出异常
+	// Output:
+	// []
 }
 
 func ExampleSliceAddressability() {
