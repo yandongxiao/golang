@@ -13,7 +13,7 @@
 // are mutable but the bytes stored in strings are immutable, so a byte
 // slice and a string can't share byte elements.
 //
-// byte slices and rune slices are not supported directly in Go
+// Conversions between byte slices and rune slices are not supported directly in Go
 // unicode/utf8 或 use the Runes function in the bytes standard package
 // 使用string作为中间结果的方法，需要两次深度拷贝，不见得是好方法
 //
