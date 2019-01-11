@@ -1,3 +1,10 @@
+// The parameter names must be either all present or all absent (anonymous).
+// The same rule is for result names.
+// func (int, string, string) (int, int, bool) // the standard form
+// func (a int, b string, c string) (int, int, bool)
+// func (x int, _ string, z string) (int, int, bool)
+// func (int, string, string) (x int, y int, z bool)
+// func (int, string, string) (a int, b int, _ bool)
 package main
 
 import "fmt"

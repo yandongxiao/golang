@@ -5,6 +5,30 @@ import (
 	"fmt"
 )
 
+func ExampleBuiltinValues() {
+	// use of builtin append not in function call
+	// NOTE, built-in functions can't be used as values.
+	// a := append
+	a([]byte(nil), "hello"...)
+	//len("hello")
+	// Output:
+	//
+}
+
+func ExampleDiscardResults() {
+	// append(([]byte)(nil), "hello"...) evaluated but not used
+	// The return results of a custom function call can be all discarded together.
+	// The return results of calls to built-in functions, except recover and copy,
+	// can't be discarded, though they can be ignored by assigning them to some
+	// blank identifiers.
+	// Function calls whose results can't be discarded can't be used as deferred
+	// function calls or goroutine calls.
+	append([]byte(nil), "hello"...)
+	//len("hello")
+	// Output:
+	//
+}
+
 func ExampleSlice() {
 	var data []byte // NOTE: data can be nil
 	// the append function doesn't require the variadic argument

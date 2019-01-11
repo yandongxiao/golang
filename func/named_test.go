@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+func ExampleBlankIdentifier() {
+	// multiple functions can be declared with names as the blank
+	// identifier _, in which cases, the declared functions can never be called.
+}
+
 func ExampleShadow() {
 	v := func() (val int) {
 		// no new variables on left side of :=
