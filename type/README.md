@@ -197,6 +197,31 @@ type _interface struct {
 }
 
 // non-blank interface types
+// Go compilers will build a global table which contains the
+// information of each type at compile time.
+// The information includes what kind a type is, what methods
+// and fields a type owns, what the element type of a container
+// type is, type sizes, etc. The global table will be loaded into
+// memory when a program starts.
+//
+// At run time, when a non-interface value is boxed into an interface
+// value, the Go runtime (at least for the standard Go runtime) will
+// analyze and build the implementation information for the type pair
+// of the two values, and store the implementation information in the
+// interface value. The implementation information for each
+// non-interface type and interface type pair will only be built most
+// once and cached in a global map for execution efficiency consideration.
+// The number of entries of the global map never decreases.
+// In fact, a non-nil interface value just uses an internal pointer
+// field which references a cached implementation information entry.
+// 指的就是dynamicTypeInfo
+//
+// The implementation information for each (interface type, dynamic type)
+// pair includes two pieces of inforamtion:
+//  1. the inforamtion of the dynamic type (a non-interface type) --> implement reflection.
+//  2. and a method table (a slice) which stores all the corresponding
+//     methods specified by the interface type and declared for the
+//     non-interface type (the dynamic type).   --> implement polymorphism.
 type _interface struct {
 	dynamicTypeInfo *struct {
 		dynamicType *_type       // the dynamic type

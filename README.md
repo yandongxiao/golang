@@ -23,3 +23,22 @@ In the current compilers, if a variable has its address taken, that variable is 
 However, a basic escape analysis recognizes some cases when such variables will not live past the return from the function and can reside on the stack.
 NOTE: new 也不一定保证就是在堆上
 
+## Value Copy Costs
+
+Generally speaking, the cost to copy a value is proportional to
+the size of the value. However, value sizes are not the only factor
+determining value copy costs. Different CPU architectures may
+specially optimize value copying for values with specific sizes.
+
+In practice, we can view values with sizes not larger than four
+native words as small-size values. The costs of copying small-size
+values are small. For the standard Go compiler, except values of
+large-size struct and array types, most types in Go are small-size types.
+
+One the other hand, we should also consider the fact that too many pointers
+will increase the pressure of garbage collectors at run time.
+
+We should also try to avoid using the two-iteration-variable forms
+to iterate array and slice elements if the element types are large-size
+types, for each element value will be copy to the second iteration
+variable in the iteration process.

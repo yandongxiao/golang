@@ -1,3 +1,5 @@
+//  calling methods on a nil interface value will panic at run time,'
+// for there are no available declared methods can be called.
 package main
 
 import (
