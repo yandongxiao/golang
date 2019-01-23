@@ -2,26 +2,6 @@ package main
 
 import "fmt"
 
-func ExampleTypeSwitch() {
-	whatAmI := func(i interface{}) {
-		// a type switch is like a regular switch statement
-		// The declaration in a type switch has the same
-		// syntax as a type assertion i.(T),
-		switch t := i.(type) { // but the specific type T is replaced with the keyword type.
-		case bool: // the cases in a type switch specify types (not values)
-			fmt.Println("I am bool", t) // 在这个case当中，t的类型信息变为bool
-		default: // 在default当中，the variable t is of the same interface type and value as i
-			fmt.Printf("I do not know %T\n", t)
-		}
-	}
-	whatAmI(true)
-	whatAmI(3)
-
-	// Output:
-	// I am bool true
-	// I do not know int
-}
-
 func ExampleTypeSwitch2() {
 	values := []interface{}{
 		456, "abc", true, 0.33, int32(789),
@@ -53,4 +33,14 @@ func ExampleTypeSwitch2() {
 		// NOTE: each variable denoted by v in the
 		// last three branches is a copy of x.
 	}
+
+	// Output:
+	// number: 456
+	// string: abc
+	// others: true
+	// number: 0.33
+	// number: 789
+	// int slice: [1 2 3]
+	// others: map[]
+	// <nil>
 }
