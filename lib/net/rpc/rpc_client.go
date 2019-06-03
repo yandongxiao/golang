@@ -34,10 +34,10 @@ func main() {
 	if err != nil {
 		log.Fatal("add error", err)
 	}
-	fmt.Printf("add(remote object, 10) = %d", reply)
+	fmt.Printf("add(remote object, 10) = %d\n", reply)
 
 	// async
 	divCall := client.Go("Args.Add", 20, &reply, nil)
 	<-divCall.Done
-	fmt.Printf("add(remote object, 20) = %d", reply)
+	fmt.Printf("add(remote object, 20) = %d\n", reply)
 }
