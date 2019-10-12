@@ -1,4 +1,16 @@
-// 传统的 switch 有三种应用方式
+/*
+	switch InitSimpleStatement; CompareOperand0 {
+	case CompareOperandList1:
+		// do something
+	case CompareOperandList2:
+		// do something
+	...
+	case CompareOperandListN:
+		// do something
+	default:
+		// do something
+	}
+*/
 package main
 
 import (
@@ -6,26 +18,28 @@ import (
 	"time"
 )
 
+// 不需要指定break，这是golang的默认行为
 func ExampleNormal() {
-	// 方式一：比较变量i与case值，与传统的switch语法相似
-	i := 2
-	switch i {
-	case 1:
-		// 不需要指定break，这是golang的默认行为
+	//x := int64(3)
+	type INT int
+	switch 1 { // 2是无类型的常量，隐式地将它转换为int类型.
+	case 1: // 1是无类型的常量，隐式地将它转换为与CompareOperand0为相同的类型
 		fmt.Println("One")
-	case 2:
-		fmt.Println("Two")
-	case 3:
-		fmt.Println("Three")
+		// invalid case INT(2) in switch on 2 (mismatched types INT and int)
+		//case INT(2):
+		//	fmt.Println("Two")
+		// invalid case x in switch on 2 (mismatched types int64 and int)
+		// case x:
+		// fmt.Println("Three")
 	}
 
 	// Output:
-	// Two
+	// One
 }
 
+// 方式二：You can use commas to separate multiple expressions
+// in the same case statement.
 func ExampleMultipleExpressions() {
-	// 方式二：You can use commas to separate multiple expressions
-	// in the same case statement.
 	switch time.Now().Weekday() {
 	// NOTE: case 后面可以跟随多个表达式，它们之间是或的关系
 	//后面没有接任何case语句，表明do nothing. 与其它case语句毫无关系
@@ -39,8 +53,8 @@ func ExampleMultipleExpressions() {
 	//
 }
 
+// InitSimpleStatement
 func ExampleStatement() {
-	// 扩展
 	switch num := 10; num {
 	case 10:
 		fmt.Println("equal")
@@ -52,26 +66,10 @@ func ExampleStatement() {
 	// equal
 }
 
-func ExampleLikeIf() {
-	v := 10
-	// 方式三：switch without an expression is an alternate
-	// way to express if/else logic.
-	switch {
-	case v < 12: // 这时候case表达式返回true or false
-		fmt.Println("It's before noon")
-	default:
-		fmt.Println("It's after noon")
-	}
-
-	// Output:
-	// It's before noon
-}
-
 func Example5() {
-	// 扩展：与方式三的语义一样
-	// 这里的分号是必须的，否则整个表达式会当做val进行处理
-	switch num := 10; {
-	case 1 == 1: // 需要是表达式形式
+	// 这里的分号是必须的，否则编译器报错。
+	switch num := 10; { // CompareOperand0的值为true，类型为bool
+	case 1 == 1: // 表达式的结果也必须是bool类型的值，这样才能与CompareOperand0进行比较
 		fmt.Println(num)
 	default:
 		fmt.Println("not equal")
@@ -79,4 +77,11 @@ func Example5() {
 
 	// Output:
 	// 10
+}
+
+func Example6() {
+	switch {
+	}
+
+	// Output:
 }
