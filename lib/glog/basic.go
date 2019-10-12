@@ -1,6 +1,6 @@
 // Package glog implements logging analogous to the Google-internal C++ INFO/ERROR/V setup.
 // It provides functions Info, Warning, Error, Exit, Fatal, plus formatting variants such as Infof.
-// NOTE: 竟然没有Debug日志?
+// NOTE: 没有Debug日志
 package main
 
 import (
