@@ -1,12 +1,3 @@
-data races
-One of the duties in concurrent programming is to control resource sharing among concurrent computations, so that data races will not happen.
-The ways to achieve this duty are called concurrency synchronization, or data synchronization.
-Go supports several data synchronization techniques. Below will introduce one of them, channel.
-
-Most operations in Go are not synchronized. In other words, they are not concurrency-safe.
-These operations include value assignments, argument passing and container element manipulations, etc.
-There are only a few operations which are synchronized, including the several to be introduced channel operations below.
-
 One suggestion (made by Rob Pike) for concurrent programming is don't (let computations) communicate by sharing memory, (let them) share memory by communicating (through channels).
 
 chan T
