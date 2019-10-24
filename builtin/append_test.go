@@ -6,13 +6,9 @@ import (
 )
 
 func ExampleBuiltinValues() {
-	// use of builtin append not in function call
-	// NOTE, built-in functions can't be used as values.
-	// a := append
-	a([]byte(nil), "hello"...)
-	//len("hello")
+	fmt.Println(string(append([]byte(nil), "hello"...)))
 	// Output:
-	//
+	// hello
 }
 
 func ExampleDiscardResults() {
@@ -23,7 +19,7 @@ func ExampleDiscardResults() {
 	// blank identifiers.
 	// Function calls whose results can't be discarded can't be used as deferred
 	// function calls or goroutine calls.
-	append([]byte(nil), "hello"...)
+	_ = append([]byte(nil), "hello"...)
 	//len("hello")
 	// Output:
 	//
@@ -31,9 +27,6 @@ func ExampleDiscardResults() {
 
 func ExampleSlice() {
 	var data []byte // NOTE: data can be nil
-	// the append function doesn't require the variadic argument
-	// must be a slice with the same type as the first slice argument
-	// two argument slices must share the same underlying type.
 	data = append(data, []byte{4, 5, 6}...)
 	data = append(data, []byte(nil)...)
 	data = append(data, 7, 8, 9)
@@ -42,16 +35,4 @@ func ExampleSlice() {
 	fmt.Println(data)
 	//Output:
 	//[4 5 6 7 8 9 120 121 122]
-}
-
-func ExampleNilMap() {
-	defer func() {
-		err := recover()
-		fmt.Println(err)
-	}()
-
-	var m map[int]int
-	m[1] = 1 // panic
-	// Output:
-	// assignment to entry in nil map
 }
