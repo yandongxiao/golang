@@ -33,7 +33,7 @@ func ExampleReverseOrder() {
 func ExampleAdd() {
 	// 正确2
 	m := []int{1, 2, 3}
-	n := m[:0] // len(n)=0, cap(n)=3, 与m共享同一份数据
+	n := m[:0] // len(n)=0, cap(n)=3, 与m共享同一份数据(没有浪费内存)
 	for _, v := range m {
 		if v > 2 {
 			n = append(n, v) // 通过构造一个新的slice来达到删除元素的目的
