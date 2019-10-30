@@ -13,7 +13,7 @@ func ExampleCloseClosedChan() {
 
 	ch := make(chan struct{})
 	close(ch)
-	close(ch)
+	close(ch) // panic
 	//Output:
 	//close of closed channel
 }
@@ -23,7 +23,7 @@ func ExampleCloseNilChan() {
 		fmt.Println(recover())
 	}()
 	var ch chan int
-	close(ch)
+	close(ch) // panic
 	//Output:
 	//close of nil channel
 }
@@ -34,7 +34,7 @@ func ExampleReceiveFromClosedChan() {
 	close(ch)
 	fmt.Println(<-ch)
 
-	val, has := <-ch
+	val, has := <-ch // has比ok更准确
 	fmt.Println(val, has)
 	//Output:
 	// 10

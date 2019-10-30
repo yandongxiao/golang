@@ -26,9 +26,13 @@ func ExampleNil1() {
 
 func ExampleNil2() {
 	defer func() {
+		fmt.Println("hello")
+	}()
+	defer func() {
 		fmt.Println(recover())
 	}()
 	panic(nil)
 	//Output:
-	//<nil>
+	// <nil>
+	// hello
 }

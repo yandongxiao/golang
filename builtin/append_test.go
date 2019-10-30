@@ -11,20 +11,6 @@ func ExampleBuiltinValues() {
 	// hello
 }
 
-func ExampleDiscardResults() {
-	// append(([]byte)(nil), "hello"...) evaluated but not used
-	// The return results of a custom function call can be all discarded together.
-	// The return results of calls to built-in functions, except recover and copy,
-	// can't be discarded, though they can be ignored by assigning them to some
-	// blank identifiers.
-	// Function calls whose results can't be discarded can't be used as deferred
-	// function calls or goroutine calls.
-	_ = append([]byte(nil), "hello"...)
-	//len("hello")
-	// Output:
-	//
-}
-
 func ExampleSlice() {
 	var data []byte // NOTE: data can be nil
 	data = append(data, []byte{4, 5, 6}...)
@@ -35,4 +21,15 @@ func ExampleSlice() {
 	fmt.Println(data)
 	//Output:
 	//[4 5 6 7 8 9 120 121 122]
+}
+
+func ExampleShare() {
+	data := make([]int, 0, 10)
+	data2 := data[5:10:10]
+	for i := 0; i < 10; i++ {
+		data = append(data, i)
+	}
+	fmt.Println(data2)
+	//Output:
+	//[5 6 7 8 9]
 }
