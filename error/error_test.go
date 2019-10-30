@@ -7,11 +7,11 @@
 // 调用os.Open的函数一般要么打印error string，要么向上返回该error.
 // 所以，识别error抛出的源头是重要的.
 //
-// error strings should identify their origin, such as
+// NOTE: error strings should identify their origin, such as
 // by having a prefix naming the operation or package that
 // generated the error.
 //
-// naming convention: Error types **end** in "Error"
+// Error类型的命名规则: Error types **end** in "Error"
 // and error variables are called (or **start** with) "err" or "Err".
 package main
 
