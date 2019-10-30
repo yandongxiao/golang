@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// 输入参数是channel
 func longTimeRequest(r chan<- int32) {
 	// Simulate a workload.
 	time.Sleep(time.Second * 3)

@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// 输入参数是channel
 func source(c chan<- int32) {
 	ra, rb := rand.Int31(), rand.Intn(3)+1
 	// Simulate a workload, and sleep 1s/2s/3s.

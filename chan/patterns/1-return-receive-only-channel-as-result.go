@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// 输出参数是channel
 func longTimeRequest() <-chan int32 {
 	r := make(chan int32)
 	go func() {

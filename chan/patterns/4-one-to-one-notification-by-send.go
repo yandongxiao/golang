@@ -15,7 +15,7 @@ func main() {
 	}
 
 	done := make(chan struct{})
-	// The sorting goroutine.
+	// The sorting goroutine. channel作为输入和输出参数
 	go func() {
 		sort.Slice(values, func(i, j int) bool {
 			return values[i] < values[j]

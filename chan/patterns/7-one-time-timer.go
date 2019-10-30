@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// 与time.After的区别是什么?
 func AfterDuration(d time.Duration) <-chan struct{} {
 	c := make(chan struct{}, 1)
 	go func() {
