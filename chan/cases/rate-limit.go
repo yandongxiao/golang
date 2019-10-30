@@ -4,7 +4,6 @@ import "time"
 import "fmt"
 
 func main() {
-
 	// First we'll look at basic rate limiting. Suppose
 	// we want to limit our handling of incoming requests.
 	// We'll serve these requests off a channel of the
@@ -16,7 +15,7 @@ func main() {
 	close(requests)
 
 	// This `limiter` channel will receive a value
-	// every 200 milliseconds. This is the regulator in
+	// every 200 millisecods. This is the regulator in
 	// our rate limiting scheme.
 	limiter := time.Tick(200 * time.Millisecond)
 

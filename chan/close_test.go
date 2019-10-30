@@ -1,3 +1,6 @@
+// close a closed channel, panic
+// cloase a nil channel, panic
+// clsoe a not-nil not-closed channel, success
 package main
 
 import "fmt"

@@ -1,5 +1,4 @@
-// NOTE: all types can be used in a channel.
-// A channel is in fact a typed message queue so channels are first class objects
+// NOTE: all types can be used in a channel.(包括channel)
 package main
 
 import (

@@ -1,9 +1,3 @@
-// A common idiom used to let the main program
-// block indefinitely while other goroutines
-// run is to place select {} as the last statement
-// in a main function. The default clause is optional;
-// fall through behavior, like in the normal switch, is not permitted.
-// If there are no cases, the select blocks execution forever.
 package main
 
 import "fmt"
@@ -11,7 +5,9 @@ import "fmt"
 func ExampleSelectDefault() {
 	ch := make(chan string) // 如果是buffered channel, 输出则变成succeed...
 	select {
-	case ch <- "hello": // NOTICE：执行的是default表达式，该表达式根本未执行
+	case ch <- "hello":
+		// NOTICE：执行的是default表达式，该表达式根本未执行.
+		// 反证法：如果ch<-被执行，那么当前协程就会进入block状态！
 		fmt.Println("succeed to send")
 	default:
 		fmt.Println("failed to send")
