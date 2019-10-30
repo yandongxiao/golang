@@ -1,4 +1,3 @@
-// Concurrent requests are serialized by a Mutex
 package memo
 
 import "sync"
@@ -9,7 +8,7 @@ type Memo struct {
 	cache map[string]result
 }
 
-type Func func(key string) (interface{}, error)
+type Func func(string) (interface{}, error)
 
 type result struct {
 	value interface{}
@@ -20,13 +19,19 @@ func New(f Func) *Memo {
 	return &Memo{f: f, cache: make(map[string]result)}
 }
 
-func (memo *Memo) Get(key string) (interface{}, error) {
+// 因为sync.Mutex, 方法必须采用pointer receiver
+// 如果缓存中没有key值，那么f(key)会被调用,
+// 在f(key)返回之前，同一个key的请求仍会导致f(key)被并发调用.
+func (memo *Memo) Get(key string) (value interface{}, err error) {
 	memo.mu.Lock()
 	res, ok := memo.cache[key]
+	memo.mu.Unlock()
+
 	if !ok {
 		res.value, res.err = memo.f(key)
+		memo.mu.Lock()
 		memo.cache[key] = res
+		memo.mu.Unlock()
 	}
-	memo.mu.Unlock()
 	return res.value, res.err
 }

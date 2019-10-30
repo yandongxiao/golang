@@ -18,6 +18,7 @@ func foo(data []byte) chan error {
 			f1.Close()
 		}()
 	}
+
 	f2, err := os.Create("file2") // The second conflicting write to err.
 	if err != nil {
 		res <- err

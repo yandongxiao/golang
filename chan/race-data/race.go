@@ -1,7 +1,6 @@
-// go test -race mypkg    // to test the package
-// go run -race mysrc.go  // to run the source file
-// go build -race mycmd   // to build the command
-// go install -race mypkg // to install the package
+// go test -race race.go    // to test the package
+// go run -race race.go  // to run the source file
+// go build -race race.go; ./race	// to build the command
 package main
 
 import (
