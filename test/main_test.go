@@ -1,3 +1,5 @@
+// It is sometimes necessary for a test program to do extra setup or teardown
+// before or after testing.
 package test_test
 
 import (
@@ -8,6 +10,8 @@ import (
 
 // if a test file contains a function: like this
 func TestMain(m *testing.M) {
+	// call flag.Parse() here if TestMain uses flags
+
 	// then the generated test will call TestMain(m) instead of
 	// running the tests directly. TestMain runs in the main
 	// goroutine and can do whatever setup and teardown
@@ -23,8 +27,6 @@ func TestHello(t *testing.T) {
 	t.Log("hello")
 }
 
-func ExampleWorld() {
+func TestWorld(t *testing.T) {
 	fmt.Println("world")
-	// Output:
-	// world
 }

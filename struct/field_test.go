@@ -5,25 +5,25 @@ import (
 	"fmt"
 )
 
-type Child struct {
+type ChildF struct {
 	Age int
 }
 
 type Person struct {
 	Name string
-	// NOTE: 如果你也想暴露child，可以将field name定义为Child
-	Child Child
+	// NOTE: 如果你也想暴露child，可以将field name定义为ChildF
+	ChildF ChildF
 }
 
 type Person2 struct {
 	Name string
-	Child
+	ChildF
 }
 
 func ExampleFieldName() {
 	p := Person{
 		Name: "jack",
-		Child: Child{
+		ChildF: ChildF{
 			Age: 10,
 		},
 	}
@@ -32,13 +32,13 @@ func ExampleFieldName() {
 
 	p2 := Person2{
 		Name: "jack",
-		Child: Child{
+		ChildF: ChildF{
 			Age: 10,
 		},
 	}
 	data, _ = json.Marshal(p2)
 	fmt.Println(string(data))
 	// Output:
-	// {"Name":"jack","Child":{"Age":10}}
+	// {"Name":"jack","ChildF":{"Age":10}}
 	// {"Name":"jack","Age":10}
 }

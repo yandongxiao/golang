@@ -18,56 +18,56 @@ package main
 
 import "fmt"
 
-type Person struct {
+type PersonF struct {
 	name string
 }
 
 // Each Method Corresponds To An Implicit Function
 // For each method declaration, compiler will declare a corresponding implicit function for it.
-// NOTE: Person.Name这种函数名称只能由编译器生成，程序员无权构造含有.的Identifier.
-// 但是程序员却可以使用Person.Name(method expression).
-// 将receiver parameter作为Person.Name的第一个参数，同时, 保持method body不变
-// func Person.Name(p Person) string {
+// NOTE: PersonF.Name这种函数名称只能由编译器生成，程序员无权构造含有.的Identifier.
+// 但是程序员却可以使用PersonF.Name(method expression).
+// 将receiver parameter作为PersonF.Name的第一个参数，同时, 保持method body不变
+// func PersonF.Name(p PersonF) string {
 //		return p.name
 // }
 //
 // For each method declared for value receiver type T,
 // a corresponding method with the same name will be implictly
 // declared by compiler for type *T. NOTE: 程序员不能同时定义T和*T的同名方法
-// func (p *Person) Name() string {
-//		return Person.Name(*p)
+// func (p *PersonF) Name() string {
+//		return PersonF.Name(*p)
 // }
-// func (*Person).Name(p *Person) string {
-//		return Person.Name(*p)
+// func (*PersonF).Name(p *PersonF) string {
+//		return PersonF.Name(*p)
 // }
 //
 // NOTE: In fact, compilers not only declare the two implicit functions,
 // they also **rewrite** the two corresponding explicit declared methods
 // to let the two methods call the two implicit functions in the method bodies.
-// func (p Person) Name() string {
-//		return Person.Name(p)
+// func (p PersonF) Name() string {
+//		return PersonF.Name(p)
 // }
 // 最终，编译器生成了一个方法和两个函数。但是执行的内容是一致的。
 //
-func (p Person) Name() string {
+func (p PersonF) Name() string {
 	// 如果field是Name时，会产生错误:
-	// type Person has both field and method named Name
+	// type PersonF has both field and method named Name
 	return p.name
 }
 
 // For each method declaration, compiler will declare
 // a corresponding implicit function for it.
-// func (*Person).Add(p *Person, a , b int) int {
+// func (*PersonF).Add(p *PersonF, a , b int) int {
 //	 return a + b // the body is the same as the SetPages method
 // }
-func (p *Person) Add(a, b int) int {
+func (p *PersonF) Add(a, b int) int {
 	return a + b
 }
 
 func ExampleImplicitFunction() {
-	var p Person = Person{name: "jack"}
-	fmt.Println(Person.Name(p))
-	fmt.Println((*Person).Add(nil, 10, 20))
+	var p PersonF = PersonF{name: "jack"}
+	fmt.Println(PersonF.Name(p))
+	fmt.Println((*PersonF).Add(nil, 10, 20))
 
 	// Output:
 	// jack
@@ -75,15 +75,15 @@ func ExampleImplicitFunction() {
 }
 
 func ExampleMethodExpression() {
-	var foo func(p *Person, a, b int) int
-	foo = (*Person).Add
+	var foo func(p *PersonF, a, b int) int
+	foo = (*PersonF).Add
 	fmt.Println(foo(nil, 1, 2))
 	// Output:
 	// 3
 }
 
 func ExampleMethodValue() {
-	var p Person
+	var p PersonF
 	var bar func(x, y int) int
 	bar = p.Add
 	fmt.Println(bar(1, 2))
@@ -97,7 +97,7 @@ func ExampleMethodValue2() {
 	// the evaluation of the method value;
 	// the saved **copy** is then used as the receiver
 	// in any calls, which may be executed later.
-	var p Person
+	var p PersonF
 	p.name = "jack"
 	foo := p.Name //因为Name是value recevier类型
 	p.name = "alice"

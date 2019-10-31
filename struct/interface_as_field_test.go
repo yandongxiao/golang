@@ -20,7 +20,7 @@ func ExampleNil() {
 	p.foo()
 	// Output:
 	// {<nil>}
-	// <nil>		// 这个<>没有什么特别的含义
+	// <nil>
 	// runtime error: invalid memory address or nil pointer dereference
 }
 
@@ -38,6 +38,6 @@ func ExamplePointer() {
 	p.foo()
 	// Output:
 	// {<nil>}
-	// <nil>	// 这个<>没有什么特别的含义
+	// <nil>
 	// *SFoo foo
 }

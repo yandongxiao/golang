@@ -17,24 +17,30 @@ func TestAdd(t *testing.T) {
 	t.Log("helloworld", t.Name(), c)
 }
 
-// Benchmarks are run sequentially.
-// The benchmark function must run the target code b.N times.
-// go help testflag: go test -bench=.
+func TestSkip(t *testing.T) {
+	t.Log("hello")
+	t.Skip("not implemented, run to here")
+	t.Log("world")
+}
+
+// NOTE: Benchmarks are run sequentially.
+// go test -bench=.	// 执行BenchmarkXxx
 // To start tuning the Go program, we have to enable profiling.
 // If the code used the Go testing package's benchmarking support,
 // we could use gotest's standard -cpuprofile and -memprofile flags
 func BenchmarkAdd(b *testing.B) {
 	// If a benchmark needs some expensive setup before running, the timer may be reset
 	b.ResetTimer()
+	// The benchmark function must run the target code b.N times.
 	for i := 0; i < b.N; i++ {
 		c := test.Add(i, i)
 		if c != 2*i {
-			// TODO
 			fmt.Println("helloworld")
 		}
 	}
 }
 
+//NOTE: go test -bench=. -cpu=2(指定并行数)
 // If a benchmark needs to test performance in a parallel setting,
 // it may use the RunParallel helper function
 // such benchmarks are intended to be used with the go test -cpu flag
