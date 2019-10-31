@@ -4,6 +4,19 @@ import "fmt"
 
 type addf func(a, b int) int
 
+// 如果按照普通的方式定义函数add, add = foo(add)会导致编译出错。
+// 出错内容：cannot assign to add.
+var add = func(a, b int) int {
+	if a == 0 {
+		panic("a==0")
+	}
+	return a + b
+}
+
+func init() {
+	add = foo(add)
+}
+
 // 高阶函数foo的作用: 为参数add增加defer+recver的保护
 // 这里隐藏了高阶函数的一个应用，面向切面编程(AOP)：
 //	1. foo可以为所有函数提供defer+recover的保护
@@ -21,19 +34,6 @@ func foo(add addf) addf {
 	}
 }
 
-func init() {
-	add = foo(add)
-}
-
 func main() {
 	fmt.Println(add(0, 2))
-}
-
-// 如果按照普通的方式定义函数add, add = foo(add)会导致编译出错。
-// 出错内容：cannot assign to add.
-var add = func(a, b int) int {
-	if a == 0 {
-		panic("a==0")
-	}
-	return a + b
 }

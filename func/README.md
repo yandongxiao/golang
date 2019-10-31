@@ -5,6 +5,5 @@ a function type: is composed of the func keyword and a function signature litera
 
 When we declare a custom function, we also declared an immutable function value acutally.
 
-The fatal error is not recoverable and will make the whole program crash.
-    It is fatal error to call a nil function to start a new goroutine.
-    For other situations, calls to nil function values will produce recoverable panics, including deferred function calls.
+It is fatal error to call a nil function to start a new goroutine. The fatal error is not recoverable and will make the whole program crash.
+For other situations, calls to nil function values will produce recoverable panics, including deferred function calls.
