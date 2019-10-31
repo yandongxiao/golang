@@ -1,16 +1,3 @@
-// a go method is a function that acts on variable of
-// a certain type, called the receiver.
-// type分为两类，一种是value type(如type INT int),
-// 另一种是pointer Type(如 type PINT *int).
-// It cannot be a pointer type, but it can be a pointer
-// to any of the allowed types. 所以，PINT类型是不允许被作为recevier的!!
-// variable: 一个recevier可以是(a INT) 或 (p *INT) 两种变形.
-//
-// a method is a special kind of function. 注意，方法的本质是函数.
-// The receiver type can be (almost) anything, not only a struct
-// type: any type can have methods,
-// even a function type or alias types for int, bool, string or array.
-// 但是，要求类型和它的方法在同一个package内
 package main
 
 import (
@@ -71,13 +58,6 @@ func ExampleContinuousBlock() {
 	// 0
 }
 
-// 3. The rule about pointers vs. values for receivers is that
-// value methods can be invoked on pointers and values,
-// but pointer methods can only be invoked on pointers.
-// 依据上面的规则，p1.setAge(100)岂不是应该调用失败？
-// 先要搞清楚什么是addressable变量：开发者可以访问到的变量，不论是指针还是值.
-// pointer receiver 方法意味着会对对象进行修改，
-// 如果被修改的变量是addressable的，那么就是合法调用, 不论是指针还是值。
 func ExampleAccess() {
 	p1 := SPerson{age: 10}
 	p1.setAge(100) // 作用在p1上，p1是可访问的，所以合法
@@ -86,12 +66,6 @@ func ExampleAccess() {
 	p2 := &SPerson{age: 20}
 	p2.setAge(200)
 	fmt.Println(p2.getAge())
-
-	// cannot use p1 (type SPerson) as type Setter in argument
-	// to setAge. 解释：setter = p1, 即赋值给interface变量时
-	// 会创建一个p1的一个副本，修改操作将会应用在p1的副本上。
-	// p1副本是不可访问的。注意，通过type assertion的方式返回的是p1副本的副本.
-	// setAge(p1)
 
 	// Output:
 	// 100
@@ -125,7 +99,7 @@ func (p SPerson) getAge() int {
 	return p.age
 }
 
-// 如果再在pointer上重定义getAge
+// NOTE: 如果再在pointer上重定义getAge
 // 会导致method redeclared: SPerson.getAge错误
 //func (p *SPerson) getAge() int {
 //	return p.age

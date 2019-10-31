@@ -28,19 +28,16 @@ func ExampleAmbiguous() {
 	h.Empty = ADog{20} // 如果House.getAge实现了，该赋值是无效的
 	fmt.Println(h)
 
-	// afoo(h)
+	afoo(h)
 
 	// Output:
 	// {<nil> {10}}
 	// {{20} {10}}
+	// 20
 }
 
 func afoo(empty Empty) {
-	println(empty.getAge())
-}
-
-func (p APerson) getAge() int {
-	return p.age
+	fmt.Println(empty.getAge())
 }
 
 func (d ADog) getAge() int {

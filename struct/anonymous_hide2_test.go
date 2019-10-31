@@ -24,9 +24,7 @@ func ExampleInherit2() {
 	// 所以肯定只会调用Base的方法
 	fmt.Println(foo(child.Base))
 
-	// 解释为什么输出20
-	// child.getMore调用的本质是方法名寻找,
-	// 调用对应field的方法的过程(而调用方法的本质是调用函数)
+	// 解释为什么输出20, child.getMore() == child.Base.getMore()
 	child.getMore()
 
 	// Output:

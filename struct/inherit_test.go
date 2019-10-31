@@ -14,11 +14,8 @@ type Engine interface {
 }
 
 // 使用匿名内部类型来模拟面对对象编程中的继承.
-// 不但可以直接访问匿名类的field, 还可以直接访问匿名类的方法
+// NOTE: 不但可以直接访问匿名类的field, 还可以直接访问匿名类的方法
 // Golang规定：只要实现了接口定义的方法，即认为该类型实现了该interface。
-// 没有implements或者extends等关键字
-// 匿名内部类型 + 接口 即可实现多态
-// 内部类的本质是composite
 type Car struct {
 	wheelCount int
 	Engine
@@ -37,6 +34,9 @@ func (m *Mercedes) sayHiToMerkel() {
 func (car Car) numberOfWheels() int {
 	return car.wheelCount
 }
+
+// 即使Engine==nil, 因为*Car重载了它的方法，也OK。
+// 即使*Car == nil, 因为Start和Stop方法没有对receiver进行解引用，也OK!
 func (car *Car) Start() {
 	fmt.Println("Car is started")
 }
@@ -53,8 +53,8 @@ func (car *Car) GoToWorkIn() {
 	// get out of car
 }
 
-func ExampleCar() {
-	m := Mercedes{Car{4, nil}}
+func ExampleMercedes() {
+	m := Mercedes{Car{4, nil}} // Engine = nil
 	fmt.Println(m.numberOfWheels())
 	m.GoToWorkIn()
 	m.sayHiToMerkel()
@@ -64,4 +64,13 @@ func ExampleCar() {
 	// Car is started
 	// Car is stopped
 	// Hi Angela!
+}
+
+func ExampleCar() {
+	var car *Car
+	car.GoToWorkIn()
+
+	// Output:
+	// Car is started
+	// Car is stopped
 }

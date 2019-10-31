@@ -1,4 +1,3 @@
-// NOTICE: 如果你需要使用map[T1]T2来聚合数据，考虑使用匿名类来代替
 package main
 
 import (
