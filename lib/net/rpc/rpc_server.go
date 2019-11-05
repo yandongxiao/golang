@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"net/rpc"
 
-	"./calc"
+	"rpc/calc"
 )
 
 func main() {
@@ -15,7 +15,8 @@ func main() {
 	v.N = 10
 	v.M = 10
 
-	// A server registers an object, making it visible as a **service** with the name of the type of the object(对象的类型的名称，比如Args).
+	// A server registers an object, making it visible as a **service** with the name of
+	// the type of the object(对象的类型的名称，比如Args).
 	// After registration, exported methods of the object will be accessible remotely.
 	// A server may register multiple objects (services) of different types
 	// but it is an error to register multiple objects of the same type.
@@ -24,8 +25,6 @@ func main() {
 
 	// NOTE: RPC和HTTP服务是可以在一个应用中共存的
 	// 通过前缀/_goRPC_/来区分RPC和HTTP两种服务
-	// More typically it will create a network listener and call Accept or,
-	// for an HTTP listener, HandleHTTP and http.Serve.
 	listener, e := net.Listen("tcp", "localhost:1234")
 	if e != nil {
 		log.Fatal("Starting RPC-server -listen error:", e)
