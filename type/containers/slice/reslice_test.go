@@ -3,24 +3,37 @@ package main
 import "fmt"
 
 func ExampleSlice0() {
-	nums := []int{0, 1, 2, 3, 4, 5}
-	v := nums[:]
+	array := [5]int{1, 2, 3, 4, 5}
+	nums := array[:]
+	fmt.Println(len(nums), cap(nums))
+
+	v := nums[0:len(nums):cap(nums)]
+	fmt.Println(v)
+
+	v = nums[:]
 	fmt.Println(v)
 	//Output:
-	// [0 1 2 3 4 5]
+	// 5 5
+	// [1 2 3 4 5]
+	// [1 2 3 4 5]
 }
 
 func ExampleSlice1() {
-	nums := []int{0, 1, 2, 3, 4, 5}
-	v := nums[2:]
+	array := [6]int{0, 1, 2, 3, 4, 5}
+	nums := array[:]
+	v := nums[2:len(nums):cap(nums)]
+	fmt.Println(v)
+
+	v = nums[2:]
 	fmt.Println(v)
 	//Output:
+	// [2 3 4 5]
 	// [2 3 4 5]
 }
 
 func ExampleSlice2() {
 	nums := []int{0, 1, 2, 3, 4, 5}
-	v1 := nums[1:2] // 1, 2-1=1, cap(nums)-1=5
+	v1 := nums[1:2] // 等价于：1, 2-1=1, cap(nums)-1=5
 	fmt.Println(v1, len(v1), cap(v1))
 	//Output:
 	// [1] 1 5
@@ -55,7 +68,7 @@ func ExampleOutOfRange() {
 	}()
 	nums := []int{0, 1, 2, 3, 4, 5}
 	nv := nums[1:2:3]
-	fmt.Println(nv[0:3])
+	fmt.Println(nv[0:3]) // 注意: nv[0:2] 就是合法的
 	// Output:
-	// runtime error: slice bounds out of range
+	// runtime error: slice bounds out of range [:3] with capacity 2
 }
