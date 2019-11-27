@@ -4,8 +4,6 @@ import "fmt"
 
 type addf func(a, b int) int
 
-// 如果按照普通的方式定义函数add, add = foo(add)会导致编译出错。
-// 出错内容：cannot assign to add.
 var add = func(a, b int) int {
 	if a == 0 {
 		panic("a==0")
