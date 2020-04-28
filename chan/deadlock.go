@@ -24,5 +24,5 @@ func main() {
 		}
 	}()
 	go test()
-	select {}
+	select {} // block forever
 }

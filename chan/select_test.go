@@ -34,14 +34,13 @@ func ExampleSelectOrder() {
 		ch2 <- "second"
 	}()
 
-Loop:
 	for {
 		select {
 		case msg1 := <-ch1: // 一定是先收到first
 			fmt.Println(msg1)
 		case msg2 := <-ch2:
 			fmt.Println(msg2) // undefined: msg1
-			break Loop
+			return
 		}
 	}
 

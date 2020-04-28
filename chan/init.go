@@ -3,7 +3,7 @@ package main
 
 import "fmt"
 
-var IntChan = func() chan int {
+var IntChan = func() <-chan int {
 	ch := make(chan int)
 	// 在这里创建了协程!
 	go func() {
