@@ -1,8 +1,11 @@
 // Concurrent requests for the same key block until the first completes.
 // This implementation uses a Mutex.
-package memo
+package main
 
-import "sync"
+import (
+	"sync"
+	"time"
+)
 
 type Memo struct {
 	f  Func
@@ -43,4 +46,17 @@ func (memo *Memo) Get(key string) (value interface{}, err error) {
 		<-e.ready // 见信号取值。
 	}
 	return e.res.value, e.res.err
+}
+
+func main() {
+	mem := New(do)
+	go mem.Get("1")
+	go mem.Get("1")
+	go mem.Get("2")
+	time.Sleep(time.Second * 2)
+}
+
+func do(string) (interface{}, error) {
+	time.Sleep(time.Second)
+	return "hello", nil
 }
