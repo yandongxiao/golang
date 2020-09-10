@@ -5,19 +5,19 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
 func main() {
 	chData := make(chan int)
 	chEnd := make(chan struct{})
 
-	go func() { // producer
+	// producer
+	go func() {
 		counter := 0
 		for {
 			// do work and send data
 			// NOTE: 如果将该注释打开，则会出现deal lock.
-			time.Sleep(100 * time.Millisecond)
+			// time.Sleep(100 * time.Millisecond)
 			counter++
 			chData <- counter
 
