@@ -31,7 +31,7 @@ func (*SFoo) foo() {
 }
 
 func ExamplePointer() {
-	var s *SFoo
+	var s *SFoo // s==nil
 	p := IPerson{Foo: s}
 	fmt.Println(p)
 	fmt.Println(p.Foo)

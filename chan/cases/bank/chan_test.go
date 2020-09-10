@@ -5,11 +5,11 @@ import "fmt"
 var deposits = make(chan int)
 var balances = make(chan int)
 
-func CDeposit(money int) { deposits <- money } // 只有一行语句的函数
+func CDeposit(money int) { deposits <- money }
 func CBalance() int      { return <-balances }
 
 func broker() {
-	money := 0 // 原本共享的变量，变成协程独有
+	money := 0
 	for {
 		select {
 		case inc := <-deposits:

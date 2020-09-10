@@ -1,3 +1,4 @@
+// 最好使用sync.Mutex，效率更高
 package main
 
 import "fmt"

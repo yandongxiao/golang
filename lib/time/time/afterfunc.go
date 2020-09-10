@@ -11,7 +11,7 @@ func f() {
 
 func main() {
 	timer := time.AfterFunc(3e9, f)
-	time.Sleep(4e9)
+	time.Sleep(1e9)
 	if timer.Stop() {
 		fmt.Println("stop the timer successfully")
 	} else {

@@ -1,6 +1,5 @@
 // 1. 函数是一等变量（first class），可以作为参数或者返回值.
 // 2. 返回函数的函数称为高阶函数
-
 package main
 
 import "fmt"

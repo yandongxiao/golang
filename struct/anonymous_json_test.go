@@ -7,10 +7,6 @@ import (
 	"os"
 )
 
-// 与 type INT int 进行类比
-// type JPerson struct{...}
-// struct{} 本身就是一个类型
-// struct{}{} 不但定义该类型，同时对它进行初始化
 type JPerson struct {
 	name string
 	age  int

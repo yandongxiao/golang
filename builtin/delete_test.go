@@ -6,17 +6,23 @@ func ExampleExistedElement() {
 	m := map[int]int{1: 1, 2: 2, 3: 3}
 	delete(m, 1)
 	// NOTE: the order is unpredictable even if the same loop is run multiple times with the same map
-	fmt.Println(len(m)) // 如果打印整个map，则无法保证元素的顺序
-	// Output:
-	// 2
+	for k, v := range m {
+		fmt.Println(k, v)
+	}
+	// Unordered output:
+	// 2 2
+	// 3 3
 }
 
 func ExampleNotExistedElement() {
 	m := map[int]int{1: 1, 2: 2}
 	delete(m, 10)
-	fmt.Println(len(m))
-	// Output:
-	// 2
+	for k, v := range m {
+		fmt.Println(k, v)
+	}
+	// Unordered output:
+	// 2 2
+	// 1 1
 }
 
 func ExampleNilMap() {

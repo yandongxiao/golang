@@ -7,7 +7,6 @@ import (
 
 func ExampleNamedReturnValue() {
 	func(s string) (n int, err error) {
-
 		defer func() {
 			n++
 			fmt.Println(n)

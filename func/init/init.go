@@ -1,3 +1,4 @@
+// go run init.go ddd.go
 // a common use of init functions is to verify or repair
 // correctness of the program state before real execution begins.
 // 在init函数中，如果出现失败，可以以panic的方式抛出.
@@ -17,8 +18,8 @@ package main
 
 import (
 	"fmt"
-
-	_ "./pkg"
+	_ "init-test/pkg"
+	// _ "./pkg" // 这种模式只能在$GOPATH之外使用; 在Module模式下，也不赞成这样使用
 )
 
 func init() {

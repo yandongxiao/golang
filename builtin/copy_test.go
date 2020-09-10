@@ -3,25 +3,14 @@ package main
 
 import "fmt"
 
-func ExampleCopyFast() {
+func ExampleDeepCopy() {
 	a := []int{1, 2, 3}
+	// append申请新的内存块的时机
 	b := append(a[:0:0], a...)
+	a[0] = 100
 	fmt.Println(b)
 	// Output
 	// [1 2 3]
-}
-
-func ExampleCopyUnderlying() {
-	// the types of the two slices are not required to be identical,
-	// but their element types must be identical. In other words,
-	// the two argument slices must share the same underlying type.
-	type bytes []byte
-	x := make(bytes, 10)
-	copy(x, []byte("hello"))
-	copy(x, "world")           // Sugar
-	fmt.Println(string(x[:5])) // :5是必须的
-	// Output:
-	// world
 }
 
 func ExampleCopyBytes() {
