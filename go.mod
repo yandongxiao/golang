@@ -5,9 +5,6 @@ go 1.12
 require (
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/mock v1.4.3
+	github.com/micro/go-micro v1.18.0 // indirect
 	go.mongodb.org/mongo-driver v1.3.3
-	golang.org/x/net v0.0.0-20191101175033-0deb6923b6d9 // indirect
-	golang.org/x/sys v0.0.0-20191029155521-f43be2a4598c // indirect
-	google.golang.org/genproto v0.0.0-20191028173616-919d9bdd9fe6 // indirect
-	google.golang.org/grpc v1.24.0 // indirect
 )
