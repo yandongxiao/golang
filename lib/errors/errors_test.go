@@ -65,9 +65,9 @@ func ExampleAs() {
 
 	// As unwraps its first argument sequentially looking for an error that can be
 	// assigned to its second argument, which must be a pointer.
-	var myErrror *MyError
-	if errors.As(err, &myErrror) {
-		fmt.Println(myErrror)
+	var myError *MyError
+	if errors.As(err, &myError) {
+		fmt.Println(myError)
 	}
 
 	// Output:
