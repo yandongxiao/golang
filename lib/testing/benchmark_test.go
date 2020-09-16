@@ -17,7 +17,7 @@ func Fib(n int) int {
 }
 
 func BenchmarkFib20(b *testing.B) {
-    // 除了每次Fib(20)的执行时间，磁性次数
+    // 除了每次Fib(20)的执行时间，执行次数
     // 该指令给出每次Fib(20)的申请内存，申请次数
     b.ReportAllocs()
 

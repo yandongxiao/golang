@@ -7,7 +7,8 @@ import (
 )
 
 // a common way of writing tests in Go.
-// This approach, commonly referred to as table-driven tests. makes it straightforward to add more test cases
+// This approach, commonly referred to as table-driven tests.
+// makes it straightforward to add more test cases
 func TestTime(t *testing.T) {
 	testCases := []struct {
 		gmt  string
