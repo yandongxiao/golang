@@ -27,8 +27,8 @@ func main() {
 	println(num1 + 10.0) // ok
 
 	// 也可以强制为常量声明一个类型
-	const NUM2 int = 10
-	var num2 = 10.0
+	// const NUM2 int = 10
+	// var num2 = 10.0
 	// invalid operation: num2 + NUM2 (mismatched types float64 and int))
-	println(num2 + NUM2)
+	// println(num2 + NUM2)
 }

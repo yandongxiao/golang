@@ -1,3 +1,4 @@
+package main
 // 返回多个select结果是，就需要用到rows.NextResultSet了
 import (
 	"fmt"

@@ -28,3 +28,4 @@
    whole. Thus %q will quote each element of a slice of strings, and %6.2f
    will control formatting for each element of a floating-point array.
 */
+package main

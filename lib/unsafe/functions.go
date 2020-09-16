@@ -12,7 +12,7 @@ type S struct {
 	v4 int64
 }
 
-func main() {
+func main2() {
 	s := S{}
 	fmt.Println(unsafe.Sizeof(s))      // 16
 	fmt.Println(unsafe.Offsetof(s.v4)) // 8

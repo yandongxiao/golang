@@ -1,6 +1,6 @@
 // Concurrent requests for the same key block until the first completes.
 // This implementation uses a Mutex.
-package main
+package memo
 
 import (
 	"sync"
@@ -48,7 +48,7 @@ func (memo *Memo) Get(key string) (value interface{}, err error) {
 	return e.res.value, e.res.err
 }
 
-func main() {
+func main12753() {
 	mem := New(do)
 	go mem.Get("1")
 	go mem.Get("1")
