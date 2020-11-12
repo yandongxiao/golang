@@ -10,5 +10,6 @@ require (
 	github.com/google/wire v0.4.0
 	github.com/gorilla/websocket v1.4.1
 	github.com/micro/go-micro v1.18.0 // indirect
+	github.com/prometheus/client_golang v1.8.0 // indirect
 	go.mongodb.org/mongo-driver v1.3.3
 )
