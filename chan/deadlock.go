@@ -17,7 +17,7 @@ func test() {
 	ch <- 1
 }
 
-func main() {
+func ExampleC() {
 	defer func() {
 		if err := recover(); err != nil {
 			fmt.Println(err)

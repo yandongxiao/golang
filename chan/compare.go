@@ -26,7 +26,7 @@ func addOne(val int, resp chan<- int) {
 	resp <- val + 1
 }
 
-func main() {
+func ExampleB() {
 	now := time.Now()
 	sum := 0
 	resp := make(chan int)

@@ -18,7 +18,6 @@ package main
 
 import (
 	"fmt"
-	_ "init-test/pkg"
 	// _ "./pkg" // 这种模式只能在$GOPATH之外使用; 在Module模式下，也不赞成这样使用
 )
 

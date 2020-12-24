@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/rpc"
 
-	"rpc/calc"
+	"github.com/yandongxiao/go/lib/net/rpc/calc"
 )
 
 const serverAddress = "localhost"

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func ExampleD() {
 	ch := make(chan int, 1)
 	select {
 	case <-ch:

@@ -2,9 +2,9 @@ package main
 
 import (
 	"testing"
-	"tree/spider"
 
 	"github.com/golang/mock/gomock"
+	"github.com/yandongxiao/go/lib/gomock/tree/spider"
 )
 
 // 在单元测试中再也不用先去实现一个Spider接口了

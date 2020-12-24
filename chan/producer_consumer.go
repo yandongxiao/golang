@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func ExampleD() {
 	chData := make(chan int)
 	chEnd := make(chan struct{})
 

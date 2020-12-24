@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"net/rpc"
 
-	"rpc/calc"
+	"github.com/yandongxiao/go/lib/net/rpc/calc"
 )
 
 func main() {

@@ -48,7 +48,7 @@ func jack() {
 	fmt.Println(b)
 }
 
-func main() {
+func ExampleBB() {
 	alice()
 	// bob()
 	// jack()

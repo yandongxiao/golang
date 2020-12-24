@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func ExampleCCX() {
 	c := make(chan struct{})
 	close(c)
 	select {

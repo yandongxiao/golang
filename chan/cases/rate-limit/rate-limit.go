@@ -1,9 +1,11 @@
 package main
 
-import "time"
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func main() {
+func ExampleB() {
 	// First we'll look at basic rate limiting. Suppose
 	// we want to limit our handling of incoming requests.
 	// We'll serve these requests off a channel of the

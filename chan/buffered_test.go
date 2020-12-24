@@ -4,7 +4,7 @@ package main
 
 import "fmt"
 
-func main() {
+func ExampleA() {
 	// 默认创建的协程是不带缓存的，这导致无论是发送端还是接收端，发送或接收操作都是阻塞式.
 	defer func() {
 		fmt.Println(recover())

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func ExampleEE() {
 	c := make(chan string, 2)
 	trySend := func(v string) {
 		select {

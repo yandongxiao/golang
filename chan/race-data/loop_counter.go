@@ -6,7 +6,7 @@ import (
 	"sync"
 )
 
-func main() {
+func ExampleAA() {
 	var wg sync.WaitGroup
 	wg.Add(5)
 	for i := 0; i < 5; i++ {

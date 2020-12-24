@@ -1,7 +1,7 @@
 package main
 
 import (
-	"tree/spider"
+	"github.com/yandongxiao/go/lib/gomock/tree/spider"
 )
 
 func GetGoVersion(s spider.Spider) string {

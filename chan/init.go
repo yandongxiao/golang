@@ -20,5 +20,3 @@ func init() {
 	}()
 	fmt.Println(<-ch)
 }
-
-func main() {}

@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func main() {
+func ExampleA() {
 	limiter := time.Tick(1000 * time.Millisecond)
 	for t := range limiter {
 		time.Sleep(time.Second * 2)

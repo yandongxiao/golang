@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func ExampleCC() {
 	ctx, _ := context.WithCancel(context.Background())
 	ch1 := write(ctx, 0)
 	ch2 := write(ctx, 1)
