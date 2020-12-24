@@ -3,7 +3,7 @@ package bank_test
 import (
 	"testing"
 
-	"github.com/magiconair/properties/assert"
+	"github.com/stretchr/testify/assert"
 
 	bank "github.com/yandongxiao/go/chan/cases/bank/chan-bank"
 )

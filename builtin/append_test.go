@@ -42,7 +42,7 @@ func TestAppendShare(t *testing.T) {
 }
 
 // 采用 Example 更合理
-// NOTE: 这种删除元素的方式不可取
+// NOTE: for-range 这种删除元素的方式不可取
 func ExampleRemoveElementByAppend() {
 	defer func() {
 		fmt.Println(recover())
