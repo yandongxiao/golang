@@ -5,16 +5,15 @@ import (
 	"time"
 )
 
-func ExampleB() {
-	// First we'll look at basic rate limiting. Suppose
-	// we want to limit our handling of incoming requests.
-	// We'll serve these requests off a channel of the
-	// same name.
+func main() {
+	// 假设，这是我们要处理的所有的请求
 	requests := make(chan int, 5)
 	for i := 1; i <= 5; i++ {
 		requests <- i
 	}
 	close(requests)
+
+	// 方式一
 
 	// This `limiter` channel will receive a value
 	// every 200 milliseconds. This is the regulator in

@@ -1,6 +1,6 @@
-// 使用channel来实现deduplicate.go同样的效果
+// 使用 channel 来实现 deduplicate.go 同样的效果
 // NOTE: channel不一定非得关闭，只要不阻塞协程就好。
-package memo
+package monitor
 
 type Func func(string) (interface{}, error)
 
@@ -24,8 +24,12 @@ func New(f Func) *Memo {
 	return memo
 }
 
+// 我们使用单独的协程，负责与远端交互。
+// 它接收请求，go 请求远端，远端一旦有结果，它需要通知给请求方。
 func (memo *Memo) server(f Func) {
-	cache := make(map[string]*entry) // NOTE: 将共享变量归属为一个协程的局部变量
+	// NOTE: 将共享变量归属为一个协程的局部变量
+	cache := make(map[string]*entry)
+
 	for req := range memo.requests {
 		e := cache[req.key]
 		if e == nil {
@@ -37,6 +41,7 @@ func (memo *Memo) server(f Func) {
 	}
 }
 
+// 对外暴露的是同步接口，这个很重要 ！
 func (memo *Memo) Get(key string) (interface{}, error) {
 	req := request{key: key, resp: make(chan result)}
 	memo.requests <- req
@@ -51,13 +56,13 @@ type entry struct {
 	ready chan struct{}
 }
 
-// 没有返回值，返回值是信号
+// 执行远程调用，通知
 func (e *entry) call(f Func, key string) {
 	e.res.value, e.res.err = f(key)
 	close(e.ready)
 }
 
-// 输入和删除都是channel
+// 专门负责通知
 func (e *entry) delivery(resp chan<- result) {
 	<-e.ready
 	resp <- e.res

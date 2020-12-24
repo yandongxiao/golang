@@ -1,14 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"time"
 )
 
 func main() {
-	chRate := time.Tick(time.Second)
-	for {
-		<-chRate
-		println("a message")
+	limiter := time.Tick(1000 * time.Millisecond)
+	for t := range limiter {
+		fmt.Println(t)
 	}
-
 }
