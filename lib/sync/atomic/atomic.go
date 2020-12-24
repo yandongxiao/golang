@@ -1,12 +1,14 @@
 package main
 
-import "fmt"
-import "time"
-import "sync/atomic"
+import (
+	"fmt"
+	"sync/atomic"
+	"time"
+)
 
 var ops uint64
 
-func main() {
+func ExampleA() {
 	for i := 0; i < 50; i++ {
 		go func() {
 			for {

@@ -12,7 +12,7 @@ func myfunc(wg *sync.WaitGroup, data int) {
 	fmt.Println(data)
 }
 
-func main() {
+func ExampleDDD() {
 	var wg sync.WaitGroup
 	// The main goroutine calls Add to set the number of goroutines to wait for.
 	// Add adds delta, which may be negative, to the WaitGroup counter.

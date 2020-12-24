@@ -2,6 +2,6 @@ package main
 
 import "syscall"
 
-func main() {
+func ExampleA() {
 	println(syscall.Getpid())
 }

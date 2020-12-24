@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func main() {
+func ExampleC() {
 	go a()
 	m1()
 }

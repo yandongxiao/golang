@@ -1,14 +1,16 @@
 package main
 
-import "fmt"
-import "runtime"
-import "time"
+import (
+	"fmt"
+	"runtime"
+	"time"
+)
 
 func myroutine() {
 	fmt.Println("new routine")
 }
 
-func main() {
+func ExampleA() {
 	// get the number of logical CPUs available for the current program.
 	// Each logical CPU can only execute one goroutine at any given time.
 	// 8: 表示最多并行执行8个协程

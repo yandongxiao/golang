@@ -4,10 +4,12 @@
 
 package main
 
-import "fmt"
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
 
-func main() {
+func ExampleC() {
 
 	// Sort methods are specific to the builtin type;
 	// here's an example for strings. Note that sorting is

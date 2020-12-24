@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-func main() {
+func ExampleA() {
 	p1 := Person{"alice", 12}
 	p2 := Person{"bob", 13}
 	p3 := Person{"tom", 1}

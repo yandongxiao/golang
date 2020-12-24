@@ -6,8 +6,10 @@
 
 package main
 
-import "sort"
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 // In order to sort by a custom function in Go, we need a
 // corresponding type. Here we've created a `byLength`
@@ -36,7 +38,7 @@ func (s byLength) Less(i, j int) bool {
 // custom sort by casting the original `fruits` slice to
 // `byLength`, and then use `sort.Sort` on that typed
 // slice.
-func main() {
+func ExampleB() {
 	fruits := []string{"peach", "banana", "kiwi"}
 	sort.Sort(byLength(fruits))
 	fmt.Println(fruits)

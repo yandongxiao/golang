@@ -10,25 +10,25 @@ import (
 	"time"
 )
 
-func main() {
+func ExampleA() {
 	setupSigusr1Trap()
-	go a()
-	m1()
+	go aa()
+	m11()
 }
 
-func m1() {
-	m2()
+func m11() {
+	m22()
 }
 
-func m2() {
-	m3()
+func m22() {
+	m33()
 }
 
-func m3() {
+func m33() {
 	time.Sleep(time.Hour)
 }
 
-func a() {
+func aa() {
 	time.Sleep(time.Hour)
 }
 

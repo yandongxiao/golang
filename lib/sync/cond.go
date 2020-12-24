@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func main() {
+func ExampleCCC() {
 	rand.Seed(time.Now().UnixNano())
 	const N = 10
 	var values [N]string

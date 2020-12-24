@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-func main() {
+func ExampleB() {
 	log.SetFlags(0)
 
 	x := 0

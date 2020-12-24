@@ -429,7 +429,6 @@ To force the intermediate rounding, write float64(x*y) + z.
 3. runs vet automatically during tests，静态分析，挖掘潜在的问题
 4. permits passing string values directly between Go and C using cgo
 
-
 # Go 1.11 is released
 
 - two features stand out as being especially exciting: modules and WebAssembly support

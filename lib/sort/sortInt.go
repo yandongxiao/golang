@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-func main() {
+func ExampleD() {
 	// 排序基本数据类型
 	data := []int{4, 3, 5, 1}
 	sort.Ints(data)

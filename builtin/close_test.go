@@ -2,41 +2,46 @@
 // any receive from c will succeed without blocking, returning the zero
 // value for the channel element.
 // NOTE: close函数只是用来关闭chan，与关闭文件操作无关
-package main
+package buildin
 
-import "fmt"
+import (
+	"testing"
 
-func ExampleCloseClosedChan() {
+	"github.com/stretchr/testify/assert"
+)
+
+func TestCloseClosedChannel(t *testing.T) {
 	defer func() {
-		fmt.Println(recover())
+		err := recover()
+		assert.NotNil(t, err)
 	}()
 
 	ch := make(chan struct{})
 	close(ch)
-	close(ch) // panic
-	//Output:
-	//close of closed channel
+	close(ch) // panic here
+	assert.Equal(t, 1, 2)
 }
 
-func ExampleCloseNilChan() {
+func TestCloseNilChan(t *testing.T) {
 	defer func() {
-		fmt.Println(recover())
+		err := recover()
+		assert.NotNil(t, err)
 	}()
 	var ch chan int
-	close(ch) // panic
-	//Output:
-	//close of nil channel
+	close(ch) // panic here
+	assert.Equal(t, 1, 2)
 }
 
-func ExampleReceiveFromClosedChan() {
+func TestReceiveFromClosedChan(t *testing.T) {
 	ch := make(chan int, 1)
 	ch <- 10
 	close(ch)
-	fmt.Println(<-ch)
 
-	val, has := <-ch // has比ok更准确
-	fmt.Println(val, has)
-	//Output:
-	// 10
-	// 0 false
+	val, ok := <-ch
+	assert.Equal(t, val, 10)
+	assert.Equal(t, ok, true)
+
+	val, ok = <-ch
+	assert.Equal(t, val, 0)
+	assert.Equal(t, ok, false)
 }

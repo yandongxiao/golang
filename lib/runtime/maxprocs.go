@@ -1,9 +1,11 @@
 package main
 
-import "fmt"
-import "runtime"
+import (
+	"fmt"
+	"runtime"
+)
 
-func main() {
+func ExampleB() {
 	fmt.Println(runtime.NumCPU())
 	runtime.GOMAXPROCS(3)
 }

@@ -3,11 +3,12 @@
 // Share memory by communicating; don't communicate by sharing memory.
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync/atomic"
+)
 
-import "sync/atomic"
-
-func main() {
+func ExampleB() {
 
 	// SwapT: 等价于：old = *addr; *addr = new; return old
 	v1 := int32(1)

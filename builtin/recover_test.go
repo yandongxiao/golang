@@ -1,38 +1,50 @@
-package main
+package buildin
 
-import "fmt"
+import (
+	"testing"
 
-func ExampleBasic() {
+	"github.com/stretchr/testify/assert"
+)
+
+func TestRecover(t *testing.T) {
+	v := recover()
+	assert.Nil(t, v)
+
 	defer func() {
-		if err := recover(); err != nil {
-			fmt.Println(err)
+		if v := recover(); v != nil {
+			assert.Equal(t, v, "hello")
 		}
 	}()
 	panic("hello")
-	fmt.Println("world")
-	//Output:
-	//hello
+	assert.Equal(t, 1, 2)
 }
 
-func ExampleNil1() {
+func TestRecover_Duplicate(t *testing.T) {
 	defer func() {
-		fmt.Println(recover())
+		if v := recover(); v != nil {
+			assert.Equal(t, 1, 2)
+		}
 	}()
-	fmt.Println(recover())
-	//Output:
-	//<nil>
-	//<nil>
+
+	defer func() {
+		if v := recover(); v != nil {
+			assert.Equal(t, v, "hello")
+		} else {
+			assert.Equal(t, 1, 2)
+		}
+
+	}()
+
+	panic("hello")
 }
 
-func ExampleNil2() {
+func TestRecoverNil(t *testing.T) {
 	defer func() {
-		fmt.Println("hello")
+		if v := recover(); v != nil {
+			assert.Equal(t, 1, 2)
+		}
 	}()
-	defer func() {
-		fmt.Println(recover())
-	}()
+
 	panic(nil)
-	//Output:
-	// <nil>
-	// hello
+	assert.Equal(t, 1, 2)
 }

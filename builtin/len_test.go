@@ -1,39 +1,30 @@
-// func len(v Type) int
-package main
+package buildin
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
 
-func ExampleArrayLen() {
-	fmt.Println(len([3]int{}))
-	fmt.Println(len(&[3]int{}))
+	"github.com/magiconair/properties/assert"
+)
+
+func TestArrayLen(t *testing.T) {
+	assert.Equal(t, len([3]int{}), 3)
+	assert.Equal(t, len(&[3]int{}), 3) // cap() 作用于指针时，同理
 	var p *[3]int
-	fmt.Println(len(p), p)
-	//Output:
-	//3
-	//3
-	//3 <nil>
+	assert.Equal(t, len(p), 3)
 }
 
-func ExampleLenNil() {
-	var s []int
-	var m map[int]int
-	var p *[3]int
-	// NOTE: 所以不能以len(p)的形式遍历所有元素
-	fmt.Println(len(s), len(m), len(p), p)
-	// Output:
-	// 0 0 3 <nil>
-}
-
-func ExampleLenChan() {
+func TestChanLen(t *testing.T) {
 	ch := make(chan int, 1)
+	assert.Equal(t, len(ch), 0)
+
 	ch <- 1
-	fmt.Println(len(ch))
+	assert.Equal(t, len(ch), 1)
+
 	close(ch)
-	fmt.Println(len(ch))
+	assert.Equal(t, len(ch), 1)
+
 	<-ch
+	assert.Equal(t, len(ch), 0)
 	fmt.Println(len(ch))
-	//Output:
-	//1
-	//1
-	//0
 }

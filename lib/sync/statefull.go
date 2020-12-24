@@ -34,7 +34,7 @@ type writeOp struct {
 	resp chan bool
 }
 
-func main() {
+func ExampleAAA() {
 
 	// As before we'll count how many operations we perform.
 	var readOps uint64

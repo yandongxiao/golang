@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func main() {
+func ExampleBBB() {
 
 	// For our example the `state` will be a map.
 	var state = make(map[int]int)

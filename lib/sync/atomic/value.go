@@ -16,7 +16,7 @@ func requests() chan int {
 	return make(chan int)
 }
 
-func main() {
+func ExampleC() {
 	var config atomic.Value // holds current server configuration
 	// Create initial config value and store into config.
 	config.Store(loadConfig())

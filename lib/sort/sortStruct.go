@@ -30,7 +30,7 @@ func (ps PersonSlice) Swap(i, j int) {
 	ps[i], ps[j] = ps[j], ps[i]
 }
 
-func main() {
+func ExampleE() {
 	p1 := Person{"alice", 12}
 	p2 := Person{"bob", 13}
 	p3 := Person{"tom", 1}

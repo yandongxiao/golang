@@ -6,24 +6,24 @@ import (
 	"time"
 )
 
-func main() {
-	go a()
-	m1()
+func ExampleB() {
+	go aaa()
+	m111()
 }
 
-func m1() {
-	m2()
+func m111() {
+	m222()
 }
 
-func m2() {
-	m3()
+func m222() {
+	m333()
 }
 
-func m3() {
+func m333() {
 	pprof.Lookup("goroutine").WriteTo(os.Stdout, 1)
 	time.Sleep(time.Second)
 }
 
-func a() {
+func aaa() {
 	time.Sleep(time.Second)
 }

@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func main() {
+func ExampleA() {
 
 	var once sync.Once
 
