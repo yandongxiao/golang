@@ -9,6 +9,7 @@ require (
 	github.com/golang/mock v1.4.4
 	github.com/gorilla/websocket v1.4.2
 	github.com/prometheus/client_golang v1.9.0
+	github.com/stretchr/testify v1.6.1
 	github.com/yandongxiao/golang-learning v0.0.0-20201112102254-b1367b463167
 	go.mongodb.org/mongo-driver v1.4.4
 )
