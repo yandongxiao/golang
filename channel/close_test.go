@@ -1,6 +1,6 @@
 // close a closed channel, panic
-// cloase a nil channel, panic
-// clsoe a not-nil not-closed channel, success
+// close a nil channel, panic
+// close a not-nil not-closed channel, success
 package main
 
 import "fmt"
@@ -18,7 +18,7 @@ func ExampleClose() {
 	}()
 
 	for i := 0; i < 3; i++ {
-		chMsg <- string('a' + i)
+		chMsg <- string(byte('a' + i))
 	}
 	// 如果不执行close操作，那么主协程因为receive chEnd而阻塞
 	// 而另一个协程也因等待receive chMsg而阻塞，死锁

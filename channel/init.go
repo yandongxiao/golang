@@ -1,4 +1,5 @@
-// code that uses goroutines can be called from init routines and global initialization expressions
+// code that uses goroutines can be called from init routines and
+// global initialization expressions
 package main
 
 import "fmt"

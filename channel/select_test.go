@@ -1,28 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
 
-func ExampleSelectDefault() {
+	"github.com/magiconair/properties/assert"
+)
+
+func TestSelectDefault(t *testing.T) {
 	ch := make(chan string) // 如果是buffered channel, 输出则变成succeed...
 	select {
 	case ch <- "hello":
 		// NOTICE：执行的是default表达式，该表达式根本未执行.
 		// 反证法：如果ch<-被执行，那么当前协程就会进入block状态！
-		fmt.Println("succeed to send")
+		assert.Equal(t, 1, 2)
 	default:
-		fmt.Println("failed to send")
+		assert.Equal(t, 1, 1)
 	}
 
 	select {
-	case msg := <-ch: // NOTICE：不会被执行
-		fmt.Println("succeed to receive", msg)
+	case <-ch: // NOTICE：不会被执行
+		assert.Equal(t, 1, 2)
 	default:
-		fmt.Println("failed to receive")
+		assert.Equal(t, 1, 1)
 	}
-
-	// Output:
-	// failed to send
-	// failed to receive
 }
 
 func ExampleSelectOrder() {

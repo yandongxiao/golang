@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"sync"
 	"sync/atomic"
+	"testing"
 	"time"
 )
 
@@ -26,7 +27,7 @@ func addOne(val int, resp chan<- int) {
 	resp <- val + 1
 }
 
-func ExampleB() {
+func TestCompare(t *testing.T) {
 	now := time.Now()
 	sum := 0
 	resp := make(chan int)

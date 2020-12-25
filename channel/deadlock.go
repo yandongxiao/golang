@@ -17,6 +17,7 @@ func test() {
 	ch <- 1
 }
 
+// 没有Output注释，所以这个Example也不会执行，安全
 func ExampleC() {
 	defer func() {
 		if err := recover(); err != nil {
