@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func ExampleTypeSwitch2() {
+func ExampleTypeSwitch() {
 	values := []interface{}{
 		456, "abc", true, 0.33, int32(789),
 		[]int{1, 2, 3}, map[int]bool{}, nil,
@@ -18,19 +18,19 @@ func ExampleTypeSwitch2() {
 			// The type of v is "string" in this branch.
 			fmt.Println("string:", v)
 		case int, float64, int32: // multiple type names
-			// NOTE: The type of v is "interface{}",
+			// 注意: The type of v is "interface{}",
 			// the same as x in this branch.
 			fmt.Println("number:", v)
 		case nil:
-			// NOTE: The type of v is "interface{}",
+			// 注意: The type of v is "interface{}",
 			// the same as x in this branch.
 			fmt.Println(v)
 		default:
-			// NOTE: The type of v is "interface{}",
+			// 注意: The type of v is "interface{}",
 			// the same as x in this branch.
 			fmt.Println("others:", v)
 		}
-		// NOTE: each variable denoted by v in the
+		// 注意: each variable denoted by v in the
 		// last three branches is a copy of x.
 	}
 

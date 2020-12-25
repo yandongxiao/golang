@@ -18,12 +18,12 @@ import (
 	"time"
 )
 
-// 不需要指定break，这是golang的默认行为
+// 不需要指定 break，这是 golang 的默认行为
 func ExampleNormal() {
 	// x := int64(3)
 	type INT int
-	switch 1 { // 2是无类型的常量，隐式地将它转换为int类型.
-	case 1: // 1是无类型的常量，隐式地将它转换为与CompareOperand0为相同的类型
+	switch 1 { // 1 是无类型的常量，隐式地将它转换为 int 类型.
+	case 1: // 1 是无类型的常量，隐式地将它转换为与CompareOperand0为相同的类型
 		fmt.Println("One")
 		// invalid case INT(2) in switch on 2 (mismatched types INT and int)
 		// case INT(2):
@@ -79,7 +79,7 @@ func Example5() {
 	// 10
 }
 
-func Example6() {
+func ExampleEmptySwitch() {
 	switch {
 	}
 
