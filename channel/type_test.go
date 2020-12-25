@@ -10,7 +10,6 @@ import (
 func TestChannelInChannel(t *testing.T) {
 	resp := make(chan int)
 	req := make(chan chan int)
-	req <- resp
 
 	go func() {
 		resp := <-req
@@ -18,6 +17,7 @@ func TestChannelInChannel(t *testing.T) {
 		close(resp)
 	}()
 
+	req <- resp
 	for v := range resp {
 		assert.Equal(t, v, 1)
 	}
