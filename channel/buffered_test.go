@@ -1,6 +1,6 @@
 // 注意：Design your algorithm in the first place with unbuffered channels.
 // 注意：Only introduce buffering when performance is problematic.
-package main
+package channel
 
 import (
 	"testing"

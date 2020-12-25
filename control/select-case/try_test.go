@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func ExampleEE() {
+func ExampleTrySendAndReceive() {
 	c := make(chan string, 2)
 	trySend := func(v string) {
 		select {
@@ -24,4 +24,9 @@ func ExampleEE() {
 	fmt.Println(tryReceive()) // Hello!
 	fmt.Println(tryReceive()) // Hi!
 	fmt.Println(tryReceive()) // -
+
+	// Output:
+	// Hello!
+	// Hi!
+	// -
 }

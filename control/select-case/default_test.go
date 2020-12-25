@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func ExampleChannelDefault() {
 	var c chan struct{} // nil
 	select {
 	case <-c: // blocking for ever
@@ -10,4 +10,7 @@ func main() {
 	default:
 		fmt.Println("Go here.")
 	}
+
+	// Output:
+	// Go here.
 }

@@ -1,6 +1,6 @@
 // NOTE: fatal error: all goroutines are asleep - deadlock! 该错误信息+堆栈信息都打印在了stderr上
 // NOTE: 该错误是无法通过defer+recover恢复过来的，因为所有的协程都处于asleep状态
-package main
+package channel
 
 import (
 	"fmt"

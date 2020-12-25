@@ -29,7 +29,8 @@ func ExampleFormat2() {
 func ExampleFormat3() {
 	for { // 等价于 for true {
 		fmt.Println("helloworld")
+		break
 	}
-	// Output
+	// Output:
 	// helloworld
 }

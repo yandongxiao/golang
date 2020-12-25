@@ -1,4 +1,4 @@
-package main
+package channel
 
 // close: nil(panic), closed(panic)
 // write: nil(wait for ever), closed(panic)

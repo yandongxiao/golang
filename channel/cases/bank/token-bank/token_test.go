@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	bank "github.com/yandongxiao/go/chan/cases/bank/token-bank"
+	bank "github.com/yandongxiao/go/channel/cases/bank/token-bank"
 )
 
 func TestChan(t *testing.T) {

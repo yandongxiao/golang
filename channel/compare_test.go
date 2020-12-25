@@ -13,7 +13,7 @@
 // 接下来，换成atomic方案，效率是刚才的两倍
 // 最后，换成没有同步的方案，效率是刚才的20倍
 // 结论：每个goroutine执行很少的代码时，不划算
-package main
+package channel
 
 import (
 	"fmt"

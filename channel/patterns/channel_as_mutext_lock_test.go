@@ -5,7 +5,7 @@ import (
 
 	"github.com/magiconair/properties/assert"
 
-	"github.com/yandongxiao/go/chan/patterns"
+	"github.com/yandongxiao/go/channel/patterns"
 )
 
 func TestChannelAsMutexLock(t *testing.T) {

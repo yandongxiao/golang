@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/yandongxiao/go/chan/cases/cache/monitor"
+	"github.com/yandongxiao/go/channel/cases/cache/monitor"
 )
 
 var sema = make(chan struct{}, 20)

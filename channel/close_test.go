@@ -1,7 +1,7 @@
 // close a closed channel, panic
 // close a nil channel, panic
 // close a not-nil not-closed channel, success
-package main
+package channel
 
 import "fmt"
 

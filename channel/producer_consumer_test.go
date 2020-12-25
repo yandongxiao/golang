@@ -1,7 +1,7 @@
 // NOTE：以下实现方案存在deadlock 的风险
 // dead lock condition: producer wait on chData to send data;
 // consumer wait on chEnd to send command to stop
-package main
+package channel
 
 import (
 	"fmt"

@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/yandongxiao/go/chan/cases/cache/mutex"
+	"github.com/yandongxiao/go/channel/cases/cache/mutex"
 )
 
 var sema = make(chan struct{}, 20)

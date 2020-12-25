@@ -1,5 +1,5 @@
 // NOTE: all types can be used in a channel.(包括 channel)
-package main
+package channel
 
 import (
 	"testing"
