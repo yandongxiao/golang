@@ -1,8 +1,10 @@
-package main
+package patterns
 
-import "fmt"
-import "time"
-import "os"
+import (
+	"fmt"
+	"os"
+	"time"
+)
 
 type Ball uint64
 

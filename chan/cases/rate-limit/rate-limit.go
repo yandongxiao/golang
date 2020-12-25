@@ -29,6 +29,8 @@ func main() {
 		fmt.Println("request", req, time.Now())
 	}
 
+	// 方式二
+
 	// We may want to allow short bursts of requests in
 	// our rate limiting scheme while preserving the
 	// overall rate limit. We can accomplish this by
