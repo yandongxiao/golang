@@ -2,6 +2,7 @@ package main
 
 import "io"
 
+// 编译通过即可，无需测试
 // 只要两个接口的close方法签名相同
 type ReadWriter interface {
 	io.ReadCloser
@@ -24,5 +25,6 @@ func (r readWriter) Write(p []byte) (n int, err error) {
 }
 
 var (
-	_ ReadWriter = readWriter(nil)
+	_ ReadWriter = readWriter{}
+	_ ReadWriter = (*readWriter)(nil)
 )
