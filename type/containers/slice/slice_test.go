@@ -1,8 +1,10 @@
 // for _, buf := range buffers. 如果buffers中元素很多，则**不建议**使用这种方法
 package main
 
-import "fmt"
-import "unsafe"
+import (
+	"fmt"
+	"unsafe"
+)
 
 func ExampleNilSlice() {
 	var a []int
@@ -10,7 +12,7 @@ func ExampleNilSlice() {
 	c := []int{}
 
 	fmt.Println(a == nil && b == nil && unsafe.Sizeof(c) == 24)
-	//Output:
+	// Output:
 	// true
 }
 

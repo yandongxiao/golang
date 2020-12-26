@@ -14,7 +14,7 @@ import (
 func ExampleAdd() {
 	fmt.Println(test.Add(1, 2))
 	fmt.Println(test.Add(10, 20))
-	//Output:
-	//3
-	//30
+	// Output:
+	// 3
+	// 30
 }

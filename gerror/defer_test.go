@@ -1,4 +1,4 @@
-package main
+package gerror
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ func ExampleNamedReturnValue() {
 	// 8
 }
 
-func ExampleOrder() {
+func ExamplePanicOrder() {
 	fmt.Println("begin")
 	defer func() {
 		if err := recover(); err != nil {
@@ -28,13 +28,14 @@ func ExampleOrder() {
 	defer fmt.Println("defer createpanic")
 	panic("try it")
 	fmt.Println("end")
+
 	// Output:
 	// begin
 	// defer createpanic
 	// try it
 }
 
-func ExampleDeferFuncParam() {
+func ExampleDeferFuncWithParam() {
 	var i = 10
 	defer func(v int) {
 		fmt.Println(v) // 10
@@ -48,10 +49,3 @@ func ExampleDeferFuncParam() {
 	// 20
 	// 10
 }
-
-// func ExampleExit() {
-// 	defer fmt.Println("hello") /* do not execute */
-// 	os.Exit(1)
-// 	// Output:
-// 	//
-// }

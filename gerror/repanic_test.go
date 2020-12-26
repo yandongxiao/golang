@@ -7,7 +7,7 @@
 // 即使在库A的defer语句中捕捉到了，也继续向上抛
 // 以下是实现思路如下（将它考虑成一个package）
 
-package main
+package gerror
 
 import (
 	"fmt"

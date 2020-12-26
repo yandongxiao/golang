@@ -27,7 +27,7 @@
 // 2. return errors as error values to the callers of your package.
 // 3. 发生panic意味着that something **impossible** has happened.
 //    在init中，初始化package失败时，可抛出异常
-package main
+package gerror
 
 import "fmt"
 
