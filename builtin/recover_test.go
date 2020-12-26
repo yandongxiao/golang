@@ -38,6 +38,10 @@ func TestRecover_Duplicate(t *testing.T) {
 	panic("hello")
 }
 
+// If recover is called outside the deferred function it will
+// not stop a panicking sequence. In this case, or when the
+// goroutine is not panicking, or if the argument supplied
+// to panic was nil, recover returns nil.
 func TestRecoverNil(t *testing.T) {
 	defer func() {
 		if v := recover(); v != nil {

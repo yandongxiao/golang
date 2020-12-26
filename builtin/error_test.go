@@ -13,7 +13,7 @@
 //
 // Error类型的命名规则: Error types **end** in "Error"
 // and error variables are called (or **start** with) "err" or "Err".
-package gerror
+package buildin
 
 import (
 	"errors"
@@ -66,5 +66,4 @@ func TestCustomizeError(t *testing.T) {
 	var ae2 *argError
 	assert.True(t, errors.As(err, &ae2))
 	assert.Equal(t, ae1, ae2)
-
 }
