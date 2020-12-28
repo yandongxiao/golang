@@ -7,14 +7,14 @@
 // There are no rules to resolve the ambiguity; it must be fixed.
 package main
 
-import "fmt"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 type Animal struct {
 	Name string
-}
-
-type Dog struct {
-	Animal
 }
 
 type Cat struct {
@@ -22,25 +22,10 @@ type Cat struct {
 	Animal
 }
 
-func ExampleHide() {
-	dog := Dog{
-		Animal: Animal{Name: "Animal"},
-	}
-	fmt.Println(dog)
-	fmt.Println(dog.Name)
-	// Output:
-	// {{Animal}}
-	// Animal
-}
-
-func ExampleHide2() {
+func TestHide(t *testing.T) {
 	cat := Cat{
 		Name:   "Cat",
 		Animal: Animal{Name: "Animal"},
 	}
-	fmt.Println(cat)
-	fmt.Println(cat.Name)
-	// Output:
-	// {Cat {Animal}}
-	// Cat
+	assert.True(t, cat.Name == "Cat")
 }

@@ -8,10 +8,10 @@ type GPerson struct {
 	Name string
 }
 
+// 与在外部声明单独声明Man, Woman相比，Ps将同一类型的数据聚合在了一起。
 // 在最外层定义了匿名类. 外部访问方式：package.Ps.Man
 // 与数组方式相比，它不需要下标，语义更清晰
 // 与MAP方式相比，它不需要额外定义key的取值范围，更安全
-// 与在外部声明单独声明Man, Woman相比，Ps将同一类型的数据聚合在了一起
 var Ps struct {
 	Man, Woman GPerson
 }

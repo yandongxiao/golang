@@ -21,22 +21,13 @@ type Car struct {
 	Engine
 }
 
-type Mercedes struct {
-	Car //anonymous field Car
-}
-
-// a behavior only available for the Mercedes
-func (m *Mercedes) sayHiToMerkel() {
-	fmt.Println("Hi Angela!")
-}
-
 // define a behavior for Car
 func (car Car) numberOfWheels() int {
 	return car.wheelCount
 }
 
 // 即使Engine==nil, 因为*Car重载了它的方法，也OK。
-// 即使*Car == nil, 因为Start和Stop方法没有对receiver进行解引用，也OK!
+// 即使car == nil, 因为Start和Stop方法没有对receiver进行解引用，也OK!
 func (car *Car) Start() {
 	fmt.Println("Car is started")
 }
@@ -51,6 +42,15 @@ func (car *Car) GoToWorkIn() {
 	// drive to work
 	car.Stop()
 	// get out of car
+}
+
+type Mercedes struct {
+	Car // anonymous field Car
+}
+
+// a behavior only available for the Mercedes
+func (m *Mercedes) sayHiToMerkel() {
+	fmt.Println("Hi Angela!")
 }
 
 func ExampleMercedes() {

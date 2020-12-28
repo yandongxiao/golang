@@ -34,7 +34,7 @@ func ExampleInitialize() {
 }
 
 // 3. Even when a struct contains other structs,
-// structs form a continuous block in memory
+// 注意：structs form a continuous block in memory
 // this gives a huge performance benefit.
 // NOTE: The size of a struct type is the sum of the sizes of all its field types
 // plus the number of some padding bytes. The padding bytes are used to align
@@ -58,26 +58,12 @@ func ExampleContinuousBlock() {
 	// 0
 }
 
-func ExampleAccess() {
-	p1 := SPerson{age: 10}
-	p1.setAge(100) // 作用在p1上，p1是可访问的，所以合法
-	fmt.Println(p1.getAge())
-
-	p2 := &SPerson{age: 20}
-	p2.setAge(200)
-	fmt.Println(p2.getAge())
-
-	// Output:
-	// 100
-	// 200
-}
-
 // when we have a struct type and define an alias type for it
 // both types have the same underlying type and can be converted
 // into one another,
 func ExampleConversion() {
-	n1 := number{1.0}
-	n2 := NUMBER(n1) // 两个独立的value
+	n1 := number{1.0} // 是{}, 不是()
+	n2 := NUMBER(n1)  // 两个独立的value
 	n1.f = 10.0
 	fmt.Println(n1, n2)
 
@@ -93,17 +79,17 @@ func ExampleConversion() {
 type number struct {
 	f float32
 }
-type NUMBER number // alias type
+type NUMBER number
 
 func (p SPerson) getAge() int {
 	return p.age
 }
 
 // NOTE: 如果再在pointer上重定义getAge
-// 会导致method redeclared: SPerson.getAge错误
-//func (p *SPerson) getAge() int {
+// 会导致method redeclared: SPerson.getAge 错误
+// func (p *SPerson) getAge() int {
 //	return p.age
-//}
+// }
 
 func (p *SPerson) setAge(age int) {
 	p.age = age
@@ -111,8 +97,4 @@ func (p *SPerson) setAge(age int) {
 
 type Setter interface {
 	setAge(age int)
-}
-
-func setAge(setter Setter) {
-	setter.setAge(100)
 }

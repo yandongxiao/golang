@@ -1,4 +1,4 @@
-// A type assertion provides access to an interface value's
+// a type assertion provides access to an interface value's
 // underlying concrete value.
 package main
 

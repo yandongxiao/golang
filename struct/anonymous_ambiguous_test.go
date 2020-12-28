@@ -2,44 +2,48 @@ package main
 
 import "fmt"
 
-type Empty interface {
+// NOTE: struct不但可以包含匿名的struct，而且也可以包含匿名的interface
+// 在 struct 中添加 interface 作为成员的技术，叫做 call dispatch
+//
+// 如果 House 实现了 getAge 方法，h.getAge的调用肯定会调用该实现
+type House struct {
+	AgeInterface
+	AnonymousPerson
+}
+
+type AgeInterface interface {
 	getAge() int
 }
 
-type APerson struct {
+// 解释：为什么Person不能实现getAge接口?
+type AnonymousPerson struct {
 	age int
 }
 
-type ADog struct {
+type AnonymousDog struct {
 	age int
 }
 
-// NOTE: struct不但可以包含匿名的struct，而且也可以包含匿名的interface
-type House struct {
-	Empty
-	APerson
+func (d AnonymousDog) getAge() int {
+	return d.age
 }
 
 func ExampleAmbiguous() {
 	h := House{
-		APerson: APerson{10},
+		AnonymousPerson: AnonymousPerson{10},
 	}
 	fmt.Println(h)
-	h.Empty = ADog{20} // 如果House.getAge实现了，该赋值是无效的
+
+	h.AgeInterface = AnonymousDog{20}
 	fmt.Println(h)
 
-	afoo(h)
+	foo := func(i AgeInterface) {
+		fmt.Println(i.getAge())
+	}
+	foo(h)
 
 	// Output:
 	// {<nil> {10}}
 	// {{20} {10}}
 	// 20
-}
-
-func afoo(empty Empty) {
-	fmt.Println(empty.getAge())
-}
-
-func (d ADog) getAge() int {
-	return d.age
 }

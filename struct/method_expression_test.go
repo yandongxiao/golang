@@ -99,7 +99,7 @@ func ExampleMethodValue2() {
 	// in any calls, which may be executed later.
 	var p PersonF
 	p.name = "jack"
-	foo := p.Name //因为Name是value recevier类型
+	foo := p.Name // 因为Name是value recevier类型
 	p.name = "alice"
 	fmt.Println(foo())
 
