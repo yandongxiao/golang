@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/yandongxiao/golang-learning/test"
+	"github.com/yandongxiao/go/test"
 )
 
 // The Run methods of T and B allow defining subtests

@@ -6,7 +6,9 @@ import (
 	"html/template"
 	"testing"
 
-	"github.com/yandongxiao/golang-learning/test"
+	"github.com/stretchr/testify/assert"
+
+	"github.com/yandongxiao/go/test"
 )
 
 func TestAdd(t *testing.T) {
@@ -15,6 +17,7 @@ func TestAdd(t *testing.T) {
 	c := test.Add(a, b)
 	// printed only if the test fails or the -test.v flag is set.
 	t.Log("helloworld", t.Name(), c)
+	assert.True(t, a == b)
 }
 
 func TestSkip(t *testing.T) {
@@ -40,7 +43,7 @@ func BenchmarkAdd(b *testing.B) {
 	}
 }
 
-//NOTE: go test -bench=. -cpu=2(指定并行数)
+// NOTE: go test -bench=. -cpu=2(指定并行数)
 // If a benchmark needs to test performance in a parallel setting,
 // it may use the RunParallel helper function
 // such benchmarks are intended to be used with the go test -cpu flag

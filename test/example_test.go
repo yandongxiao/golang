@@ -3,9 +3,10 @@ package test_test
 import (
 	"fmt"
 
-	"github.com/yandongxiao/golang-learning/test"
+	"github.com/yandongxiao/go/test"
 )
 
+// 待验证：
 // The entire test file is presented as the example when it contains a single
 // example function, at least one other function, type, variable, or constant
 // declaration, and no test or benchmark functions.
