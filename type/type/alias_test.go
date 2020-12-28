@@ -12,7 +12,7 @@ func ExampleTypeAliasDeclaration() {
 	// 200
 }
 
-func ExampleRun() {
+func ExampleRune() {
 	// rune is an alias for int32 and is equivalent to
 	// int32 in all ways. It is used, by convention, to
 	// distinguish character values from integer values.
@@ -21,7 +21,7 @@ func ExampleRun() {
 	// NOTE: 不能将rune等价为type rune int32
 	m := int32(1)
 	n := rune(1)
-	fmt.Println(m == n) //true
+	fmt.Println(m == n) // true
 
 	// Output:
 	// true

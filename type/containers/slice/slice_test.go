@@ -3,89 +3,70 @@ package main
 
 import (
 	"fmt"
-	"unsafe"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
-func ExampleNilSlice() {
+func TestNilSlice(t *testing.T) {
 	var a []int
 	b := []int(nil)
 	c := []int{}
 
-	fmt.Println(a == nil && b == nil && unsafe.Sizeof(c) == 24)
-	// Output:
-	// true
+	assert.True(t, a == nil)
+	assert.True(t, b == nil)
+	assert.True(t, c != nil)
 }
 
-func ExampleNilSliceIndex() {
+// 一个微小的差别
+func TestNilSliceIndex(t *testing.T) {
 	var a []int
-	fmt.Println(a[:0]) // NOTE: 竟然没有抛出异常
-	// Output:
-	// []
+	if a[:0] != nil {
+		t.Fatal("a[:0] != nil")
+	}
+
+	b := []int{1}
+	if b[:0] == nil {
+		t.Fatal("b[:0] == nil")
+	}
 }
 
-func ExampleSliceAddressability() {
+func TestSliceAddressability(t *testing.T) {
 	// Elements of any slice value are always addressable, whether
 	// or not that slice value is addressable.
 	ps0 := &[]string{"Go", "C"}[0]
-	fmt.Println(*ps0) // Go
+	assert.True(t, ps0 != nil)
 
+	// 数组
 	// Elements of addressable array values are also addressable.
 	// Elements of unaddressable array values are also unaddressable.
 	// The reason is each array value only consists of one direct part.
 	// _ = &[3]int{2, 3, 5}[0]
-
-	// Output:
-	// Go
-
 }
 
-func ExampleSlice() {
+func TestSlice(t *testing.T) {
 	// 对切片的要求，可见low不一定要比len(baseContainer)小
 	// 0 <= low <= high <= cap(baseContainer)        // two-index form
 	// 0 <= low <= high <= max <= cap(baseContainer) // three-index form
 	var arr1 [6]int
-	var slice1 = arr1[2:5] // 2, 5-2, 6-2
-	var i int32            // 作为下标，不一定非得是int类型
-	for i = 0; i < 6; i++ {
-		arr1[i] = int(i)
+	for i := 0; i < len(arr1); i++ {
+		arr1[i] = i
 	}
-	fmt.Println("array state")
-	fmt.Println(len(arr1))
-	fmt.Println(arr1)
+	assert.Equal(t, 6, len(arr1))
 
-	fmt.Println("slice state")
-	fmt.Println(len(slice1))
-	fmt.Println(cap(slice1))
-	fmt.Println(slice1)
+	var slice1 = arr1[2:5] // 2, 5-2, 6-2
+	assert.Equal(t, 3, len(slice1))
+	assert.Equal(t, 4, cap(slice1))
 
 	// grow the slice:
-	fmt.Println("grow slice")
 	slice1 = slice1[0:4]
-	fmt.Println(len(slice1))
-	fmt.Println(cap(slice1))
-	fmt.Println(slice1)
+	assert.Equal(t, 4, len(slice1))
+	assert.Equal(t, 4, cap(slice1))
 	// grow the slice beyond capacity:
 	// slice1 = slice1[0:7 ] // panic: runtime error: slice bounds out of range
 
-	fmt.Println("grow slice2")
 	slice1 = append(slice1, 1) // 执行append之后，arr1和slice1再无关系
 	slice1[0] = 100
+	assert.NotEqual(t, slice1[0], arr1[0])
 	fmt.Println(slice1)
-	fmt.Println(arr1)
-
-	// Output:
-	// array state
-	// 6
-	// [0 1 2 3 4 5]
-	// slice state
-	// 3
-	// 4
-	// [2 3 4]
-	// grow slice
-	// 4
-	// 4
-	// [2 3 4 5]
-	// grow slice2
-	// [100 3 4 5 1]
-	// [0 1 2 3 4 5]
 }

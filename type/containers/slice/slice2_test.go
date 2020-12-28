@@ -45,8 +45,6 @@ func ExampleInitialize() {
 
 	// 初始化的方式
 	a1 := []int{1, 2, 3}
-	// To create an empty slice with non-zero length,
-	// use the builtin make.
 	a2 := make([]int, 3)
 	fmt.Println(a1, a2)
 	// Output:

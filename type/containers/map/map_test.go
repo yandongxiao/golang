@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 注意：这是一个与直觉相反的地方
 func ExampleNil() {
 	// if v[k] is used as a destination value in an assignment and v is a nil map, a panic will occur at run time.
 	// if v[k] is used to retrieve the element value corresponding key k in map v, then no panics will occur, even if v is a nil map.
@@ -14,11 +15,12 @@ func ExampleNil() {
 func ExampleAddressability() {
 	m := map[int]bool{1: true}
 	_ = m
-	// Elements of map values are always unaddressable.
+	// 注意：Elements of map values are always unaddressable.
 	// _ = &map[int]bool{1: true}[1]
 	// _ = &m[1]
 }
 
+// 注意：Map的Value类型为struct
 func ExampleModifyElement1() {
 	// Unlike most other unaddressable values, which direct parts can not be modified,
 	// the direct part of a map element values can be modified, but can only be modified
@@ -28,17 +30,17 @@ func ExampleModifyElement1() {
 	mt["John"] = T{age: 29} // modify it as a whole
 	ma := map[int][5]int{}
 	ma[1] = [5]int{1: 789} // modify it as a whole
+
 	// ma[1][1] = 123      // error: cannot assign to a[1][1]
 	// mt["John"].age = 30 // cannot assign to struct field. mt["John"].age in map.
-	_ = mt
-	_ = ma
-	// Output:
-	//
 }
 
+// 注意：Map的Value类型为slice
 func ExampleModifyElement2() {
 	ma := map[int][]int{}
 	ma[1] = []int{1: 789} // modify it as a whole
+
+	// 解释一下：为什么这里又可以了呢？
 	ma[1][1] = 100
 	fmt.Println(ma[1][1])
 	// Output:
@@ -53,8 +55,7 @@ func ExampleShare() {
 	// share all (underlying) elements. Their respective lengths and capacities
 	// equal to each other. However, if the length/capacity of one slice changes
 	// later, the change will not reflect on the other slice.
-	type INTMAP map[int]int
-	v1 := make(INTMAP)
+	v1 := make(map[int]int)
 	v1[1] = 1
 	v2 := v1
 	v1[2] = 2
@@ -64,18 +65,10 @@ func ExampleShare() {
 }
 
 func ExampleMap() {
-	// 定义并初始化
-	m1 := map[string][]string{
-		"name": []string{"nihao"},
-	}
-	fmt.Println(m1)
-
-	// add
 	// To create an empty map, use the builtin make
 	persons := make(map[string][]string)
 	persons["k1"] = []string{"1"}
 	persons["k2"] = nil
-	fmt.Println(persons)
 
 	// get 这个方法的返回值很有考究
 	if persons["k2"] == nil {
@@ -96,8 +89,6 @@ func ExampleMap() {
 	fmt.Println(persons)
 
 	// Output:
-	// map[name:[nihao]]
-	// map[k1:[1] k2:[]]
 	// 如何区分：k2在map当中，值为nil；和k2不在map当中
 	// [] true
 	// [] false

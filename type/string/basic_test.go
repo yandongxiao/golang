@@ -1,5 +1,3 @@
-// When comparing two strings, their underlying bytes will be compared, one byte by one byte.
-// An addressable string value can only be overwritten as a whole(like slice)
 package main
 
 import "fmt"

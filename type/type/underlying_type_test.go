@@ -12,7 +12,7 @@ func ExampleUnderlying() {
 
 	var a [3]int
 	var b array
-	fmt.Println(b == array(a))
+	fmt.Println(b == a) // 底层类型相同，才可以比较。
 
 	// Output:
 	// true

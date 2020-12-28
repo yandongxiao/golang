@@ -31,12 +31,10 @@ import (
 )
 
 func ExampleNumber2String() {
-	fmt.Println(string(0x4f60))
 	c := '你' // NOTE: 即使c:='a', c的类型也是rune
 	fmt.Printf("%T %v\n", c, string(c))
 
 	// Output:
-	// 你
 	// int32 你
 }
 

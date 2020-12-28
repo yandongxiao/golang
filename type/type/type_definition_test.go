@@ -5,7 +5,7 @@ import "fmt"
 func ExampleTypeDefinition1() {
 	// 1. a new defined type and its respective source type in
 	// type definitions are two distinct types.
-	// 3. types can be defined within function bodies.
+	// 2. types can be defined within function bodies.
 	type INT int
 	var a INT = 10
 	fmt.Println(a)

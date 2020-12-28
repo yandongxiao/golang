@@ -11,7 +11,7 @@ func ExampleImmutable() {
 	bd := []byte(data)
 	bd[0] = 'H'
 
-	// 直接打印一个byte slice
+	// 注意：直接打印一个byte slice
 	fmt.Printf("%q\n", bd)
 	fmt.Println(data)
 

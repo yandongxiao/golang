@@ -16,7 +16,7 @@ func ExampleIdentical() {
 		a int
 	}{}
 
-	fmt.Println(v1 == v2)
+	fmt.Println(v1 == v2) // 注意：可以比较
 	// Output:
 	// true
 }
@@ -36,18 +36,18 @@ func ExampleAssignments() {
 	}{}
 
 	v2 = v1
-	fmt.Println(v1 == v2)
+	fmt.Println(v1 == v2) // 可以比较
 	// Output:
 	// true
 }
 
-// NOTE: 两个不同类型之间可比较的条件是：两个类型之间可赋值
+// struct, interface 是否可比较，要看具体的field
 // invalid operation: v1 == v2 (struct containing []string cannot be compared)
-//func ExampleComparisons() {
+// func ExampleComparisons() {
 //	type SPerson struct {
 //		name []string
 //	}
 //
 //	var v1, v2 SPerson
 //	fmt.Println(v1 == v2)
-//}
+// }

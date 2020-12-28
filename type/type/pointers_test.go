@@ -109,7 +109,7 @@ func ExampleNamedPointerType3() {
 
 	var a Ta
 	var b Tb
-	//fmt.Println(a == Ta(b))
+	// fmt.Println(a == Ta(b))
 	fmt.Println(a == Ta((*int64)((*MyInt)(b))))
 	// Output:
 	// true
