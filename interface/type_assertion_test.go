@@ -38,7 +38,7 @@ func TestTypeAssertion(t *testing.T) {
 }
 
 func TestTypeAssertion_2(t *testing.T) {
-	f, err := os.Open("/tmp/dd")
+	f, err := os.Create("/tmp/dd")
 	assert.Nil(t, err)
 
 	var writeCloser io.WriteCloser
