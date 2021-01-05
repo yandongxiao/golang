@@ -1,6 +1,6 @@
 ## Scanner
 
-### Scanner也缓存数据
+### Scanner 也缓存数据
 
 ```
 Scanner provides a convenient interface for reading data such as a file

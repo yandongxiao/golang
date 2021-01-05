@@ -9,16 +9,17 @@ import (
 	"os"
 )
 
-func main() {
-	// Create and add some files to the archive.
+func ExampleArchiveTar() {
+	// 准备输出到 bytes.Buffer 中
 	var buf bytes.Buffer
 	tw := tar.NewWriter(&buf)
+
+	// 先写header，再写body
 	var files = []struct {
 		Name, Body string
 	}{
 		{"readme.txt", "This archive contains some text files."},
 		{"gopher.txt", "Gopher names:\nGeorge\nGeoffrey\nGonzo"},
-		{"todo.txt", "Get animal handling license."},
 	}
 	for _, file := range files {
 		hdr := &tar.Header{
@@ -54,4 +55,12 @@ func main() {
 		fmt.Println()
 	}
 
+	// Output:
+	// Contents of readme.txt:
+	// This archive contains some text files.
+	// Contents of gopher.txt:
+	// Gopher names:
+	// George
+	// Geoffrey
+	// Gonzo
 }
