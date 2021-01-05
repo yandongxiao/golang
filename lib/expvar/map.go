@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func main3() {
 	// 线程安全的
 	person := expvar.NewMap("person")
 	var name expvar.String

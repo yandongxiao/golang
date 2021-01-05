@@ -13,7 +13,7 @@ func myFunc() interface{} {
 	return time.Now().String()
 }
 
-func main() {
+func main2() {
 	expvar.Publish("func", expvar.Func(myFunc))
 	fmt.Println(expvar.Get("func"))
 }

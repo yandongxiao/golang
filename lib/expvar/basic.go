@@ -30,7 +30,7 @@ func do(kv expvar.KeyValue) {
 	fmt.Println(key, val)
 }
 
-func main() {
+func main1() {
 	expvar.Do(do)
 	//http.HandleFunc("/go/hello", HelloServer)
 	//http.ListenAndServe(":8080", nil)

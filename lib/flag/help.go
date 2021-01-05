@@ -14,6 +14,6 @@ func init() {
 	flag.BoolVar(&debug, "debug", false, "the debug")
 }
 
-func main() {
+func main2() {
 	flag.Usage()
 }

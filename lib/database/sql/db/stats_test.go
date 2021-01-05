@@ -7,13 +7,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-
-func main() {
+func ExampleStats() {
 	// panic: sql: unknown driver "mysql" (forgotten import?)
 	// return db handle
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/helloworld")
@@ -22,4 +16,8 @@ func main() {
 	fmt.Println(db.Ping())
 	// 参见Readme.md中关于Open Conn 和 Idle Conn的区别
 	fmt.Println(stats.OpenConnections)
+
+	// Output:
+	// <nil>
+	// 0
 }

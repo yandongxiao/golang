@@ -8,12 +8,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func checkError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-
 func query() {
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/helloworld")
 	checkError(err)
@@ -44,11 +38,11 @@ func query() {
 
 	if err = rows.Err(); err != nil {
 		rows.Close() // NOTE: 幂等操作，与之前的Close操作不冲突
-		panic(error)
+		panic(err)
 	}
 }
 
-func main() {
+func ExampleQuery() {
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/helloworld")
 	checkError(err)
 
@@ -69,4 +63,7 @@ func main() {
 		}
 	}
 	fmt.Println(id, age)
+
+	// Output:
+	// 0 0
 }

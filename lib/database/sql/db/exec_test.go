@@ -13,7 +13,7 @@ func checkError(err error) {
 	}
 }
 
-func main() {
+func ExampleExec() {
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/helloworld")
 	checkError(err)
 
@@ -24,6 +24,9 @@ func main() {
 	result, err := db.Exec("insert into user (name, age) values('jack',?)", 999)
 	checkError(err)
 
-	fmt.Println(result.LastInsertId())
+	// fmt.Println(result.LastInsertId())
 	fmt.Println(result.RowsAffected())
+
+	// Output:
+	// 1 <nil>
 }
