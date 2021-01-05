@@ -9,10 +9,13 @@ import (
 )
 
 // NOTE: Location仅用于时区转化，而不对time内部的数据产生影响
-func loadLocation() {
-	println("loadLocation")
+func ExampleLoadLocation() {
 	// 等同于"UTC", 世界标准时间
+	// 2020-12-28 16:45:49.28318 +0800 CST m=+0.001168111
 	now := time.Now()
+
+	// 下面语句块的执行，没有修改 time.Now 的返回值
+	// 2020-12-28 16:45:49.28318 +0800 CST m=+0.001168111
 	local1, err1 := time.LoadLocation("") // 等同于传递"UTC"
 	if err1 != nil {
 		fmt.Println(err1)
@@ -31,29 +34,23 @@ func loadLocation() {
 		fmt.Println(err3)
 	}
 
-	fmt.Println(now) // Now的时区信息是Local
+	fmt.Println(now) // Now 的时区信息是Local
 	fmt.Println(now.In(local1))
 	fmt.Println(now.In(local2))
 	fmt.Println(now.In(local3))
 }
 
 // Format
-func format() {
-	println("format")
+func ExampleFormat() {
 	t := time.Now().UTC() // 此时返回了一个新的time.Time值，它是标准世界时间
 	fmt.Println(t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), t.Second())
 	// -0700 对应的输出是±hhmm，表示与世界标准时间的差值.
 	// MST是比较有魔力的一个值，他会被转换为UTC（世界标准时间）
-	fmt.Println(t.Format("Mon Jan 2 15:04:05 -0700 MST 2006")) // GMT和UTC是两种不同的时间记录方式，都是世界标准时间
-	fmt.Println(t.Format("Mon Jan 2 15:04:05 GMT 2006"))       // GMT是一个普通的字符串
+	fmt.Println(t.Format("Mon Jan 2 15:04:05 -0700 MST 2006")) // 这个是UTC时间，GMT和UTC是两种不同的时间记录方式，都是世界标准时间
+	fmt.Println(t.Format("Mon Jan 2 15:04:05 GMT 2006"))       // 这个是GMT时间，GMT是一个普通的字符串
 
 	now := time.Now() // 返回的是Local时区的时间
 	// MST是比较有魔力的一个值，他会被转换为CST（北京时间）
 	fmt.Println(now.Format("Mon Jan 2 15:04:05 -0700 MST 2006")) // GMT和UTC是两种不同的时间记录方式，都是世界标准时间
 	fmt.Println(now.Format("Mon Jan 2 15:04:05 GMT 2006"))
-}
-
-func main() {
-	loadLocation()
-	format()
 }

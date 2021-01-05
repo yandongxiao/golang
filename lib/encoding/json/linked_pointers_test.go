@@ -23,13 +23,19 @@ func (server *Server) String() (output string) {
 	return
 }
 
-func main() {
+func ExampleLinkedPointers() {
 	data1 := &Server{"shanghai", "127.0.0.1", nil}
 	data1.Next = &Server{"beijing", "127.0.0.2", nil}
 	encode, _ := json.Marshal(data1)
 	fmt.Printf("%s\n", encode)
 
+	// 对于链表形式，json反解析也成功了
 	decodeServer := new(Server)
-	json.Unmarshal(encode, decodeServer)
+	_ = json.Unmarshal(encode, decodeServer)
 	fmt.Println(decodeServer)
+
+	// Output:
+	// {"Name":"shanghai","Ip":"127.0.0.1","Next":{"Name":"beijing","Ip":"127.0.0.2","Next":null}}
+	// shanghai 127.0.0.1
+	// beijing 127.0.0.2
 }
