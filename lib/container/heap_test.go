@@ -30,7 +30,7 @@ func (h *IntHeap) Pop() interface{} {
 
 // This example inserts several ints into an IntHeap, checks the minimum,
 // and removes them in order of priority.
-func main() {
+func ExampleHeap() {
 	h := &IntHeap{2, 1, 5}
 	sort.Sort(h)
 	fmt.Println(h)
@@ -40,4 +40,9 @@ func main() {
 	for h.Len() > 0 {
 		fmt.Printf("%d ", heap.Pop(h))
 	}
+
+	// Output:
+	// &[1 2 5]
+	// minimum: 1
+	// 1 2 3 5
 }

@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func ExampleRing() {
 	// Create a new ring of size 5
 	r := ring.New(5)
 
@@ -22,4 +22,11 @@ func main() {
 	r.Do(func(p interface{}) {
 		fmt.Println(p.(int))
 	})
+
+	// Output:
+	// 0
+	// 1
+	// 2
+	// 3
+	// 4
 }

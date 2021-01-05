@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func ExampleList() {
 	lst := list.New()
 	lst.PushBack(100)
 	lst.PushBack(101)
@@ -16,4 +16,9 @@ func main() {
 		// fmt.Println(e)
 		fmt.Println(e.Value)
 	}
+
+	// Output:
+	// 100
+	// 101
+	// 102
 }

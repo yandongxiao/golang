@@ -55,7 +55,7 @@ func (pq *PriorityQueue) update(item *Item, value string, priority int) {
 
 // This example creates a PriorityQueue with some items, adds and manipulates an item,
 // and then removes the items in priority order.
-func main() {
+func ExamplePriority() {
 	// Some items and their priorities.
 	items := map[string]int{
 		"banana": 3, "apple": 2, "pear": 4,
@@ -88,4 +88,7 @@ func main() {
 		item := heap.Pop(&pq).(*Item)
 		fmt.Printf("%.2d:%s ", item.priority, item.value)
 	}
+
+	// Output:
+	// 05:orange 04:pear 03:banana 02:apple
 }
