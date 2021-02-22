@@ -15,6 +15,7 @@ func main() {
 	v.N = 10
 	v.M = 10
 
+	// rpc.Register函数调用会将对象类型中所有满足RPC规则的对象方法注册为RPC函数
 	// A server registers an object, making it visible as a **service** with the name of
 	// the type of the object(对象的类型的名称，比如Args).
 	// After registration, exported methods of the object will be accessible remotely.
