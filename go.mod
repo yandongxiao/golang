@@ -12,8 +12,11 @@ require (
 	github.com/golang/mock v1.4.4
 	github.com/gorilla/websocket v1.4.2
 	github.com/magiconair/properties v1.8.4
+	github.com/mitchellh/go-homedir v1.1.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.9.0
+	github.com/spf13/cobra v0.0.3
+	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.6.1
 	github.com/yandongxiao/golang-learning v0.0.0-20201112102254-b1367b463167
 	go.mongodb.org/mongo-driver v1.4.4
