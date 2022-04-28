@@ -5,12 +5,13 @@ package main
 
 import (
 	"fmt"
+	"testing"
 	"time"
 )
 
 // NOTE: Location仅用于时区转化，而不对time内部的数据产生影响
-func ExampleLoadLocation() {
-	// 等同于"UTC", 世界标准时间
+func TestLoadLocation(t *testing.T) {
+	// 已经做了时区转换
 	// 2020-12-28 16:45:49.28318 +0800 CST m=+0.001168111
 	now := time.Now()
 
@@ -41,7 +42,7 @@ func ExampleLoadLocation() {
 }
 
 // Format
-func ExampleFormat() {
+func TestFormat(ts *testing.T) {
 	t := time.Now().UTC() // 此时返回了一个新的time.Time值，它是标准世界时间
 	fmt.Println(t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), t.Second())
 	// -0700 对应的输出是±hhmm，表示与世界标准时间的差值.
@@ -52,5 +53,5 @@ func ExampleFormat() {
 	now := time.Now() // 返回的是Local时区的时间
 	// MST是比较有魔力的一个值，他会被转换为CST（北京时间）
 	fmt.Println(now.Format("Mon Jan 2 15:04:05 -0700 MST 2006")) // GMT和UTC是两种不同的时间记录方式，都是世界标准时间
-	fmt.Println(now.Format("Mon Jan 2 15:04:05 GMT 2006"))
+	fmt.Println(now.Format("Mon Jan 2 15:04:05 GMT 2006"))       // 北京时间的GMT值，返回的是北京时间. 证明了GMT是一个普通字符串。
 }

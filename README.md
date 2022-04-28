@@ -1,19 +1,15 @@
 # Go 1.1 is released
 
-The most significant improvements are performance-related.
-We have made optimizations in the compiler and linker,
-garbage collector, goroutine scheduler, map implementation,
-and parts of the standard library.
+The most significant improvements are performance-related. We have made optimizations in the compiler and linker, garbage collector, goroutine scheduler, map implementation, and parts of the standard library.
 
-It is likely that your Go code will run noticeably faster when built with Go 1.1.
+**It is likely that your Go code will run noticeably faster when built with Go 1.1.**
 
 ## 摘要
 
-1. add method value, like a.Foo. And method expresstion like A.Foo
-2. the addition of a race detector
-3. expand stand library, changes to go command
-4. remains compatible with Go 1.0. 保持了完全兼容
-5. Both the gc and gccgo implementations now make int and uint 64 bits on 64-bit platforms
+1. remains compatible with Go 1.0. 保持了完全兼容
+1. the addition of a race detector
+1. expand stand library, changes to go command
+1. **add method value, like a.Foo. And method expresstion like A.Foo**
 
 ## Unicode
 
